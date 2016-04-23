@@ -1,0 +1,67 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Base.AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textColorHighlight">?android:textColorHighlight</item>
+        <item name="android:textColorHint">?android:textColorHint</item>
+        <item name="android:textColorLink">?android:textColorLink</item>
+
+
+    </style>
+
+    <style name="ImageTranslucentTheme" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!--在Android 4.4之前的版本上运行，直接跟随系统主题-->
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/login_splash</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="actionBarItemBackground">@drawable/toolbarItemBackground</item>
+        <item name="selectableItemBackground">@drawable/toolbarItemBackground</item>
+        <item name="titleTextAppearance">@style/ToolBar.Title</item>
+        <item name="subtitleTextAppearance">@style/Toolbar.SubTitle</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="ToolBar.Title" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">17.0sp</item>
+        <item name="android:textColor">@color/toolbarTextColor</item>
+    </style>
+
+    <style name="Toolbar.SubTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">#ff928e91</item>
+    </style>
+
+    <style name="Base.AppTheme" parent="@style/Theme.AppCompat.Light">
+        <item name="android:windowBackground">@color/normalBackground</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:fadingEdgeLength">0.0dip</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <!--<item name="windowActionModeOverlay">true</item>-->
+        <!--<item name="searchViewStyle">@style/MySearchViewStyle</item>-->
+        <!--<item name="colorPrimary">@color/theme_color_Primary</item>-->
+        <!--<item name="colorPrimaryDark">@color/theme_color_PrimaryDark</item>-->
+        <!--<item name="colorAccent">@color/theme_color_PrimaryAccent</item>-->
+    </style>
+
+    <style name="MySearchViewStyle" parent="@style/Widget.AppCompat.SearchView" />
+
+
+    <style name="anim_menu_bottombar">
+        <item name="android:windowEnterAnimation">@anim/menu_bottombar_in</item>
+        <item name="android:windowExitAnimation">@anim/menu_bottombar_out</item>
+    </style>
+
+</resources>

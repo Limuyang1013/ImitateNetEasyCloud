@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/list_head"
+    android:layout_marginTop="20dp"
+    android:fillViewport="false"
+    android:scrollbarSize="10dp"
+    android:scrollbarStyle="insideInset"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/list_head"
+                android:layout_width="match_parent"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/themeColor" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="5dp"
+                    android:text="全部歌单"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/list_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/list_head"
+                android:layout_marginTop="10dp">
+
+                <include layout="@layout/list_image_layout" />
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/list_layout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="60dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/anim_image"
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
+                    android:layout_toLeftOf="@+id/anim_text"
+                    android:padding="1dp"
+                    android:src="@drawable/loadanimation" />
+
+                <TextView
+                    android:id="@+id/anim_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="bottom"
+                    android:text="正在加载更多..."
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
