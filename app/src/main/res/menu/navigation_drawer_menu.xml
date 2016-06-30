@@ -4,51 +4,55 @@
     <group
         android:id="@+id/top_group"
         android:checkableBehavior="single">
-    <item
-    android:id="@+id/item_msg"
-    android:icon="@mipmap/topmenu_icn_msg"
-    android:title="我的消息" />
-    <item
-    android:id="@+id/item_store"
-    android:icon="@mipmap/topmenu_icn_store"
-    android:title="积分商城" />
-    <item
-    android:id="@+id/item_member"
-    android:icon="@mipmap/topmenu_icn_member"
-    android:title="付费音乐包" />
-    <item
-    android:id="@+id/item_free"
-    android:icon="@mipmap/topmenu_icn_free"
-    android:title="在线听歌免流量" />
+        <item
+            android:id="@+id/item_msg"
+            android:icon="@mipmap/topmenu_icn_msg"
+            android:title="我的消息" />
+        <item
+            android:id="@+id/item_store"
+            android:icon="@mipmap/topmenu_icn_store"
+            android:title="积分商城" />
+        <item
+            android:id="@+id/item_member"
+            android:icon="@mipmap/topmenu_icn_member"
+            android:title="付费音乐包" />
+        <item
+            android:id="@+id/item_free"
+            android:icon="@mipmap/topmenu_icn_free"
+            android:title="在线听歌免流量" />
     </group>
 
-    <group android:checkableBehavior="single"
+    <group
         android:id="@+id/bottom_group"
-        >
-    <item
-    android:id="@+id/item_identify"
-    android:icon="@mipmap/topmenu_icn_identify"
-    android:title="听歌识曲" />
-    <item
-    android:id="@+id/item_skin"
-    android:icon="@mipmap/topmenu_icn_skin"
-    android:title="主题换肤" />
-    <item
-    android:id="@+id/item_night"
-    android:icon="@mipmap/topmenu_icn_night"
-    android:title="夜间模式" />
-    <item
-    android:id="@+id/item_time"
-    android:icon="@mipmap/topmenu_icn_time"
-    android:title="定时停止播放" />
-    <item
-    android:id="@+id/item_clock"
-    android:icon="@mipmap/topmenu_icn_clock"
-    android:title="音乐闹钟" />
-    <item
-    android:id="@+id/item_cloud"
-    android:icon="@mipmap/topmenu_icn_cloud"
-    android:title="我的音乐云盘" />
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_identify"
+            android:icon="@mipmap/topmenu_icn_identify"
+            android:title="听歌识曲" />
+        <item
+            android:id="@+id/item_skin"
+            android:icon="@mipmap/topmenu_icn_skin"
+            android:title="主题换肤" />
+        <item
+            android:id="@+id/item_night"
+            android:icon="@mipmap/topmenu_icn_night"
+            android:title="夜间模式" />
+        <item
+            android:id="@+id/item_time"
+            android:icon="@mipmap/topmenu_icn_time"
+            android:title="定时停止播放" />
+        <item
+            android:id="@+id/item_clock"
+            android:icon="@mipmap/topmenu_icn_clock"
+            android:title="音乐闹钟" />
+        <item
+            android:id="@+id/item_cloud"
+            android:icon="@mipmap/topmenu_icn_cloud"
+            android:title="我的音乐云盘" />
+        <item
+            android:id="@+id/item_cloud2"
+            android:icon="@mipmap/topmenu_icn_cloud"
+            android:title="我的音乐云盘" />
     </group>
 
 
