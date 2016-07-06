@@ -129,10 +129,12 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:layout_width="0.1dp"
-                    android:layout_weight="0"
-                    android:layout_gravity="center_vertical"
-                    android:layout_height="5dp" />
+                    android:layout_width="1.0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="14.0dip"
+                    android:layout_marginTop="14.0dip"
+                    android:background="#fff1f1f1"
+                     />
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
