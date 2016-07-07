@@ -51,7 +51,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="@mipmap/radio_4" />
+                android:background="@drawable/dujia_1" />
         </LinearLayout>
 
 

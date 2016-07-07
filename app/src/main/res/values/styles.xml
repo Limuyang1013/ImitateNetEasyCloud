@@ -23,6 +23,11 @@
         <item name="android:windowBackground">@drawable/login_splash</item>
     </style>
 
+    <style name="NormalTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="actionBarItemBackground">@drawable/toolbarItemBackground</item>
         <item name="selectableItemBackground">@drawable/toolbarItemBackground</item>
