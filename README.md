@@ -5,6 +5,10 @@
 ###注意事项
 - 所用图片素材均从网易云官方APP获取，该源码纯作学习使用
 - 因为时间匆促，所以该Demo尚有许多Bug
-- 如需要实现完全仿网易云界面的滑动切换效果，只需要把放在MainActivity中的TabLayout控件抽取出来，在主界面设置一个ViewPager配合ToolBar上的Button进行联动，在单独的Fragment里面加入TabLayout布局，这样整体布局就能实现仿网易云的样式
+- 近期进行了大规模的代码重构，想看旧版本的效果在SplashActivity内跳转到MainActivity即可，最新的效果显示可以跳转到HomePageActivity查看
 - 如果有合适的意见或者建议，或者说你对网易云APP中某些功能有自己的见解，欢迎提Issue
+
+###目前存在的问题
+
+多个Fragment跟TabLayout的搭配嵌套导致滑动卡顿，正在寻求解决方法
  
