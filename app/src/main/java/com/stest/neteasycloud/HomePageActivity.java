@@ -93,7 +93,6 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     private void initWidgets() {
         setSupportActionBar(toolbar);
         //去除状态栏文字
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
         mNavigationView.setItemIconTintList(null);
         adapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         view_pager.setAdapter(adapter);

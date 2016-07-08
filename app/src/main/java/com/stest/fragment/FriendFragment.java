@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.InnerFragment.AnchorFragment;
+import com.stest.InnerFragment.DynamicFragment;
 import com.stest.InnerFragment.ListFragment;
 import com.stest.InnerFragment.RankingFragment;
 import com.stest.InnerFragment.RecommendFragment;
@@ -44,11 +45,11 @@ public class FriendFragment extends Fragment {
         mTitleList.add("附近");
         mTitleList.add("好友");
 
-        fragments.add(new RecommendFragment());
-        fragments.add(new ListFragment());
-        fragments.add(new AnchorFragment());
-    }
+        fragments.add(new DynamicFragment());
+        fragments.add(new DynamicFragment());
+        fragments.add(new DynamicFragment());
 
+    }
 
     @Nullable
     @Override
@@ -57,10 +58,11 @@ public class FriendFragment extends Fragment {
         ViewUtils.inject(this, v);
         MyAdapter myAdapter = new MyAdapter(getActivity().getSupportFragmentManager());
         myAdapter.notifyDataSetChanged();
+        friends_viewPager.setOffscreenPageLimit(2);
         friends_viewPager.setAdapter(myAdapter);
-        friends_tab.setTabsFromPagerAdapter(myAdapter);
         friends_tab.setTabMode(TabLayout.MODE_FIXED);
         friends_tab.setupWithViewPager(friends_viewPager);
+        friends_tab.setTabsFromPagerAdapter(myAdapter);
         return v;
     }
 
@@ -87,9 +89,5 @@ public class FriendFragment extends Fragment {
             return mTitleList.get(position);
         }
 
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            super.destroyItem(container, position, object);
-        }
     }
 }
