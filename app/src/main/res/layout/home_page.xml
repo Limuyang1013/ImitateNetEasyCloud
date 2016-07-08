@@ -31,9 +31,9 @@
                     android:id="@+id/drawerIcon"
                     android:layout_width="23dp"
                     android:layout_height="45dp"
+                    android:layout_alignBaseline="@+id/bar_disco"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="20dp"
-                    android:layout_alignBaseline="@+id/bar_disco"
                     android:background="@drawable/toolbarItemBackground"
                     android:scaleType="centerInside"
                     android:src="@mipmap/actionbar_menu" />
@@ -63,14 +63,24 @@
                     android:background="@drawable/actionbar_friends"
                     android:clickable="true" />
 
-                <ImageView
-                    android:id="@+id/bar_search"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                <LinearLayout
+                    android:id="@+id/search_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/actionbar_search" />
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/search_select"
+                    >
+                    <ImageView
+                        android:id="@+id/bar_search"
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/actionbar_search" />
+                </LinearLayout>
             </RelativeLayout>
 
 

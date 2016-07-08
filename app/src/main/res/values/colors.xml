@@ -255,7 +255,7 @@
     <color name="tabTextNormalColor">#ff666666</color>
     <color name="tagTextColor">#ff999999</color>
     <color name="themeColor">#ffce3d3a</color>
-    <color name="theme_color_Primary">#ffce3d3e</color>
+    <color name="theme_color_Primary">#ffce3d3c</color>
     <color name="theme_color_PrimaryAccent">#ffce3d3e</color>
     <color name="theme_color_PrimaryDark">#ffa13b41</color>
     <color name="theme_color_c2_common_bg">#fff2f4f5</color>
@@ -285,4 +285,5 @@
     <color name="videoWindowBgPrs">#e5000000</color>
     <color name="white">#ffffff</color>
     <color name="smallRed">#cda2a6</color>
+    <color name="search_bg">#00000000</color>
 </resources>

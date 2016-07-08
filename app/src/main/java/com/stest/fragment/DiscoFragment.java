@@ -60,7 +60,7 @@ public class DiscoFragment extends Fragment {
         ViewUtils.inject(this, v);
         MyAdapter myAdapter = new MyAdapter(getActivity().getSupportFragmentManager());
         myAdapter.notifyDataSetChanged();
-        main_viewpager.setOffscreenPageLimit(2);
+        main_viewpager.setOffscreenPageLimit(4);
         main_viewpager.setAdapter(myAdapter);
         main_tab.setTabMode(TabLayout.MODE_FIXED);
         main_tab.setupWithViewPager(main_viewpager);

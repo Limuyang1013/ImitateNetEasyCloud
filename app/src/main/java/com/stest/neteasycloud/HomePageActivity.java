@@ -1,5 +1,7 @@
 package com.stest.neteasycloud;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -51,6 +53,8 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     private ImageView play_btn;
     @ViewInject(R.id.bottom_music_more)
     private LinearLayout bottom_music_more;
+    @ViewInject(R.id.search_layout)
+    private LinearLayout search_layout;
     private boolean isOpen;
     //ToolBar三个按钮对应的Fragment
     private List<Fragment> fragmentlist = new ArrayList<>(3);
@@ -90,6 +94,11 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
+    public static void start(Context context) {
+        Intent intent = new Intent(context, HomePageActivity.class);
+        context.startActivity(intent);
+    }
+
     private void initWidgets() {
         setSupportActionBar(toolbar);
         //去除状态栏文字
@@ -101,6 +110,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         bar_disco.setOnClickListener(this);
         bar_music.setOnClickListener(this);
         bar_friends.setOnClickListener(this);
+        search_layout.setOnClickListener(this);
         //初始化显示位置
         bar_music.setSelected(true);
         view_pager.setCurrentItem(1);
@@ -139,6 +149,8 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                 bar_music.setSelected(false);
                 bar_disco.setSelected(false);
                 view_pager.setCurrentItem(2);
+                break;
+            case R.id.search_layout:
                 break;
         }
 

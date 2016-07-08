@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
@@ -18,7 +20,8 @@ import com.stest.neteasycloud.R;
 public class DynamicFragment extends Fragment {
     @ViewInject(R.id.txt)
     private TextView txt;
-
+    @ViewInject(R.id.nact_btn)
+    private ImageView nact_btn;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
