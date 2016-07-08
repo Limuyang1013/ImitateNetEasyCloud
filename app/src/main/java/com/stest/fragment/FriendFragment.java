@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.InnerFragment.DynamicFragment;
+import com.stest.InnerFragment.PartnerFragment;
 import com.stest.neteasycloud.R;
 import com.stest.view.NetEasyRefreshLayout;
 
@@ -48,7 +50,7 @@ public class FriendFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
         fragments.add(new DynamicFragment());
         fragments.add(new DynamicFragment());
-        fragments.add(new DynamicFragment());
+        fragments.add(new PartnerFragment());
 
     }
 
@@ -79,7 +81,6 @@ public class FriendFragment extends Fragment implements SwipeRefreshLayout.OnRef
                 }
             }
         }, 2500);
-
     }
 
 
