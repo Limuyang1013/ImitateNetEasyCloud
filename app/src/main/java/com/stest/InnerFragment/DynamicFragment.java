@@ -21,7 +21,7 @@ public class DynamicFragment extends Fragment {
     @ViewInject(R.id.txt)
     private TextView txt;
     @ViewInject(R.id.nact_btn)
-    private ImageView nact_btn;
+    private ImageButton nact_btn;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
