@@ -20,6 +20,7 @@ import com.stest.InnerFragment.RecommendFragment;
 import com.stest.neteasycloud.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -31,21 +32,16 @@ public class DiscoFragment extends Fragment {
     private TabLayout main_tab;
     @ViewInject(R.id.disco_viewPager)
     private ViewPager main_viewpager;
-    private List<String> mTitleList = new ArrayList<>(4);
-    private List<Fragment> fragments = new ArrayList<>(4);
+    private List<String> mTitleList = Arrays.asList("个性推荐", "歌单", "主播电台", "排行榜");
+    private List<Fragment> fragments = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addView();
+        setRetainInstance(true);
     }
 
     private void addView() {
-        mTitleList.add("个性推荐");
-        mTitleList.add("歌单");
-        mTitleList.add("主播电台");
-        mTitleList.add("排行榜");
-
         fragments.add(new RecommendFragment());
         fragments.add(new ListFragment());
         fragments.add(new AnchorFragment());
@@ -58,9 +54,10 @@ public class DiscoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.disco_fragment, container, false);
         ViewUtils.inject(this, v);
+        addView();
         MyAdapter myAdapter = new MyAdapter(getActivity().getSupportFragmentManager());
         myAdapter.notifyDataSetChanged();
-        main_viewpager.setOffscreenPageLimit(4);
+        main_viewpager.setOffscreenPageLimit(3);
         main_viewpager.setAdapter(myAdapter);
         main_tab.setTabMode(TabLayout.MODE_FIXED);
         main_tab.setupWithViewPager(main_viewpager);

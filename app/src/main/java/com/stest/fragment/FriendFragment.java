@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,7 @@ import com.stest.neteasycloud.R;
 import com.stest.view.NetEasyRefreshLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,20 +34,15 @@ public class FriendFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private ViewPager friends_viewPager;
     @ViewInject(R.id.refresh)
     private NetEasyRefreshLayout refreshLayout;
-    private List<String> mTitleList = new ArrayList<>(3);
-    private List<Fragment> fragments = new ArrayList<>(3);
+    private List<String> mTitleList = Arrays.asList("动态", "附近", "好友");
+    private List<Fragment> fragments = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addView();
     }
 
     private void addView() {
-        mTitleList.add("动态");
-        mTitleList.add("附近");
-        mTitleList.add("好友");
-
         fragments.add(new DynamicFragment());
         fragments.add(new DynamicFragment());
         fragments.add(new PartnerFragment());
@@ -59,6 +54,7 @@ public class FriendFragment extends Fragment implements SwipeRefreshLayout.OnRef
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.friend_fragment, container, false);
         ViewUtils.inject(this, v);
+        addView();
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeResources(R.color.themeColor);
         MyAdapter myAdapter = new MyAdapter(getActivity().getSupportFragmentManager());
