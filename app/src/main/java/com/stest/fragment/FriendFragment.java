@@ -57,13 +57,11 @@ public class FriendFragment extends Fragment implements SwipeRefreshLayout.OnRef
         addView();
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeResources(R.color.themeColor);
-        MyAdapter myAdapter = new MyAdapter(getActivity().getSupportFragmentManager());
-        myAdapter.notifyDataSetChanged();
-        friends_viewPager.setOffscreenPageLimit(3);
+        MyAdapter myAdapter = new MyAdapter(getFragmentManager());
         friends_viewPager.setAdapter(myAdapter);
         friends_tab.setTabMode(TabLayout.MODE_FIXED);
-        friends_tab.setupWithViewPager(friends_viewPager);
         friends_tab.setTabsFromPagerAdapter(myAdapter);
+        friends_tab.setupWithViewPager(friends_viewPager);
         return v;
     }
 

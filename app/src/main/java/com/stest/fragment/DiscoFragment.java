@@ -33,7 +33,7 @@ public class DiscoFragment extends Fragment {
     @ViewInject(R.id.disco_viewPager)
     private ViewPager main_viewpager;
     private List<String> mTitleList = Arrays.asList("个性推荐", "歌单", "主播电台", "排行榜");
-    private List<Fragment> fragments = new ArrayList<>();
+    private List<Fragment> fragments = new ArrayList<>(4);
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,13 +55,11 @@ public class DiscoFragment extends Fragment {
         View v = inflater.inflate(R.layout.disco_fragment, container, false);
         ViewUtils.inject(this, v);
         addView();
-        MyAdapter myAdapter = new MyAdapter(getActivity().getSupportFragmentManager());
-        myAdapter.notifyDataSetChanged();
-        main_viewpager.setOffscreenPageLimit(3);
+        MyAdapter myAdapter = new MyAdapter(getFragmentManager());
         main_viewpager.setAdapter(myAdapter);
         main_tab.setTabMode(TabLayout.MODE_FIXED);
-        main_tab.setupWithViewPager(main_viewpager);
         main_tab.setTabsFromPagerAdapter(myAdapter);
+        main_tab.setupWithViewPager(main_viewpager);
         main_viewpager.setCurrentItem(0);
         return v;
     }
