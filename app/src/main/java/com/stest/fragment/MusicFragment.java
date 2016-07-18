@@ -14,10 +14,16 @@ import com.stest.neteasycloud.R;
  * Created by Limuyang on 2016/7/7.
  */
 public class MusicFragment extends Fragment {
+    private View v;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.music_fragment, container, false);
+        if (v != null) {
+            ViewUtils.inject(this, v);
+            return v;
+        }
+        v = inflater.inflate(R.layout.music_fragment, container, false);
         ViewUtils.inject(this, v);
         return v;
     }
