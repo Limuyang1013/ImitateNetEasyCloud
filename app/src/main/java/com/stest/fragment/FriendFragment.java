@@ -16,12 +16,12 @@ import android.view.ViewGroup;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.InnerFragment.DynamicFragment;
+import com.stest.InnerFragment.NearbyFragment;
 import com.stest.InnerFragment.PartnerFragment;
 import com.stest.neteasycloud.R;
 import com.stest.view.NetEasyRefreshLayout;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,8 +34,12 @@ public class FriendFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private ViewPager friends_viewPager;
     @ViewInject(R.id.refresh)
     private NetEasyRefreshLayout refreshLayout;
-    private List<String> mTitleList = Arrays.asList("动态", "附近", "好友");
-    private List<Fragment> fragments = new ArrayList<>();
+    private List<String> mTitleList = new ArrayList<>(3);
+    private List<Fragment> fragments = new ArrayList<>(3);
+    private DynamicFragment dynamicFragment;
+    private NearbyFragment nearbyFragment;
+    private PartnerFragment partnerFragment;
+    private View v;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,24 +47,42 @@ public class FriendFragment extends Fragment implements SwipeRefreshLayout.OnRef
     }
 
     private void addView() {
-        fragments.add(new DynamicFragment());
-        fragments.add(new DynamicFragment());
-        fragments.add(new PartnerFragment());
+        mTitleList.add("动态");
+        mTitleList.add("附近");
+        mTitleList.add("好友");
+        if (dynamicFragment == null) {
+            dynamicFragment = new DynamicFragment();
+            fragments.add(dynamicFragment);
+        }
+        if (nearbyFragment == null) {
+            nearbyFragment = new NearbyFragment();
+            fragments.add(nearbyFragment);
+        }
+        if (partnerFragment == null) {
+            partnerFragment = new PartnerFragment();
+            fragments.add(partnerFragment);
+        }
 
     }
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.friend_fragment, container, false);
+        if (v != null) {
+            ViewUtils.inject(this, v);
+            return v;
+        }
+        v = inflater.inflate(R.layout.friend_fragment, container, false);
         ViewUtils.inject(this, v);
         addView();
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeResources(R.color.themeColor);
         MyAdapter myAdapter = new MyAdapter(getFragmentManager());
+        myAdapter.notifyDataSetChanged();
         friends_viewPager.setAdapter(myAdapter);
+        friends_viewPager.setOffscreenPageLimit(3);
         friends_tab.setTabMode(TabLayout.MODE_FIXED);
-        friends_tab.setTabsFromPagerAdapter(myAdapter);
         friends_tab.setupWithViewPager(friends_viewPager);
         return v;
     }
