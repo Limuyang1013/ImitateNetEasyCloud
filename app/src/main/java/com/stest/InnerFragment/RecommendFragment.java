@@ -15,7 +15,7 @@ import com.stest.neteasycloud.R;
  * Created by Limuyang on 2016/7/7.
  */
 public class RecommendFragment extends Fragment {
-
+    //个性推荐界面
     @ViewInject(R.id.txt)
     private TextView txt;
 
