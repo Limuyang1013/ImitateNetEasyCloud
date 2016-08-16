@@ -26,7 +26,7 @@
                 android:layout_height="9dp"
                 android:layout_centerInParent="true"
                 android:layout_toLeftOf="@+id/v_dot2"
-                android:background="@mipmap/red_point" />
+                android:background="@mipmap/red" />
 
             <View
                 android:id="@+id/v_dot2"
@@ -35,7 +35,7 @@
                 android:layout_marginStart="3dp"
                 android:layout_centerInParent="true"
                 android:layout_toLeftOf="@+id/v_dot3"
-                android:background="@mipmap/grey_point" />
+                android:background="@mipmap/grey" />
 
             <View
                 android:id="@+id/v_dot3"
@@ -44,7 +44,7 @@
                 android:layout_marginStart="3dp"
                 android:layout_centerInParent="true"
                 android:layout_toLeftOf="@+id/v_dot4"
-                android:background="@mipmap/grey_point" />
+                android:background="@mipmap/grey" />
 
             <View
                 android:id="@+id/v_dot4"
@@ -52,7 +52,7 @@
                 android:layout_marginStart="3dp"
                 android:layout_height="9dp"
                 android:layout_centerInParent="true"
-                android:background="@mipmap/grey_point" />
+                android:background="@mipmap/grey" />
 
             <View
                 android:id="@+id/v_dot5"
@@ -61,7 +61,7 @@
                 android:layout_height="9dp"
                 android:layout_centerInParent="true"
                 android:layout_toRightOf="@+id/v_dot4"
-                android:background="@mipmap/grey_point" />
+                android:background="@mipmap/grey" />
 
             <View
                 android:id="@+id/v_dot6"
@@ -71,7 +71,7 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:layout_toRightOf="@+id/v_dot5"
-                android:background="@mipmap/grey_point" />
+                android:background="@mipmap/grey" />
 
             <View
                 android:id="@+id/v_dot7"
@@ -80,7 +80,7 @@
                 android:layout_height="9dp"
                 android:layout_centerInParent="true"
                 android:layout_toRightOf="@+id/v_dot6"
-                android:background="@mipmap/grey_point" />
+                android:background="@mipmap/grey" />
 
 
         </RelativeLayout>

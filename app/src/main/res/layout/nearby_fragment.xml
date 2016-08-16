@@ -9,6 +9,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
+        android:text="NearBy"
         android:layout_marginTop="281dp"
         android:textSize="20sp"
         android:textStyle="bold" />

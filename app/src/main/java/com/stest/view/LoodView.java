@@ -181,9 +181,9 @@ public class LoodView extends FrameLayout {
             currentItem = position;
             for (int i = 0; i < dotViewList.size(); i++) {
                 if (i == position) {
-                    dotViewList.get(i).setBackgroundResource(R.mipmap.red_point);
+                    dotViewList.get(i).setBackgroundResource(R.mipmap.red);
                 } else {
-                    dotViewList.get(i).setBackgroundResource(R.mipmap.grey_point);
+                    dotViewList.get(i).setBackgroundResource(R.mipmap.grey);
                 }
             }
 
