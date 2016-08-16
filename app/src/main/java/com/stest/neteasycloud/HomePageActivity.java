@@ -23,6 +23,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.fragment.DiscoFragment;
 import com.stest.fragment.FriendFragment;
 import com.stest.fragment.MusicFragment;
+import com.stest.service.NetworkStateService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +68,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         ViewUtils.inject(this);
         addFragment();
         initWidgets();
+        checkNextWork();
 
         mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -188,6 +190,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+
     class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
         public MyFragmentPagerAdapter(FragmentManager fm) {
@@ -212,6 +215,14 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
             isOpen = false;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    /**
+     * 检测网络
+     */
+    public void checkNextWork() {
+        Intent i = new Intent(this, NetworkStateService.class);
+        startService(i);
     }
 
 }
