@@ -73,7 +73,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         initWidgets();
         checkNextWork();
 
-        mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+        mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
 

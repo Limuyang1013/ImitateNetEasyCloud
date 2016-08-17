@@ -69,12 +69,12 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:layout_marginTop="3dp"
                     android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    >
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
                     <ImageView
                         android:id="@+id/bar_search"
                         android:layout_width="25dp"
@@ -93,7 +93,9 @@
             android:background="#ffffff" />
     </LinearLayout>
     <!--底部唱片布局-->
-    <include layout="@layout/bottom_music_layout"></include>
+    <include
+        android:id="@+id/bottom_nusic_nav"
+        layout="@layout/bottom_music_layout"></include>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"

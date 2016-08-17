@@ -65,6 +65,7 @@
             android:layout_width="45dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
+            android:background="@drawable/list_bg"
             android:clickable="true"
             android:orientation="vertical">
 
@@ -72,7 +73,7 @@
                 android:id="@+id/play_btn"
                 android:layout_width="45dp"
                 android:layout_height="match_parent"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/list_bg"
                 android:src="@drawable/playbar_btn_play" />
         </LinearLayout>
 
@@ -80,6 +81,7 @@
             android:layout_width="45dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
+            android:background="@drawable/list_bg"
             android:clickable="true"
             android:orientation="vertical">
 
