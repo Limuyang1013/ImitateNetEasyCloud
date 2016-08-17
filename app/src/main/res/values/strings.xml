@@ -5,4 +5,5 @@
     <string name="no_net">无可用网络</string>
     <string name="net_ok">网络状况良好</string>
     <string name="change_item">调整栏目顺序</string>
+    <string name="drag_info">想调整首页栏目的顺序？按住右边的按钮拖动即可</string>
 </resources>

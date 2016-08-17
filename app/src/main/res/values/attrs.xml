@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DividerPadding">
+        <attr name="dividerPaddingLeft" format="dimension" />
+        <attr name="dividerPaddingRight" format="dimension" />
+        <attr name="dividerPaddingTop" format="dimension" />
+        <attr name="dividerPaddingBottom" format="dimension" />
+    </declare-styleable>
+</resources>

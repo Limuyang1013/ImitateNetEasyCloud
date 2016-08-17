@@ -20,5 +20,31 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/tool_bar"
         android:background="@color/white"
-        ></LinearLayout>
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/lamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/list_slt_icn_light"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/lamp"
+                android:text="@string/drag_info"
+                android:textSize="11sp"
+                android:layout_alignBaseline="@+id/lamp"
+                android:textColor="#999999" />
+        </RelativeLayout>
+    </LinearLayout>
+
 </RelativeLayout>
