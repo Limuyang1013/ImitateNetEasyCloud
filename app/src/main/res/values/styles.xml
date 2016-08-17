@@ -13,6 +13,7 @@
 
     <style name="ImageTranslucentTheme" parent="AppTheme">
         <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
         <item name="android:windowIsTranslucent">true</item>
         <!--在Android 4.4之前的版本上运行，直接跟随系统主题-->
     </style>
@@ -34,6 +35,11 @@
         <item name="titleTextAppearance">@style/ToolBar.Title</item>
         <item name="subtitleTextAppearance">@style/Toolbar.SubTitle</item>
         <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="ColorTranslucentTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
     </style>
 
     <style name="ToolBar.Title" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">

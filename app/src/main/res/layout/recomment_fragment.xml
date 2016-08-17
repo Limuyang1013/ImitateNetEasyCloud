@@ -157,7 +157,6 @@
 
         <!--更改布局按钮-->
         <LinearLayout
-            android:id="@+id/item_change"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -179,10 +178,11 @@
                 android:textSize="10sp" />
 
             <LinearLayout
+                android:id="@+id/item_change"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="70dp"
+                android:layout_marginBottom="50dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/btn_background"
                 android:clickable="true"

@@ -4,4 +4,5 @@
     <string name="close">close</string>
     <string name="no_net">无可用网络</string>
     <string name="net_ok">网络状况良好</string>
+    <string name="change_item">调整栏目顺序</string>
 </resources>

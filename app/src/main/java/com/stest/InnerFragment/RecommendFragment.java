@@ -4,9 +4,11 @@ import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.stest.neteasycloud.R;
+import com.stest.neteasycloud.RecommendPageItemChangeActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,6 +24,10 @@ public class RecommendFragment extends BaseInnerFragment implements View.OnClick
     private TextView daily_text;
     private ImageButton daily_btn;
     private List<String> networkImages;
+    //更改布局
+    private LinearLayout item_change;
+    //动态添加布局
+    private LinearLayout dynamic_layout;
     //轮播图
     private String[] images;
     private static final String URL_1 = "http://p4.music.126.net/yuIj6uoIjQtK0GlSgt6KVg==/3252355409837033.jpg";
@@ -53,13 +59,15 @@ public class RecommendFragment extends BaseInnerFragment implements View.OnClick
         daily_btn = findViewById(R.id.daily_btn);
         daily_text.setText(getDate());
         images = new String[]{URL_1, URL_2, URL_3, URL_4, URL_5, URL_6, URL_7};
+        item_change = findViewById(R.id.item_change);
+        dynamic_layout = findViewById(R.id.dynamic_layout);
         daily_btn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     daily_btn.setBackgroundResource(R.drawable.recommend_icn_daily_prs);
                     daily_text.setTextColor(Color.parseColor("#ffffff"));
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                } else {
                     daily_btn.setBackgroundResource(R.drawable.recommend_icn_daily);
                     daily_text.setTextColor(Color.parseColor("#ffce3d3a"));
                 }
@@ -71,10 +79,18 @@ public class RecommendFragment extends BaseInnerFragment implements View.OnClick
     @Override
     protected void setListener() {
         super.setListener();
+        item_change.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.item_change:
+                RecommendPageItemChangeActivity.start(getActivity());
+                break;
+            case R.id.daily_btn:
+                break;
+        }
     }
 
 }
