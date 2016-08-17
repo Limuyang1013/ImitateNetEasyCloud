@@ -3,4 +3,5 @@
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="no_net">无可用网络</string>
+    <string name="net_ok">网络状况良好</string>
 </resources>

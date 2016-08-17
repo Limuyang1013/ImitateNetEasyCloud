@@ -284,6 +284,6 @@
     <color name="videoWindowBg">#ff1e2123</color>
     <color name="videoWindowBgPrs">#e5000000</color>
     <color name="white">#ffffff</color>
-    <color name="smallRed">#cda2a6</color>
+    <color name="smallRed">#faebeb</color>
     <color name="search_bg">#00000000</color>
 </resources>

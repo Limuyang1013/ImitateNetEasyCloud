@@ -15,6 +15,7 @@ import com.stest.utils.ToastUtils;
 
 /**
  * Created by Limuyang on 2016/8/16.
+ * 监听网络状态改变
  */
 public class NetworkStateService extends Service {
 
@@ -36,9 +37,9 @@ public class NetworkStateService extends Service {
                     Log.d(tag, "当前网络名称：" + name);
                     //doSomething()
                 } else {
-                    ToastUtils.show(NetworkStateService.this, R.string.no_net, 3500);
                     Log.d(tag, "没有可用网络");
                     //doSomething()
+                    ToastUtils.show(NetworkStateService.this, R.string.no_net, 3500);
                 }
             }
         }

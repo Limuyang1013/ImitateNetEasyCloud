@@ -24,6 +24,8 @@ import com.stest.fragment.DiscoFragment;
 import com.stest.fragment.FriendFragment;
 import com.stest.fragment.MusicFragment;
 import com.stest.service.NetworkStateService;
+import com.stest.utils.LogUtils;
+import com.stest.utils.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +61,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     //ToolBar三个按钮对应的Fragment
     private List<Fragment> fragmentlist = new ArrayList<>(3);
     private MyFragmentPagerAdapter adapter;
+    private static final String TAG = "HomePageActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -221,8 +224,13 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
      * 检测网络
      */
     public void checkNextWork() {
-        Intent i = new Intent(this, NetworkStateService.class);
-        startService(i);
+        if (NetworkUtils.isNetworkConnected(this)) {
+            LogUtils.D(TAG, getString(R.string.net_ok));
+
+        } else {
+            Intent i = new Intent(this, NetworkStateService.class);
+            startService(i);
+        }
     }
 
 }

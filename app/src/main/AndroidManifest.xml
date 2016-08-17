@@ -19,14 +19,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/ImageTranslucentTheme" />
-        <activity
-            android:name=".MusicActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".HomePageActivity"
             android:label="@string/app_name"
             android:theme="@style/ImageTranslucentTheme" />
