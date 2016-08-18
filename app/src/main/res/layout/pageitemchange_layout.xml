@@ -51,7 +51,7 @@
         <com.mobeta.android.dslv.DragSortListView
             android:id="@+id/drag_lv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:divider="#E0E0E0"
             android:dividerHeight="0.3dp"
             android:listSelector="@drawable/drag_lv_selector"
@@ -61,16 +61,26 @@
             dslv:drag_scroll_start="0.33"
             dslv:drag_start_mode="onDown"
             dslv:float_alpha="0.2"
+            dslv:float_background_color="@color/qianhuise"
             dslv:max_drag_scroll_speed="0.2"
             dslv:remove_enabled="true"
             dslv:remove_mode="flingRemove"
             dslv:slide_shuffle_speed="0.1"
             dslv:sort_enabled="true"
             dslv:track_drag_sort="false"
-            dslv:use_default_controller="true"
-            dslv:float_background_color="@color/qianhuise"
-            />
+            dslv:use_default_controller="true" />
 
+        <TextView
+            android:id="@+id/drag_restore_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_order"
+            android:textSize="13sp"
+            android:textColor="@color/drag_text_bg"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:clickable="true"
+            />
     </LinearLayout>
 
 </RelativeLayout>
