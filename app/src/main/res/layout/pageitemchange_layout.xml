@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:dslv="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/themeColor"
@@ -46,20 +47,30 @@
                 android:textSize="11sp" />
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.3dp"
-            android:background="#E0E0E0"
-            android:layout_marginLeft="10dp"
-            />
 
-        <com.stest.view.DividerListView xmlns:divider="http://schemas.android.com/apk/res-auto"
+        <com.mobeta.android.dslv.DragSortListView
             android:id="@+id/drag_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="#E0E0E0"
             android:dividerHeight="0.3dp"
-            divider:dividerPaddingLeft="10dp" />
+            android:listSelector="@drawable/drag_lv_selector"
+            dslv:collapsed_height="2dp"
+            dslv:drag_enabled="true"
+            dslv:drag_handle_id="@drawable/list_icn_move"
+            dslv:drag_scroll_start="0.33"
+            dslv:drag_start_mode="onDown"
+            dslv:float_alpha="0.2"
+            dslv:max_drag_scroll_speed="0.2"
+            dslv:remove_enabled="true"
+            dslv:remove_mode="flingRemove"
+            dslv:slide_shuffle_speed="0.1"
+            dslv:sort_enabled="true"
+            dslv:track_drag_sort="false"
+            dslv:use_default_controller="true"
+            dslv:float_background_color="@color/qianhuise"
+            />
+
     </LinearLayout>
 
 </RelativeLayout>
