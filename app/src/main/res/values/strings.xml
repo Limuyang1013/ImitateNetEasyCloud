@@ -5,5 +5,15 @@
     <string name="no_net">无可用网络</string>
     <string name="net_ok">网络状况良好</string>
     <string name="change_item">调整栏目顺序</string>
+    <string name="drag_item">拖拽条目</string>
     <string name="drag_info">想调整首页栏目的顺序？按住右边的按钮拖动即可</string>
+
+    <string-array name="drag_lv_data">
+        <item>推荐歌单</item>
+        <item>独家放送</item>
+        <item>最新音乐</item>
+        <item>推荐MV</item>
+        <item>主播电台</item>
+
+    </string-array>
 </resources>

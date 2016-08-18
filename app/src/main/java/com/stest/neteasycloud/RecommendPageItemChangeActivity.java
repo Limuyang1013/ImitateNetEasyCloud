@@ -12,6 +12,12 @@ import android.view.Window;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.stest.adapter.DragViewAdapter;
+import com.stest.view.DividerListView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Limuyang on 2016/8/17.
@@ -21,7 +27,13 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
 
     @ViewInject(R.id.tool_bar)
     private Toolbar toolbar;
+    @ViewInject(R.id.drag_lv)
+    private DividerListView drag_lv;
+    //适配器
+    private DragViewAdapter mAdapter;
     private ActionBar actionBar;
+    //数据
+    private List<String> data;
     private static final String TAG = RecommendPageItemChangeActivity.class.getSimpleName();
 
     @Override
@@ -48,6 +60,10 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        data = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.drag_lv_data)));
+        mAdapter = new DragViewAdapter(this, data, R.layout.drag_item);
+        drag_lv.setAdapter(mAdapter);
     }
 
     public static void start(Context context) {
