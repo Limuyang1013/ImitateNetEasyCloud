@@ -1,6 +1,7 @@
 package com.stest.InnerFragment;
 
 import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -24,6 +25,7 @@ public class RecommendFragment extends BaseInnerFragment implements View.OnClick
     private TextView daily_text;
     private ImageButton daily_btn;
     private List<String> networkImages;
+    private LayoutInflater mInflater;
     //更改布局
     private LinearLayout item_change;
     //动态添加布局
@@ -55,6 +57,7 @@ public class RecommendFragment extends BaseInnerFragment implements View.OnClick
     @Override
     protected void initView() {
         super.initView();
+        mInflater = LayoutInflater.from(getContext());
         daily_text = findViewById(R.id.daily_text);
         daily_btn = findViewById(R.id.daily_btn);
         daily_text.setText(getDate());

@@ -54,6 +54,7 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
         initWidgets();
     }
 
+
     private void initWidgets() {
         toolbar.setTitle(R.string.change_item);
         setSupportActionBar(toolbar);
@@ -120,4 +121,13 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }

@@ -155,6 +155,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                 view_pager.setCurrentItem(2);
                 break;
             case R.id.search_layout:
+                SearchActivity.start(this);
                 break;
         }
 

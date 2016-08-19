@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/themeColor"
+                android:fitsSystemWindows="true"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/themeColor"
+        app:contentInsetStart="0.0dp"
+        app:layout_scrollFlags="enterAlways|scroll"
+        app:theme="@style/ToolbarStyle">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            >
+
+            <LinearLayout
+                android:id="@+id/search_horizon_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                >
+
+                <EditText
+                    android:id="@+id/search_edittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="@string/search_txt"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@null"
+                    android:textSize="16sp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/search_layout"
+                android:layout_toRightOf="@+id/search_horizon_layout"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:clickable="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                >
+
+                <ImageView
+                    android:id="@+id/bar_search"
+                    android:layout_width="23dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/actionbar_search"/>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignRight="@+id/search_layout"
+                android:layout_below="@+id/search_horizon_layout"
+                android:layout_marginTop="5dp"
+                android:background="@color/white"
+                />
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tool_bar"
+        android:background="@color/white"
+        ></RelativeLayout>
+
+</RelativeLayout>
