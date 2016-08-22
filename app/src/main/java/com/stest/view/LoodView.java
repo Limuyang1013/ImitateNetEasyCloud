@@ -24,7 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.stest.constant.API;
 import com.stest.neteasycloud.R;
-import com.stest.utils.NetworkUtils;
+import com.stest.utils.NetWorkUtils;
 
 import org.json.JSONObject;
 
@@ -142,7 +142,7 @@ public class LoodView extends FrameLayout {
             @Override
             protected Void doInBackground(Void... params) {
                 //判断网络状态
-                if (NetworkUtils.isNetworkConnected(mContext)) {
+                if (NetWorkUtils.isNetworkConnected(mContext)) {
                     Log.d("LoadView", "Net OK");
                     RequestQueue mQueue = Volley.newRequestQueue(mContext);
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(API.BANNER, null, new Response.Listener<JSONObject>() {

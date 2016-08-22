@@ -24,7 +24,7 @@ import com.stest.fragment.FriendFragment;
 import com.stest.fragment.MusicFragment;
 import com.stest.service.NetworkStateService;
 import com.stest.utils.LogUtils;
-import com.stest.utils.NetworkUtils;
+import com.stest.utils.NetWorkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -220,7 +220,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
      * 检测网络
      */
     public void checkNextWork() {
-        if (NetworkUtils.isNetworkConnected(this)) {
+        if (NetWorkUtils.isNetworkConnected(this)) {
             LogUtils.D(TAG, getString(R.string.net_ok));
 
         } else {
