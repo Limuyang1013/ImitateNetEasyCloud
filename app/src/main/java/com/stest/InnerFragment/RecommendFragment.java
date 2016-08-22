@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.stest.NetEasyApplication;
 import com.stest.neteasycloud.R;
 import com.stest.neteasycloud.RecommendPageItemChangeActivity;
 
@@ -50,7 +51,7 @@ public class RecommendFragment extends BaseInnerFragment implements View.OnClick
     @Override
     protected void initView() {
         super.initView();
-        mStub=findViewById(R.id.recommend_stub);
+        mStub = findViewById(R.id.recommend_stub);
         mStub.inflate();
         mInflater = LayoutInflater.from(getContext());
         daily_text = findViewById(R.id.daily_text);
@@ -90,4 +91,9 @@ public class RecommendFragment extends BaseInnerFragment implements View.OnClick
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        NetEasyApplication.getRefWatcher().watch(this);
+    }
 }

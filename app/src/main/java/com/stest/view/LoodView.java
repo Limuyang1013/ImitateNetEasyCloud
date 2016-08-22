@@ -25,7 +25,6 @@ import com.android.volley.toolbox.Volley;
 import com.stest.constant.API;
 import com.stest.neteasycloud.R;
 import com.stest.utils.NetworkUtils;
-import com.stest.utils.ToastUtils;
 
 import org.json.JSONObject;
 
@@ -160,7 +159,6 @@ public class LoodView extends FrameLayout {
                     });
                     mQueue.add(jsonObjectRequest);
                 } else {
-                    ToastUtils.showShort(mContext, mContext.getResources().getString(R.string.check_net));
                 }
 
                 return null;

@@ -17,6 +17,7 @@ import com.stest.InnerFragment.AnchorFragment;
 import com.stest.InnerFragment.ListFragment;
 import com.stest.InnerFragment.RankingFragment;
 import com.stest.InnerFragment.RecommendFragment;
+import com.stest.NetEasyApplication;
 import com.stest.neteasycloud.R;
 
 import java.util.ArrayList;
@@ -33,7 +34,6 @@ public class DiscoFragment extends Fragment {
     private ViewPager main_viewpager;
     private List<String> mTitleList = new ArrayList<>(4);
     private List<Fragment> fragments = new ArrayList<>(4);
-    private String[] title = new String[]{"个性推荐", "歌单", "主播电台", "排行榜"};
     private RecommendFragment recommendFragment;
     private ListFragment listFragment;
     private AnchorFragment anchorFragment;
@@ -115,5 +115,11 @@ public class DiscoFragment extends Fragment {
         public void destroyItem(ViewGroup container, int position, Object object) {
             super.destroyItem(container, position, object);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        NetEasyApplication.getRefWatcher().watch(this);
     }
 }

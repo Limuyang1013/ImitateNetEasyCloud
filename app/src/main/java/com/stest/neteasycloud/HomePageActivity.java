@@ -1,6 +1,5 @@
 package com.stest.neteasycloud;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -98,10 +97,6 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
-    public static void start(Context context) {
-        Intent intent = new Intent(context, HomePageActivity.class);
-        context.startActivity(intent);
-    }
 
     private void initWidgets() {
         setSupportActionBar(toolbar);
