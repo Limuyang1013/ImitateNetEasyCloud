@@ -18,10 +18,14 @@ import com.stest.neteasycloud.R;
 public class NearbyFragment extends Fragment {
     @ViewInject(R.id.txt)
     private TextView txt;
+    private View v;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (v!=null){
+            return v;
+        }
         View v = inflater.inflate(R.layout.nearby_fragment, container, false);
         ViewUtils.inject(this, v);
         return v;

@@ -45,6 +45,9 @@ public abstract class BaseInnerFragment extends Fragment {
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        if (mRootView != null) {
+            return mRootView;
+        }
         mRootView = inflater.inflate(setLayoutResouceId(), container, false);
 
         initData(getArguments());

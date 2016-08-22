@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,19 +27,11 @@ public class RecommendFragment extends BaseInnerFragment implements View.OnClick
     private ImageButton daily_btn;
     private List<String> networkImages;
     private LayoutInflater mInflater;
+    private ViewStub mStub;
     //更改布局
     private LinearLayout item_change;
     //动态添加布局
     private LinearLayout dynamic_layout;
-    //轮播图
-    private String[] images;
-    private static final String URL_1 = "http://p4.music.126.net/yuIj6uoIjQtK0GlSgt6KVg==/3252355409837033.jpg";
-    private static final String URL_2 = "http://p3.music.126.net/9bb79OKLW8Re07TBSyAFwQ==/3412884115270589.jpg";
-    private static final String URL_3 = "http://p3.music.126.net/pwbDutfRLFjHO21rOBj2SQ==/1401877339824820.jpg";
-    private static final String URL_4 = "http://p3.music.126.net/VZVdskyRJX_P-5CXsbZQdQ==/1369991502537578.jpg";
-    private static final String URL_5 = "http://p4.music.126.net/J0ENITf4Hb4k6WanIFaqig==/3418381661746316.jpg";
-    private static final String URL_6 = "http://p4.music.126.net/2Q3WlnpBryOEU3BxnwHi1Q==/3413983625400914.jpg";
-    private static final String URL_7 = "http://p3.music.126.net/150XRACsO8Arr4VfsRZyIQ==/3413983627049741.jpg";
 
     @Override
     protected int setLayoutResouceId() {
@@ -57,11 +50,12 @@ public class RecommendFragment extends BaseInnerFragment implements View.OnClick
     @Override
     protected void initView() {
         super.initView();
+        mStub=findViewById(R.id.recommend_stub);
+        mStub.inflate();
         mInflater = LayoutInflater.from(getContext());
         daily_text = findViewById(R.id.daily_text);
         daily_btn = findViewById(R.id.daily_btn);
         daily_text.setText(getDate());
-        images = new String[]{URL_1, URL_2, URL_3, URL_4, URL_5, URL_6, URL_7};
         item_change = findViewById(R.id.item_change);
         dynamic_layout = findViewById(R.id.dynamic_layout);
         daily_btn.setOnTouchListener(new View.OnTouchListener() {

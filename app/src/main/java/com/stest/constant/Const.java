@@ -5,4 +5,5 @@ package com.stest.constant;
  * 全局常量管理
  */
 public class Const {
+
 }

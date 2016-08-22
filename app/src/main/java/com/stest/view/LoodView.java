@@ -2,12 +2,14 @@ package com.stest.view;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,7 +17,17 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.stest.constant.API;
 import com.stest.neteasycloud.R;
+import com.stest.utils.NetworkUtils;
+import com.stest.utils.ToastUtils;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +50,7 @@ public class LoodView extends FrameLayout {
     private List<ImageView> imageViewList;
     private List<View> dotViewList;
     private ViewPager viewPager;
+    private Context mContext;
     //当前轮播页面
     private int currentItem = 0;
     //定时任务
@@ -52,14 +65,17 @@ public class LoodView extends FrameLayout {
 
     public LoodView(Context context) {
         super(context);
+        mContext = context;
     }
 
     public LoodView(Context context, AttributeSet attributeSet) {
         this(context, attributeSet, 0);
+        mContext = context;
     }
 
     public LoodView(Context context, AttributeSet attributeSet, int defStyle) {
         super(context, attributeSet, defStyle);
+        mContext = context;
         initImageView();
         initUI(context);
         if (isAutoPlay) {
@@ -108,7 +124,7 @@ public class LoodView extends FrameLayout {
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setFocusable(true);
         viewPager.setAdapter(new MyPagerAdapter());
-        viewPager.setOnPageChangeListener(new MyPageChangeListener());
+        viewPager.addOnPageChangeListener(new MyPageChangeListener());
     }
 
     private void initImageView() {
@@ -121,9 +137,43 @@ public class LoodView extends FrameLayout {
                 R.mipmap.six,
                 R.mipmap.seven
         };
+
+        // 从网络上获取轮播图
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                //判断网络状态
+                if (NetworkUtils.isNetworkConnected(mContext)) {
+                    Log.d("LoadView", "Net OK");
+                    RequestQueue mQueue = Volley.newRequestQueue(mContext);
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(API.BANNER, null, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+
+                            Log.d("LoadView", response.toString());
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    });
+                    mQueue.add(jsonObjectRequest);
+                } else {
+                    ToastUtils.showShort(mContext, mContext.getResources().getString(R.string.check_net));
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+            }
+        }.execute();
         imageViewList = new ArrayList<>();
         dotViewList = new ArrayList<>();
     }
+
 
     private class MyPagerAdapter extends PagerAdapter {
         @Override
@@ -135,6 +185,7 @@ public class LoodView extends FrameLayout {
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView(imageViewList.get(position));
+            destoryBitmaps();
         }
 
         @Override
@@ -220,8 +271,8 @@ public class LoodView extends FrameLayout {
     //解决滑动冲突
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        switch (ev.getAction()){
-            case MotionEvent.ACTION_DOWN:{
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN: {
                 getParent().requestDisallowInterceptTouchEvent(true);
                 break;
             }

@@ -81,7 +81,7 @@ public class FriendFragment extends Fragment implements SwipeRefreshLayout.OnRef
         MyAdapter myAdapter = new MyAdapter(getFragmentManager());
         myAdapter.notifyDataSetChanged();
         friends_viewPager.setAdapter(myAdapter);
-        friends_viewPager.setOffscreenPageLimit(3);
+        friends_viewPager.setOffscreenPageLimit(2);
         friends_tab.setTabMode(TabLayout.MODE_FIXED);
         friends_tab.setupWithViewPager(friends_viewPager);
         return v;

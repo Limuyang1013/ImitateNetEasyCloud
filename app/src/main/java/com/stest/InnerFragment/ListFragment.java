@@ -15,14 +15,21 @@ import com.stest.neteasycloud.R;
 /**
  * Created by Limuyang on 2016/7/7.
  */
-public class ListFragment extends Fragment{
+public class ListFragment extends Fragment {
     @ViewInject(R.id.txt)
     private TextView txt;
+    private View v;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.listfragment,container,false);
-        ViewUtils.inject(this,v);
+        if (v != null) {
+            ViewUtils.inject(this, v);
+            return v;
+        }
+
+        View v = inflater.inflate(R.layout.listfragment, container, false);
+        ViewUtils.inject(this, v);
         return v;
     }
 }

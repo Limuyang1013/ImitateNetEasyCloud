@@ -18,11 +18,17 @@ import com.stest.neteasycloud.R;
 public class RankingFragment extends Fragment {
     @ViewInject(R.id.txt)
     private TextView txt;
+    private View v;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.rankingfragment,container,false);
-        ViewUtils.inject(this,v);
+
+        if (v != null) {
+            return v;
+        }
+        View v = inflater.inflate(R.layout.rankingfragment, container, false);
+        ViewUtils.inject(this, v);
         return v;
     }
 }
