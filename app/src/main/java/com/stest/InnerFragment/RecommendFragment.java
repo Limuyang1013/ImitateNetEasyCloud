@@ -15,7 +15,6 @@ import com.stest.neteasycloud.RecommendPageItemChangeActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Limuyang on 2016/7/7.
@@ -26,13 +25,12 @@ public class RecommendFragment extends BaseInnerFragment implements View.OnClick
     private SimpleDateFormat dateFm;
     private TextView daily_text;
     private ImageButton daily_btn;
-    private List<String> networkImages;
     private LayoutInflater mInflater;
     private ViewStub mStub;
     //更改布局
     private LinearLayout item_change;
     //动态添加布局
-    private LinearLayout dynamic_layout;
+//    private LinearLayout dynamic_layout;
 
     @Override
     protected int setLayoutResouceId() {
@@ -58,7 +56,7 @@ public class RecommendFragment extends BaseInnerFragment implements View.OnClick
         daily_btn = findViewById(R.id.daily_btn);
         daily_text.setText(getDate());
         item_change = findViewById(R.id.item_change);
-        dynamic_layout = findViewById(R.id.dynamic_layout);
+//        dynamic_layout = findViewById(R.id.dynamic_layout);
         daily_btn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

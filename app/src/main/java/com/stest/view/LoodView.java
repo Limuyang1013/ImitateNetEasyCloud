@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.stest.NetEasyApplication;
 import com.stest.constant.API;
 import com.stest.neteasycloud.R;
 import com.stest.utils.NetWorkUtils;
@@ -49,7 +50,6 @@ public class LoodView extends FrameLayout {
     private List<ImageView> imageViewList;
     private List<View> dotViewList;
     private ViewPager viewPager;
-    private Context mContext;
     //当前轮播页面
     private int currentItem = 0;
     //定时任务
@@ -64,17 +64,14 @@ public class LoodView extends FrameLayout {
 
     public LoodView(Context context) {
         super(context);
-        mContext = context;
     }
 
     public LoodView(Context context, AttributeSet attributeSet) {
         this(context, attributeSet, 0);
-        mContext = context;
     }
 
     public LoodView(Context context, AttributeSet attributeSet, int defStyle) {
         super(context, attributeSet, defStyle);
-        mContext = context;
         initImageView();
         initUI(context);
         if (isAutoPlay) {
@@ -128,13 +125,13 @@ public class LoodView extends FrameLayout {
 
     private void initImageView() {
         imageResIds = new int[]{
-                R.mipmap.first,
-                R.mipmap.second,
-                R.mipmap.third,
-                R.mipmap.fourth,
-                R.mipmap.five,
-                R.mipmap.six,
-                R.mipmap.seven
+                R.mipmap.ic_launcher,
+                R.mipmap.ic_launcher,
+                R.mipmap.ic_launcher,
+                R.mipmap.ic_launcher,
+                R.mipmap.ic_launcher,
+                R.mipmap.ic_launcher,
+                R.mipmap.ic_launcher
         };
 
         // 从网络上获取轮播图
@@ -142,9 +139,9 @@ public class LoodView extends FrameLayout {
             @Override
             protected Void doInBackground(Void... params) {
                 //判断网络状态
-                if (NetWorkUtils.isNetworkConnected(mContext)) {
+                if (NetWorkUtils.isNetworkConnected(NetEasyApplication.getInstance())) {
                     Log.d("LoadView", "Net OK");
-                    RequestQueue mQueue = Volley.newRequestQueue(mContext);
+                    RequestQueue mQueue = Volley.newRequestQueue(NetEasyApplication.getInstance());
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(API.BANNER, null, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {

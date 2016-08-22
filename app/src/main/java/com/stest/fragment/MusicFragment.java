@@ -15,6 +15,7 @@ import com.stest.neteasycloud.R;
  */
 public class MusicFragment extends Fragment {
     private View v;
+    private static MusicFragment musicFragment;
 
     @Nullable
     @Override
@@ -26,5 +27,12 @@ public class MusicFragment extends Fragment {
         v = inflater.inflate(R.layout.music_fragment, container, false);
         ViewUtils.inject(this, v);
         return v;
+    }
+
+    public static MusicFragment getInstance() {
+        if (musicFragment == null) {
+            musicFragment = new MusicFragment();
+        }
+        return musicFragment;
     }
 }

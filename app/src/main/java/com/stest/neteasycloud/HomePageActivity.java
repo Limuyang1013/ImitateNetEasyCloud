@@ -114,12 +114,13 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         bar_music.setSelected(true);
         view_pager.setCurrentItem(1);
 
+
     }
 
     private void addFragment() {
-        fragmentlist.add(new DiscoFragment());
-        fragmentlist.add(new MusicFragment());
-        fragmentlist.add(new FriendFragment());
+        fragmentlist.add(DiscoFragment.getInstance());
+        fragmentlist.add(MusicFragment.getInstance());
+        fragmentlist.add(FriendFragment.getInstance());
     }
 
     @Override

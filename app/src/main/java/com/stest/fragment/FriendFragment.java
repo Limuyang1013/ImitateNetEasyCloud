@@ -41,10 +41,14 @@ public class FriendFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private NearbyFragment nearbyFragment;
     private PartnerFragment partnerFragment;
     private View v;
+    private static FriendFragment friendFragment;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+    public static FriendFragment getInstance() {
+        if (friendFragment == null) {
+            friendFragment = new FriendFragment();
+        }
+        return friendFragment;
     }
 
     private void addView() {
@@ -124,6 +128,7 @@ public class FriendFragment extends Fragment implements SwipeRefreshLayout.OnRef
         }
 
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

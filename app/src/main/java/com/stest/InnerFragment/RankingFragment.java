@@ -16,8 +16,6 @@ import com.stest.neteasycloud.R;
  * Created by Limuyang on 2016/7/7.
  */
 public class RankingFragment extends Fragment {
-    @ViewInject(R.id.txt)
-    private TextView txt;
     private View v;
 
     @Nullable

@@ -6,18 +6,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.neteasycloud.R;
 
 /**
  * Created by Limuyang on 2016/7/18.
  */
 public class NearbyFragment extends Fragment {
-    @ViewInject(R.id.txt)
-    private TextView txt;
     private View v;
 
     @Nullable

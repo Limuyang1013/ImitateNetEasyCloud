@@ -39,10 +39,14 @@ public class DiscoFragment extends Fragment {
     private AnchorFragment anchorFragment;
     private RankingFragment rankingFragment;
     private View v;
+    private static DiscoFragment discoFragment;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+    public static DiscoFragment getInstance() {
+        if (discoFragment == null) {
+            discoFragment = new DiscoFragment();
+        }
+        return discoFragment;
     }
 
 
