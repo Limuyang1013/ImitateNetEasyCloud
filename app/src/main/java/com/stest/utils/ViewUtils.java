@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 /**
  * Created by huangziwei on 16-6-6.
  */
-public class ViewUtil {
+public class ViewUtils {
 
     public static float getX(View view) {
         if (Build.VERSION.SDK_INT >= 11) {
