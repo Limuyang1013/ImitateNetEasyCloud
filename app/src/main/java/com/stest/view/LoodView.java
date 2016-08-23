@@ -22,10 +22,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonArray;
 import com.stest.NetEasyApplication;
 import com.stest.constant.API;
+import com.stest.json.PicUrlInfo;
 import com.stest.neteasycloud.R;
+import com.stest.utils.HttpUtils;
 import com.stest.utils.NetWorkUtils;
+import com.stest.utils.ToastUtils;
 
 import org.json.JSONObject;
 
@@ -52,6 +56,8 @@ public class LoodView extends FrameLayout {
     private ViewPager viewPager;
     //当前轮播页面
     private int currentItem = 0;
+    private Context mContext;
+    private List<String> netImages = new ArrayList<>();
     //定时任务
     private ScheduledExecutorService scheduledExecutorService;
     private Handler handler = new Handler() {
@@ -64,14 +70,17 @@ public class LoodView extends FrameLayout {
 
     public LoodView(Context context) {
         super(context);
+        mContext = context;
     }
 
     public LoodView(Context context, AttributeSet attributeSet) {
         this(context, attributeSet, 0);
+        mContext = context;
     }
 
     public LoodView(Context context, AttributeSet attributeSet, int defStyle) {
         super(context, attributeSet, defStyle);
+        mContext = context;
         initImageView();
         initUI(context);
         if (isAutoPlay) {
@@ -145,13 +154,26 @@ public class LoodView extends FrameLayout {
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(API.BANNER, null, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            netImages.clear();
+                            JsonArray array = HttpUtils.getResposeJsonObject(response).get("data").getAsJsonArray();
+                            PicUrlInfo info = NetEasyApplication.gsonInstance().fromJson(array.get(0), PicUrlInfo.class);
+                            Log.d("Info---------------", array.get(0).toString());
+                            List<PicUrlInfo.DataBean> data = info.getData();
+                            for (int i = 0; i < data.size(); i++) {
+                                //获取所有图片
+                                PicUrlInfo.DataBean bean = data.get(i);
+                                netImages.add(bean.getPicUrl());
+                                String url = netImages.get(i);
+                                Log.d("IMAGE_URL-----", url);
 
-                            Log.d("LoadView", response.toString());
+                            }
                         }
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
 
+                            //弹出网络异常信息
+                            ToastUtils.showShort(mContext, getResources().getString(R.string.check_net));
                         }
                     });
                     mQueue.add(jsonObjectRequest);
