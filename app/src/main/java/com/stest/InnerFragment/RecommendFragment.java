@@ -125,6 +125,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
                         netImages.add(bean.getPicUrl());
 
                     }
+                    SPStrListUtils.remove(getContext(), "PIC_URL");
                     SPStrListUtils.putStrListValue(getContext(), "PIC_URL", netImages);
 
                 }
