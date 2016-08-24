@@ -135,6 +135,19 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
                 }
             });
             mQueue.add(jsonObjectRequest);
+            mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+            mBanner.setIndicatorGravity(BannerConfig.CENTER);
+            mBanner.setDelayTime(2500);
+            mBanner.setImages(SPStrListUtils.getStrListValue(getContext(), "PIC_URL"), new Banner.OnLoadImageListener() {
+                @Override
+                public void OnLoadImage(ImageView view, Object url) {
+                    Glide.with(getContext())
+                            .load(url)
+                            .centerCrop()
+                            .crossFade()
+                            .into(view);
+                }
+            });
 
         } else {
             //弹出网络异常信息
@@ -147,19 +160,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
             }
         }
 
-        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-        mBanner.setIndicatorGravity(BannerConfig.CENTER);
-        mBanner.setDelayTime(2500);
-        mBanner.setImages(SPStrListUtils.getStrListValue(getContext(), "PIC_URL"), new Banner.OnLoadImageListener() {
-            @Override
-            public void OnLoadImage(ImageView view, Object url) {
-                Glide.with(getContext())
-                        .load(url)
-                        .centerCrop()
-                        .crossFade()
-                        .into(view);
-            }
-        });
     }
 
     protected void setListener() {

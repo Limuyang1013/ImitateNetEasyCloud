@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:dslv="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/themeColor"
-    android:fitsSystemWindows="true">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:dslv="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/themeColor"
+                android:fitsSystemWindows="true">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tool_bar"
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/list_slt_icn_light"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
                 android:layout_toRightOf="@+id/lamp"
                 android:text="@string/drag_info"
                 android:textColor="#999999"
-                android:textSize="11sp" />
+                android:textSize="11sp"/>
         </RelativeLayout>
 
 
@@ -55,6 +55,7 @@
             android:divider="#E0E0E0"
             android:dividerHeight="0.3dp"
             android:listSelector="@drawable/drag_lv_selector"
+            android:scrollbars="none"
             dslv:collapsed_height="2dp"
             dslv:drag_enabled="true"
             dslv:drag_handle_id="@drawable/list_icn_move"
@@ -68,18 +69,18 @@
             dslv:slide_shuffle_speed="0.1"
             dslv:sort_enabled="true"
             dslv:track_drag_sort="false"
-            dslv:use_default_controller="true" />
+            dslv:use_default_controller="true"/>
 
         <TextView
             android:id="@+id/drag_restore_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/default_order"
-            android:textSize="13sp"
-            android:textColor="@color/drag_text_bg"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:clickable="true"
+            android:text="@string/default_order"
+            android:textColor="@color/drag_text_bg"
+            android:textSize="13sp"
             />
     </LinearLayout>
 
