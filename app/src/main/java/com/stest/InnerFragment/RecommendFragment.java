@@ -1,5 +1,9 @@
 package com.stest.InnerFragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -33,7 +37,6 @@ import com.stest.utils.NetWorkUtils;
 import com.stest.utils.SPStrListUtils;
 import com.stest.utils.ToastUtils;
 import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
 
 import org.json.JSONObject;
 
@@ -61,8 +64,10 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     //更改布局
     @ViewInject(R.id.item_change)
     private LinearLayout item_change;
+    private BroadcastReceiverFromService broadcastReceiverFromService;
     //动态添加布局
 //    private LinearLayout dynamic_layout;
+    //
 
     private View v;
 
@@ -109,35 +114,14 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
                 return false;
             }
         });
+        broadcastReceiverFromService = new BroadcastReceiverFromService();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("cn.com.fingerprint.action.service");
+        getActivity().registerReceiver(broadcastReceiverFromService, filter);
         //判断网络状态
-        if (NetWorkUtils.isNetworkConnected(NetEasyApplication.getInstance())) {
+        if (NetWorkUtils.isNetworkConnected(getActivity())) {
             Log.d("LoadView", "Net OK");
-            RequestQueue mQueue = Volley.newRequestQueue(NetEasyApplication.getInstance());
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(API.BANNER, null, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    JsonArray array = HttpUtils.getResposeJsonObject(response).get("data").getAsJsonArray();
-                    PicUrlInfo info = NetEasyApplication.gsonInstance().fromJson(array.get(0), PicUrlInfo.class);
-                    List<PicUrlInfo.DataBean> data = info.getData();
-                    for (int i = 0; i < data.size(); i++) {
-                        //获取所有图片
-                        PicUrlInfo.DataBean bean = data.get(i);
-                        netImages.add(bean.getPicUrl());
-
-                    }
-                    SPStrListUtils.putStrListValue(getContext(), "PIC_URL", netImages);
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            });
-            mQueue.add(jsonObjectRequest);
-            mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-            mBanner.setIndicatorGravity(BannerConfig.CENTER);
-            mBanner.setDelayTime(2500);
+            getUrlInfo();
             mBanner.setImages(SPStrListUtils.getStrListValue(getContext(), "PIC_URL"), new Banner.OnLoadImageListener() {
                 @Override
                 public void OnLoadImage(ImageView view, Object url) {
@@ -155,11 +139,36 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
             if (SPStrListUtils.getStrListValue(getContext(), "PIC_URL") != null) {
                 cacheImages = SPStrListUtils.getStrListValue(getContext(), "PIC_URL");
                 mBanner.setImages(cacheImages);
-            } else {
-                //既无缓存又还没加载时候
             }
         }
 
+    }
+
+    public void getUrlInfo() {
+        RequestQueue mQueue = Volley.newRequestQueue(NetEasyApplication.getInstance());
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(API.BANNER, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                JsonArray array = HttpUtils.getResposeJsonObject(response).get("data").getAsJsonArray();
+                PicUrlInfo info = NetEasyApplication.gsonInstance().fromJson(array.get(0), PicUrlInfo.class);
+                List<PicUrlInfo.DataBean> data = info.getData();
+                for (int i = 0; i < data.size(); i++) {
+                    //获取所有图片
+                    PicUrlInfo.DataBean bean = data.get(i);
+                    netImages.add(bean.getPicUrl());
+
+                }
+                SPStrListUtils.putStrListValue(getContext(), "PIC_URL", netImages);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.d("VOLLEY ERROR", error.toString());
+            }
+        });
+        mQueue.add(jsonObjectRequest);
     }
 
     protected void setListener() {
@@ -190,5 +199,28 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         super.onStop();
         Log.i("--", "onStop");
         mBanner.isAutoPlay(false);
+        getActivity().unregisterReceiver(broadcastReceiverFromService);
+        super.onStop();
     }
+
+    public class BroadcastReceiverFromService extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            getUrlInfo();
+            mBanner.setImages(SPStrListUtils.getStrListValue(getContext(), "PIC_URL"), new Banner.OnLoadImageListener() {
+                @Override
+                public void OnLoadImage(ImageView view, Object url) {
+                    Glide.with(getContext())
+                            .load(url)
+                            .centerCrop()
+                            .crossFade()
+                            .into(view);
+                }
+            });
+
+        }
+
+
+    }
+
 }

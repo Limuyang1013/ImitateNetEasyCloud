@@ -36,6 +36,7 @@ public class NetworkStateService extends Service {
                     String name = info.getTypeName();
                     Log.d(tag, "当前网络名称：" + name);
                     //doSomething()
+                   sendnetworkreceiver();
                 } else {
                     Log.d(tag, "没有可用网络");
                     //doSomething()
@@ -44,6 +45,12 @@ public class NetworkStateService extends Service {
             }
         }
     };
+
+    private void sendnetworkreceiver() {
+        Intent intent = new Intent();
+        intent.setAction("cn.com.fingerprint.action.service");
+        sendBroadcast(intent);
+    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -69,5 +76,6 @@ public class NetworkStateService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         return super.onStartCommand(intent, flags, startId);
     }
+
 
 }
