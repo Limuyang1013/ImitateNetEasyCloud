@@ -1,9 +1,5 @@
 package com.stest.InnerFragment;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -64,7 +60,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     //更改布局
     @ViewInject(R.id.item_change)
     private LinearLayout item_change;
-    private BroadcastReceiverFromService broadcastReceiverFromService;
     //动态添加布局
 //    private LinearLayout dynamic_layout;
     //
@@ -114,10 +109,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
                 return false;
             }
         });
-        broadcastReceiverFromService = new BroadcastReceiverFromService();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("cn.com.fingerprint.action.service");
-        getActivity().registerReceiver(broadcastReceiverFromService, filter);
         //判断网络状态
         if (NetWorkUtils.isNetworkConnected(getActivity())) {
             Log.d("LoadView", "Net OK");
@@ -199,28 +190,8 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         super.onStop();
         Log.i("--", "onStop");
         mBanner.isAutoPlay(false);
-        getActivity().unregisterReceiver(broadcastReceiverFromService);
         super.onStop();
     }
 
-    public class BroadcastReceiverFromService extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            getUrlInfo();
-            mBanner.setImages(SPStrListUtils.getStrListValue(getContext(), "PIC_URL"), new Banner.OnLoadImageListener() {
-                @Override
-                public void OnLoadImage(ImageView view, Object url) {
-                    Glide.with(getContext())
-                            .load(url)
-                            .centerCrop()
-                            .crossFade()
-                            .into(view);
-                }
-            });
-
-        }
-
-
-    }
 
 }
