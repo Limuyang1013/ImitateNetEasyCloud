@@ -18,7 +18,6 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.InnerFragment.DynamicFragment;
 import com.stest.InnerFragment.NearbyFragment;
 import com.stest.InnerFragment.PartnerFragment;
-import com.stest.NetEasyApplication;
 import com.stest.neteasycloud.R;
 import com.stest.view.NetEasyRefreshLayout;
 
@@ -129,9 +128,4 @@ public class FriendFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        NetEasyApplication.getRefWatcher().watch(this);
-    }
 }

@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
@@ -20,6 +21,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
 import com.mobeta.android.dslv.SimpleFloatViewManager;
+import com.stest.utils.SPStrListUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,6 +44,7 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
     private ActionBar actionBar;
     //数据
     private List<String> data;
+    private List<String> order_data;
     private static final String TAG = RecommendPageItemChangeActivity.class.getSimpleName();
 
     @Override
@@ -71,10 +74,16 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
         });
 
         data = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.drag_lv_data)));
-        mAdapter = new ArrayAdapter<>(this, R.layout.drag_item, R.id.text, data);
+        order_data = new ArrayList<>();
+        SPStrListUtils.putStrListValue(this, "ORDER", data);
+        if (SPStrListUtils.getStrListValue(this, "DRAG_ORDER") != null && !SPStrListUtils.getStrListValue(this, "DRAG_ORDER").isEmpty()) {
+            mAdapter = new ArrayAdapter<>(this, R.layout.drag_item, R.id.text, SPStrListUtils.getStrListValue(this, "DRAG_ORDER"));
+            Log.d("DragListView数据测试", "-----初始化DRAG_ORDER执行了");
+        } else {
+            mAdapter = new ArrayAdapter<>(this, R.layout.drag_item, R.id.text, SPStrListUtils.getStrListValue(this, "ORDER"));
+            Log.d("DragListView数据测试", "-----初始化ORDER执行了");
+        }
         drag_lv.setAdapter(mAdapter);
-        drag_lv.setDropListener(onDrop);
-        drag_lv.setRemoveListener(onRemove);
         //显示顶部横线
         drag_lv.addHeaderView(new ViewStub(this));
         drag_lv.addFooterView(new ViewStub(this));
@@ -97,29 +106,55 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
 
         //添加下划线
         drag_txt.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+
+        drag_lv.setDragSortListener(new DragSortListView.DragSortListener() {
+            @Override
+            public void drag(int i, int i1) {
+
+            }
+
+            @Override
+            public void remove(int which) {
+
+                mAdapter.remove(mAdapter.getItem(which));
+            }
+
+            @Override
+            public void drop(int from, int to) {
+                if (from != to) {
+                    String item = mAdapter.getItem(from);
+                    mAdapter.remove(item);
+                    mAdapter.insert(item, to);
+                }
+                order_data.clear();
+                for (int i = 0; i < 5; i++) {
+                    order_data.add(mAdapter.getItem(i));
+                }
+                drag_lv.setAdapter(new ArrayAdapter<>(RecommendPageItemChangeActivity.this, R.layout.drag_item, R.id.text, order_data));
+                SPStrListUtils.remove(RecommendPageItemChangeActivity.this, "DRAG_ORDER");
+                SPStrListUtils.putStrListValue(RecommendPageItemChangeActivity.this, "DRAG_ORDER", order_data);
+                for (int j = 0; j < 5; j++) {
+                    Log.d("DragListView数据测试", order_data.get(j).toString());
+                }
+            }
+
+        });
+        drag_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drag_lv.setAdapter(new ArrayAdapter<>(RecommendPageItemChangeActivity.this, R.layout.drag_item, R.id.text, SPStrListUtils.getStrListValue(RecommendPageItemChangeActivity.this, "ORDER")));
+                order_data.clear();
+                Log.d("DragListView数据测试", "-----ORDER执行了");
+            }
+        });
     }
+
 
     public static void start(Context context) {
         Intent intent = new Intent(context, RecommendPageItemChangeActivity.class);
         context.startActivity(intent);
     }
 
-    private DragSortListView.DropListener onDrop = new DragSortListView.DropListener() {
-        @Override
-        public void drop(int from, int to) {
-            if (from != to) {
-                String item = mAdapter.getItem(from);
-                mAdapter.remove(item);
-                mAdapter.insert(item, to);
-            }
-        }
-    };
-    private DragSortListView.RemoveListener onRemove = new DragSortListView.RemoveListener() {
-        @Override
-        public void remove(int which) {
-            mAdapter.remove(mAdapter.getItem(which));
-        }
-    };
 
     @Override
     protected void onPause() {

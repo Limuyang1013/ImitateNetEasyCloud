@@ -142,6 +142,8 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
             if (SPStrListUtils.getStrListValue(getContext(), "PIC_URL") != null) {
                 cacheImages = SPStrListUtils.getStrListValue(getContext(), "PIC_URL");
                 mBanner.setImages(cacheImages);
+            } else {
+                //既无缓存又还没加载时候
             }
         }
 
@@ -175,11 +177,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        NetEasyApplication.getRefWatcher().watch(this);
-    }
 
     @Override
     public void onStart() {

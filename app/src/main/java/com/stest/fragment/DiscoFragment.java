@@ -17,7 +17,6 @@ import com.stest.InnerFragment.AnchorFragment;
 import com.stest.InnerFragment.ListFragment;
 import com.stest.InnerFragment.RankingFragment;
 import com.stest.InnerFragment.RecommendFragment;
-import com.stest.NetEasyApplication;
 import com.stest.neteasycloud.R;
 
 import java.util.ArrayList;
@@ -121,9 +120,4 @@ public class DiscoFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        NetEasyApplication.getRefWatcher().watch(this);
-    }
 }
