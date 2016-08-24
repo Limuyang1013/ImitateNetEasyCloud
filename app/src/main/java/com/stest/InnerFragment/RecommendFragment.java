@@ -1,9 +1,16 @@
 package com.stest.InnerFragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -33,6 +40,7 @@ import com.stest.utils.NetWorkUtils;
 import com.stest.utils.SPStrListUtils;
 import com.stest.utils.ToastUtils;
 import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
 
 import org.json.JSONObject;
 
@@ -96,6 +104,8 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         mInflater = LayoutInflater.from(getContext());
         daily_text.setText(getDate());
 //        dynamic_layout = findViewById(R.id.dynamic_layout);
+        mBanner.setIndicatorGravity(BannerConfig.CENTER);
+        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         daily_btn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -129,7 +139,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
             ToastUtils.showShort(getContext(), getResources().getString(R.string.check_net));
             if (SPStrListUtils.getStrListValue(getContext(), "PIC_URL") != null) {
                 cacheImages = SPStrListUtils.getStrListValue(getContext(), "PIC_URL");
-                mBanner.setImages(cacheImages);
             }
         }
 
@@ -193,5 +202,49 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         super.onStop();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        IntentFilter intentFilterNet = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        intentFilterNet.addCategory(Intent.CATEGORY_DEFAULT);
+        NetRecerve netReceive = new NetRecerve();
+        getActivity().registerReceiver(netReceive, intentFilterNet);
+    }
+
+    /**
+     * 监听网络状态
+     *
+     * @author Keno
+     */
+    private class NetRecerve extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(
+                    ConnectivityManager.CONNECTIVITY_ACTION)) {
+                // 获得系统网络连接管理服务
+                ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                // 获得网络连接信息
+                NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+                if (networkInfo != null && networkInfo.isAvailable()
+                        && networkInfo.isConnected()) {
+                    Log.d("测试","TEST--------");
+                    mBanner.setIndicatorGravity(BannerConfig.CENTER);
+                    mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+                    mBanner.setImages(SPStrListUtils.getStrListValue(getContext(), "PIC_URL"), new Banner.OnLoadImageListener() {
+                        @Override
+                        public void OnLoadImage(ImageView view, Object url) {
+                            Glide.with(getContext())
+                                    .load(url)
+                                    .centerCrop()
+                                    .crossFade()
+                                    .into(view);
+                        }
+                    });
+                } else {
+                }
+            }
+        }
+    }
 
 }
