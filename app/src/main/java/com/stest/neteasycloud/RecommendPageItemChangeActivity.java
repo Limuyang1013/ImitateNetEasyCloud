@@ -55,6 +55,7 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
         ViewUtils.inject(this);
         //初始化控件
         initWidgets();
+        Log.d(TAG, "onCreat---------");
     }
 
 
@@ -75,13 +76,14 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
 
         data = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.drag_lv_data)));
         order_data = new ArrayList<>();
+        SPStrListUtils.remove(this, "ORDER");
         SPStrListUtils.putStrListValue(this, "ORDER", data);
-        if (SPStrListUtils.getStrListValue(this, "DRAG_ORDER") != null && !SPStrListUtils.getStrListValue(this, "DRAG_ORDER").isEmpty()) {
+        if (SPStrListUtils.getStrListValue(this, "DRAG_ORDER").size() > 0) {
             mAdapter = new ArrayAdapter<>(this, R.layout.drag_item, R.id.text, SPStrListUtils.getStrListValue(this, "DRAG_ORDER"));
-            Log.d("DragListView数据测试", "-----初始化DRAG_ORDER执行了");
+            Log.d("TAGGGGG", "调用了DRAG_ORDER");
         } else {
             mAdapter = new ArrayAdapter<>(this, R.layout.drag_item, R.id.text, SPStrListUtils.getStrListValue(this, "ORDER"));
-            Log.d("DragListView数据测试", "-----初始化ORDER执行了");
+            Log.d("TAGGGGG", "调用了ORDER");
         }
         drag_lv.setAdapter(mAdapter);
         //显示顶部横线
@@ -130,21 +132,20 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
                 for (int i = 0; i < 5; i++) {
                     order_data.add(mAdapter.getItem(i));
                 }
-                drag_lv.setAdapter(new ArrayAdapter<>(RecommendPageItemChangeActivity.this, R.layout.drag_item, R.id.text, order_data));
                 SPStrListUtils.remove(RecommendPageItemChangeActivity.this, "DRAG_ORDER");
                 SPStrListUtils.putStrListValue(RecommendPageItemChangeActivity.this, "DRAG_ORDER", order_data);
-                for (int j = 0; j < 5; j++) {
-                    Log.d("DragListView数据测试", order_data.get(j).toString());
-                }
+//                drag_lv.setAdapter(new ArrayAdapter<>(RecommendPageItemChangeActivity.this, R.layout.drag_item, R.id.text, order_data));
             }
 
         });
         drag_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drag_lv.setAdapter(new ArrayAdapter<>(RecommendPageItemChangeActivity.this, R.layout.drag_item, R.id.text, SPStrListUtils.getStrListValue(RecommendPageItemChangeActivity.this, "ORDER")));
-                order_data.clear();
-                Log.d("DragListView数据测试", "-----ORDER执行了");
+//                drag_lv.setAdapter(new ArrayAdapter<>(RecommendPageItemChangeActivity.this, R.layout.drag_item, R.id.text, SPStrListUtils.getStrListValue(RecommendPageItemChangeActivity.this, "ORDER")));
+                for (int i = 0; i < data.size(); i++) {
+                    mAdapter.remove(data.get(i));
+                    mAdapter.insert(data.get(i), i);
+                }
             }
         });
     }
@@ -159,10 +160,7 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d(TAG, "onPause");
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 }
