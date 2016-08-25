@@ -25,6 +25,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.NetEasyApplication;
 import com.stest.constant.API;
+import com.stest.json.OkHttp3Stack;
 import com.stest.json.PicUrlInfo;
 import com.stest.neteasycloud.R;
 import com.stest.neteasycloud.RecommendPageItemChangeActivity;
@@ -40,6 +41,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import okhttp3.OkHttpClient;
 
 /**
  * Created by Limuyang on 2016/7/7.
@@ -132,7 +135,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
                     Glide.with(getContext())
                             .load(url)
                             .centerCrop()
-                            .placeholder(R.mipmap.second)
                             .crossFade()
                             .into(view);
                 }
@@ -140,11 +142,13 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         } else {
             mBanner.setImages(localImages);
         }
+
     }
 
 
     public void getUrlInfo() {
-        RequestQueue mQueue = Volley.newRequestQueue(NetEasyApplication.getInstance());
+        OkHttpClient okClient = new OkHttpClient.Builder().build();
+        RequestQueue mQueue = Volley.newRequestQueue(NetEasyApplication.getInstance(), new OkHttp3Stack(okClient));
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(API.BANNER, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -189,16 +193,28 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onStart() {
         super.onStart();
-        Log.i("--", "onStart");
+        Log.d("Recom---------", "onStart");
         mBanner.isAutoPlay(true);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Log.i("--", "onStop");
+        Log.d("Recom---------", "onStop");
         mBanner.isAutoPlay(false);
         super.onStop();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("Recom---------", "onPause");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("Recom---------", "onResume");
     }
 
     @Override
