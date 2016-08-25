@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.gson.JsonArray;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -29,7 +31,6 @@ import com.stest.neteasycloud.RecommendPageItemChangeActivity;
 import com.stest.utils.HttpUtils;
 import com.stest.utils.NetWorkUtils;
 import com.stest.utils.SPStrListUtils;
-import com.stest.utils.ToastUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
@@ -59,6 +60,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     //更改布局
     @ViewInject(R.id.item_change)
     private LinearLayout item_change;
+    private Integer[] localImages;
     //动态添加布局
 //    private LinearLayout dynamic_layout;
     //
@@ -92,11 +94,18 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     protected void initView() {
         netImages = new ArrayList<>();
         cacheImages = new ArrayList<>();
+        localImages = new Integer[5];
+        localImages[0] = R.mipmap.first;
+        localImages[1] = R.mipmap.second;
+        localImages[2] = R.mipmap.third;
+        localImages[3] = R.mipmap.fourth;
+        localImages[4] = R.mipmap.five;
         mInflater = LayoutInflater.from(getContext());
         daily_text.setText(getDate());
 //        dynamic_layout = findViewById(R.id.dynamic_layout);
         mBanner.setIndicatorGravity(BannerConfig.CENTER);
         mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+        mBanner.setDelayTime(3000);
         daily_btn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -110,21 +119,29 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
                 return false;
             }
         });
-        //判断网络状态
-        if (NetWorkUtils.isNetworkConnected(getActivity())) {
+        if (SPStrListUtils.getStrListValue(getContext(), "PIC_URL").size() > 0) {
             Log.d("LoadView", "Net OK");
-            getUrlInfo();
-            mBanner.setImages(SPStrListUtils.getStrListValue(getContext(), "PIC_URL"));
+            cacheImages.clear();
+            cacheImages = SPStrListUtils.getStrListValue(getContext(), "PIC_URL");
+            mBanner.setImages(cacheImages, new Banner.OnLoadImageListener() {
+                @Override
+                public void OnLoadImage(ImageView view, Object url) {
+                    /**
+                     * 这里你可以根据框架灵活设置
+                     */
+                    Glide.with(getContext())
+                            .load(url)
+                            .centerCrop()
+                            .placeholder(R.mipmap.second)
+                            .crossFade()
+                            .into(view);
+                }
+            });
         } else {
-            //弹出网络异常信息
-            ToastUtils.showShort(getContext(), getResources().getString(R.string.check_net));
-            if (SPStrListUtils.getStrListValue(getContext(), "PIC_URL") != null) {
-                cacheImages = SPStrListUtils.getStrListValue(getContext(), "PIC_URL");
-                mBanner.setImages(cacheImages);
-            }
+            mBanner.setImages(localImages);
         }
-
     }
+
 
     public void getUrlInfo() {
         RequestQueue mQueue = Volley.newRequestQueue(NetEasyApplication.getInstance());
@@ -187,6 +204,11 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (NetWorkUtils.isNetworkConnected(getActivity())) {
+            Log.d("LoadView", "Net OK");
+            SPStrListUtils.remove(getContext(), "PIC_URL");
+            getUrlInfo();
+        }
     }
 
 

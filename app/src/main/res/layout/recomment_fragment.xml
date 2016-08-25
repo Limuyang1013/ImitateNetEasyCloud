@@ -17,7 +17,6 @@
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="130dp"
-            app:default_image="@mipmap/first"
             app:indicator_drawable_selected="@mipmap/red"
             app:indicator_drawable_unselected="@mipmap/grey"
             app:indicator_height="9dp"
@@ -25,7 +24,6 @@
             app:indicator_width="9dp"
             app:is_auto_play="true"
             />
-
 
         <RelativeLayout
             android:layout_width="wrap_content"
