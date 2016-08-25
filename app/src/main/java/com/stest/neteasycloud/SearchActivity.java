@@ -1,7 +1,9 @@
 package com.stest.neteasycloud;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -11,11 +13,13 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 /**
  * Created by Limuyang on 2016/8/19.
@@ -37,7 +41,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.search_layout);
         ViewUtils.inject(this);
         initViews();
-
+        applyKitKatTranslucency();
 
     }
 
@@ -90,4 +94,29 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    private void applyKitKatTranslucency() {
+
+        // KitKat translucent navigation/status bar.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setTranslucentStatus(true);
+            SystemBarTintManager mTintManager = new SystemBarTintManager(this);
+            mTintManager.setStatusBarTintEnabled(true);
+
+            mTintManager.setStatusBarTintResource(R.color.themeColor);//通知栏所需颜色
+        }
+
+    }
+
+    @TargetApi(19)
+    private void setTranslucentStatus(boolean on) {
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
+    }
 }

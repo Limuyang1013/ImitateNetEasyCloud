@@ -44,4 +44,5 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
     compile 'com.youth.banner:banner:1.2.7'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 }

@@ -71,7 +71,6 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         addFragment();
         initWidgets();
         checkNextWork();
-
         mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
@@ -229,5 +228,6 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
             startService(i);
         }
     }
+
 
 }

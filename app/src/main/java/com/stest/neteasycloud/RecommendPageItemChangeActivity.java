@@ -1,9 +1,11 @@
 package com.stest.neteasycloud;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -21,6 +24,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
 import com.mobeta.android.dslv.SimpleFloatViewManager;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.stest.utils.SPStrListUtils;
 
 import java.util.ArrayList;
@@ -55,7 +59,7 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
         ViewUtils.inject(this);
         //初始化控件
         initWidgets();
-        Log.d(TAG, "onCreat---------");
+        applyKitKatTranslucency();
     }
 
 
@@ -163,4 +167,29 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
         Log.d(TAG, "onPause");
     }
 
+    private void applyKitKatTranslucency() {
+
+        // KitKat translucent navigation/status bar.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setTranslucentStatus(true);
+            SystemBarTintManager mTintManager = new SystemBarTintManager(this);
+            mTintManager.setStatusBarTintEnabled(true);
+
+            mTintManager.setStatusBarTintResource(R.color.themeColor);//通知栏所需颜色
+        }
+
+    }
+
+    @TargetApi(19)
+    private void setTranslucentStatus(boolean on) {
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
+    }
 }
