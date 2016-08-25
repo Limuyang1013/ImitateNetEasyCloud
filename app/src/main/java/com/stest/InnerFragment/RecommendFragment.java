@@ -1,23 +1,15 @@
 package com.stest.InnerFragment;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,7 +18,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
 import com.google.gson.JsonArray;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -123,22 +114,13 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         if (NetWorkUtils.isNetworkConnected(getActivity())) {
             Log.d("LoadView", "Net OK");
             getUrlInfo();
-            mBanner.setImages(SPStrListUtils.getStrListValue(getContext(), "PIC_URL"), new Banner.OnLoadImageListener() {
-                @Override
-                public void OnLoadImage(ImageView view, Object url) {
-                    Glide.with(getContext())
-                            .load(url)
-                            .centerCrop()
-                            .crossFade()
-                            .into(view);
-                }
-            });
-
+            mBanner.setImages(SPStrListUtils.getStrListValue(getContext(), "PIC_URL"));
         } else {
             //弹出网络异常信息
             ToastUtils.showShort(getContext(), getResources().getString(R.string.check_net));
             if (SPStrListUtils.getStrListValue(getContext(), "PIC_URL") != null) {
                 cacheImages = SPStrListUtils.getStrListValue(getContext(), "PIC_URL");
+                mBanner.setImages(cacheImages);
             }
         }
 
@@ -205,46 +187,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
-        IntentFilter intentFilterNet = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        intentFilterNet.addCategory(Intent.CATEGORY_DEFAULT);
-        NetRecerve netReceive = new NetRecerve();
-        getActivity().registerReceiver(netReceive, intentFilterNet);
     }
 
-    /**
-     * 监听网络状态
-     *
-     * @author Keno
-     */
-    private class NetRecerve extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(
-                    ConnectivityManager.CONNECTIVITY_ACTION)) {
-                // 获得系统网络连接管理服务
-                ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-                // 获得网络连接信息
-                NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-                if (networkInfo != null && networkInfo.isAvailable()
-                        && networkInfo.isConnected()) {
-                    Log.d("测试","TEST--------");
-                    mBanner.setIndicatorGravity(BannerConfig.CENTER);
-                    mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-                    mBanner.setImages(SPStrListUtils.getStrListValue(getContext(), "PIC_URL"), new Banner.OnLoadImageListener() {
-                        @Override
-                        public void OnLoadImage(ImageView view, Object url) {
-                            Glide.with(getContext())
-                                    .load(url)
-                                    .centerCrop()
-                                    .crossFade()
-                                    .into(view);
-                        }
-                    });
-                } else {
-                }
-            }
-        }
-    }
 
 }
