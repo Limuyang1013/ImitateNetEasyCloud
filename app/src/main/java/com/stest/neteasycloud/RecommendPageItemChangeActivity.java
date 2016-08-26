@@ -26,6 +26,7 @@ import com.mobeta.android.dslv.DragSortListView;
 import com.mobeta.android.dslv.SimpleFloatViewManager;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.stest.utils.SPStrListUtils;
+import com.stest.utils.SPUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +50,7 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
     //数据
     private List<String> data;
     private List<String> order_data;
+    private boolean isOringal = true;
     private static final String TAG = RecommendPageItemChangeActivity.class.getSimpleName();
 
     @Override
@@ -64,6 +66,7 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
 
 
     private void initWidgets() {
+        boolean original = SPUtils.getValue(this, TAG, "ORINGAL", false);
         toolbar.setTitle(R.string.change_item);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
@@ -82,12 +85,10 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
         order_data = new ArrayList<>();
         SPStrListUtils.remove(this, "ORDER");
         SPStrListUtils.putStrListValue(this, "ORDER", data);
-        if (SPStrListUtils.getStrListValue(this, "DRAG_ORDER").size() > 0) {
+        if (!SPStrListUtils.getStrListValue(this, "DRAG_ORDER").isEmpty() && !original) {
             mAdapter = new ArrayAdapter<>(this, R.layout.drag_item, R.id.text, SPStrListUtils.getStrListValue(this, "DRAG_ORDER"));
-            Log.d("TAGGGGG", "调用了DRAG_ORDER");
         } else {
             mAdapter = new ArrayAdapter<>(this, R.layout.drag_item, R.id.text, SPStrListUtils.getStrListValue(this, "ORDER"));
-            Log.d("TAGGGGG", "调用了ORDER");
         }
         drag_lv.setAdapter(mAdapter);
         //显示顶部横线
@@ -138,18 +139,20 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
                 }
                 SPStrListUtils.remove(RecommendPageItemChangeActivity.this, "DRAG_ORDER");
                 SPStrListUtils.putStrListValue(RecommendPageItemChangeActivity.this, "DRAG_ORDER", order_data);
-//                drag_lv.setAdapter(new ArrayAdapter<>(RecommendPageItemChangeActivity.this, R.layout.drag_item, R.id.text, order_data));
+                SPUtils.putValue(RecommendPageItemChangeActivity.this, TAG, "ORINGAL", false);
             }
 
         });
         drag_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                drag_lv.setAdapter(new ArrayAdapter<>(RecommendPageItemChangeActivity.this, R.layout.drag_item, R.id.text, SPStrListUtils.getStrListValue(RecommendPageItemChangeActivity.this, "ORDER")));
                 for (int i = 0; i < data.size(); i++) {
                     mAdapter.remove(data.get(i));
                     mAdapter.insert(data.get(i), i);
+                    mAdapter.notifyDataSetChanged();
+                    SPUtils.putValue(RecommendPageItemChangeActivity.this, TAG, "ORINGAL", true);
                 }
+
             }
         });
     }
