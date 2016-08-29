@@ -154,12 +154,13 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
             public void onResponse(JSONObject response) {
                 JsonArray array = HttpUtils.getResposeJsonObject(response).get("data").getAsJsonArray();
                 PicUrlInfo info = NetEasyApplication.gsonInstance().fromJson(array.get(0), PicUrlInfo.class);
+//                PicUrlInfo info1 = NetEasyApplication.gsonInstance().fromJson(array.get(3), PicUrlInfo.class);
                 List<PicUrlInfo.DataBean> data = info.getData();
                 for (int i = 0; i < data.size(); i++) {
                     //获取所有图片
                     PicUrlInfo.DataBean bean = data.get(i);
                     netImages.add(bean.getPicUrl());
-
+//                    Log.d("qwerr",info1.getData().get(i).getPicUrl().toString());
                 }
                 SPStrListUtils.putStrListValue(getContext(), "PIC_URL", netImages);
 

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lidroid.xutils.ViewUtils;
+import com.stest.adapter.MusicDetailAdapter;
 import com.stest.neteasycloud.R;
 
 /**
@@ -16,6 +17,7 @@ import com.stest.neteasycloud.R;
 public class MusicFragment extends Fragment {
     private View v;
     private static MusicFragment musicFragment;
+    private MusicDetailAdapter mMusicDetailAdapter;
 
     @Nullable
     @Override
@@ -26,7 +28,12 @@ public class MusicFragment extends Fragment {
         }
         v = inflater.inflate(R.layout.music_fragment, container, false);
         ViewUtils.inject(this, v);
+        initWidgets();
         return v;
+    }
+
+    //初始化
+    private void initWidgets() {
     }
 
     public static MusicFragment getInstance() {

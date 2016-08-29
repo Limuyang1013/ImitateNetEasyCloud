@@ -50,7 +50,6 @@ public class RecommendPageItemChangeActivity extends AppCompatActivity {
     //数据
     private List<String> data;
     private List<String> order_data;
-    private boolean isOringal = true;
     private static final String TAG = RecommendPageItemChangeActivity.class.getSimpleName();
 
     @Override

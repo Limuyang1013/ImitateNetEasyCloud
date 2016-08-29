@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fff2f4f5"
+                xmlns:divider="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:orientation="vertical"
     >
-    <TextView
-        android:layout_width="wrap_content"
+
+    <com.stest.view.DividerListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Music"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="281dp" />
+        android:divider="#E0E0E0"
+        android:dividerHeight="0.3dp"
+        android:listSelector="@drawable/drag_lv_selector"
+        android:scrollbars="none"
+        divider:dividerPaddingLeft="20dp"
+        />
 </RelativeLayout>
