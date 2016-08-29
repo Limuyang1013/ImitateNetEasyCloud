@@ -11,12 +11,20 @@
     <string name="default_order">恢复默认排序</string>
     <string name="search_txt">搜索音乐、歌手、歌词、用户</string>
     <string name="check_net">当前网络不可用，请检查你的网络设置</string>
+    <string name="detail_txt">(239)</string>
     <string-array name="drag_lv_data">
         <item>推荐歌单</item>
         <item>独家放送</item>
         <item>最新音乐</item>
         <item>推荐MV</item>
         <item>主播电台</item>
-
+    </string-array>
+    <string-array name="music_icn_data">
+        <item>本地音乐</item>
+        <item>最近播放</item>
+        <item>下载管理</item>
+        <item>我的歌手</item>
+        <item>我的电台</item>
+        <item>我的MV</item>
     </string-array>
 </resources>

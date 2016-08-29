@@ -15,6 +15,6 @@
         android:dividerHeight="0.3dp"
         android:listSelector="@drawable/drag_lv_selector"
         android:scrollbars="none"
-        divider:dividerPaddingLeft="20dp"
+        divider:dividerPaddingLeft="45dp"
         />
 </RelativeLayout>
