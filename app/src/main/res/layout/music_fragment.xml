@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:divider="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#ffffff"
-    >
+<com.stest.view.NetEasyRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:divider="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/refresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <com.stest.view.NetEasyRefreshLayout
-        android:id="@+id/refresh"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        >
+
 
         <com.stest.view.DividerListView
             android:id="@+id/lv"
@@ -22,5 +25,16 @@
             divider:dividerPaddingLeft="45dp"
             />
 
-    </com.stest.view.NetEasyRefreshLayout>
-</RelativeLayout>
+        <include
+            android:id="@+id/creat_item"
+            layout="@layout/music_detail_creat_item"
+            />
+
+        <include
+            android:id="@+id/collect_item"
+            layout="@layout/music_detail_collect_item"
+            />
+
+
+    </LinearLayout>
+</com.stest.view.NetEasyRefreshLayout>
