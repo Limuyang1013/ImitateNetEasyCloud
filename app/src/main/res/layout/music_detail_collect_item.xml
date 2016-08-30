@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/detail_collect"
     android:layout_width="match_parent"
     android:layout_height="30dp"
     android:background="@color/theme_color_common_section"
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/expand_img"
+        android:id="@+id/collect_expand_img"
         android:layout_width="10dp"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_centerInParent="true"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
-        android:src="@drawable/list_icn_arr_right"
-        android:rotation="90"/>
+        android:rotation="90"
+        android:src="@drawable/list_icn_arr_right" />
 
     <TextView
         android:id="@+id/expand_title"
@@ -23,18 +23,17 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@+id/expand_img"
+        android:layout_toRightOf="@+id/collect_expand_img"
         android:gravity="center"
         android:text="@string/detail_expand_collect"
-        android:textSize="12sp"/>
+        android:textSize="12sp" />
 
     <ImageView
-        android:id="@+id/expand_more"
+        android:id="@+id/creat_expand_more"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:src="@drawable/list_icn_more"/>
+        android:layout_marginRight="15dp"
+        android:src="@drawable/list_icn_more" />
 
 </RelativeLayout>

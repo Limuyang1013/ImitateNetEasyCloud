@@ -160,7 +160,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
                     //获取所有图片
                     PicUrlInfo.DataBean bean = data.get(i);
                     netImages.add(bean.getPicUrl());
-//                    Log.d("qwerr",info1.getData().get(i).getPicUrl().toString());
                 }
                 SPStrListUtils.putStrListValue(getContext(), "PIC_URL", netImages);
 

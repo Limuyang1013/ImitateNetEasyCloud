@@ -26,12 +26,10 @@
             />
 
         <include
-            android:id="@+id/creat_item"
             layout="@layout/music_detail_creat_item"
             />
 
         <include
-            android:id="@+id/collect_item"
             layout="@layout/music_detail_collect_item"
             />
 

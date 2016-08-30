@@ -1,5 +1,6 @@
 package com.stest.fragment;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -9,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
@@ -25,7 +28,7 @@ import java.util.List;
 /**
  * Created by Limuyang on 2016/7/7.
  */
-public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
     private View v;
     private static MusicFragment musicFragment;
     private MusicDetailAdapter mMusicDetailAdapter;
@@ -37,6 +40,16 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     private TextView detail_number;
     @ViewInject(R.id.refresh)
     private NetEasyRefreshLayout refreshLayout;
+    @ViewInject(R.id.detail_creat)
+    private RelativeLayout creat_layout;
+    @ViewInject(R.id.detail_collect)
+    private RelativeLayout collect_layout;
+    @ViewInject(R.id.creat_expand_img)
+    private ImageView creat_expand_img;
+    @ViewInject(R.id.collect_expand_img)
+    private ImageView collect_expand_img;
+    private boolean isCreatRotate = true;
+    private boolean isCollectRotate = true;
 
     @Nullable
     @Override
@@ -54,6 +67,10 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     //初始化
     private void initWidgets() {
         refreshLayout.setOnRefreshListener(this);
+        creat_layout.setOnClickListener(this);
+        collect_layout.setOnClickListener(this);
+        creat_expand_img.setOnClickListener(this);
+        collect_expand_img.setOnClickListener(this);
         refreshLayout.setColorSchemeResources(R.color.themeColor);
         data = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.music_icn_data)));
         mMusicDetailAdapter = new MusicDetailAdapter(getActivity(), data, R.layout.music_detail_item);
@@ -104,5 +121,42 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             }
         }, 2500);
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.detail_creat:
+                if (isCreatRotate) {
+                    animCreat().start();
+                    isCreatRotate = false;
+                } else {
+                    animCreat().reverse();
+                    isCreatRotate = true;
+                }
+                break;
+            case R.id.detail_collect:
+                if (isCollectRotate) {
+                    animCollect().start();
+                    isCollectRotate=false;
+                } else {
+                    animCollect().reverse();
+                    isCollectRotate = true;
+                }
+                break;
+        }
+
+    }
+
+    public ObjectAnimator animCreat() {
+        ObjectAnimator anim_creat = ObjectAnimator.ofFloat(creat_expand_img, "rotation", 90, 0, 0);
+        anim_creat.setDuration(300);
+        return anim_creat;
+    }
+
+    public ObjectAnimator animCollect() {
+        ObjectAnimator anim_collect = ObjectAnimator.ofFloat(collect_expand_img, "rotation", 90, 0, 0);
+        anim_collect.setDuration(300);
+        return anim_collect;
     }
 }
