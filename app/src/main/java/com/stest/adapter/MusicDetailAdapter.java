@@ -14,7 +14,6 @@ import java.util.List;
  */
 public class MusicDetailAdapter extends SuperAdapter<String> {
     private int[] icn;
-
     public MusicDetailAdapter(Context context, List<String> items, int layoutResId) {
         super(context, items, layoutResId);
         icn = new int[]{R.drawable.music_icn_local, R.drawable.music_icn_recent, R.drawable.music_icn_dld,
@@ -28,4 +27,5 @@ public class MusicDetailAdapter extends SuperAdapter<String> {
         holder.setText(R.id.detail_number, getContext().getResources().getString(R.string.detail_txt));
         holder.setImageResource(R.id.detail_icn, icn[layoutPosition]);
     }
+
 }

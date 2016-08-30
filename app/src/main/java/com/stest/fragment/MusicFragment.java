@@ -14,6 +14,8 @@ import com.stest.adapter.MusicDetailAdapter;
 import com.stest.neteasycloud.R;
 import com.stest.view.DividerListView;
 
+import org.byteam.superadapter.OnItemClickListener;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,6 +51,14 @@ public class MusicFragment extends Fragment {
     private void initWidgets() {
         data = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.music_icn_data)));
         mMusicDetailAdapter = new MusicDetailAdapter(getActivity(), data, R.layout.music_detail_item);
+        //开启加载动画
+        mMusicDetailAdapter.openLoadAnimation();
+        mMusicDetailAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, int viewType, int position) {
+
+            }
+        });
         lv.setAdapter(mMusicDetailAdapter);
     }
 
