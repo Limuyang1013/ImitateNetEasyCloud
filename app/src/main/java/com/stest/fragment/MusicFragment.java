@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
@@ -16,8 +17,6 @@ import com.stest.adapter.MusicDetailAdapter;
 import com.stest.neteasycloud.R;
 import com.stest.view.DividerListView;
 import com.stest.view.NetEasyRefreshLayout;
-
-import org.byteam.superadapter.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,12 +57,30 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         refreshLayout.setColorSchemeResources(R.color.themeColor);
         data = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.music_icn_data)));
         mMusicDetailAdapter = new MusicDetailAdapter(getActivity(), data, R.layout.music_detail_item);
-        //开启加载动画
-        mMusicDetailAdapter.openLoadAnimation();
-        mMusicDetailAdapter.setOnItemClickListener(new OnItemClickListener() {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(View itemView, int viewType, int position) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    //本地音乐
+                    case 0:
+                        break;
+                    //最近播放
+                    case 1:
+                        break;
+                    //下载管理
+                    case 2:
+                        break;
+                    //我的歌手
+                    case 3:
+                        break;
+                    //我的电台
+                    case 4:
+                        break;
+                    //我的MV
+                    case 5:
+                        break;
 
+                }
             }
         });
         lv.setAdapter(mMusicDetailAdapter);
