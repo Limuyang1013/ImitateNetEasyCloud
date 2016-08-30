@@ -7,14 +7,21 @@
                 android:orientation="vertical"
     >
 
-    <com.stest.view.DividerListView
-        android:id="@+id/lv"
+    <com.stest.view.NetEasyRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="#E0E0E0"
-        android:dividerHeight="0.3dp"
-        android:listSelector="@drawable/drag_lv_selector"
-        android:scrollbars="none"
-        divider:dividerPaddingLeft="45dp"
-        />
+        android:layout_height="match_parent">
+
+        <com.stest.view.DividerListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="#E0E0E0"
+            android:dividerHeight="0.3dp"
+            android:listSelector="@drawable/drag_lv_selector"
+            android:scrollbars="none"
+            divider:dividerPaddingLeft="45dp"
+            />
+
+    </com.stest.view.NetEasyRefreshLayout>
 </RelativeLayout>
