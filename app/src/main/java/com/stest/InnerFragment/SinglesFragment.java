@@ -32,6 +32,9 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
         return v;
     }
 
+    /**
+     * 初始化
+     */
     private void initWidgets() {
         play_layout.setOnClickListener(this);
         select.setOnClickListener(this);
