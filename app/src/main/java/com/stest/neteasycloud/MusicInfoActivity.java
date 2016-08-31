@@ -13,6 +13,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -26,6 +29,7 @@ import com.stest.InnerFragment.FoldersFragment;
 import com.stest.InnerFragment.SingersFragment;
 import com.stest.InnerFragment.SinglesFragment;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,6 +83,29 @@ public class MusicInfoActivity extends AppCompatActivity {
         infos_tab.setTabMode(TabLayout.MODE_FIXED);
         infos_tab.setupWithViewPager(mPager);
 
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    //搜索本地歌曲
+                    case R.id.action_search:
+                        break;
+                    //扫描
+                    case R.id.action_scanning:
+                        break;
+                    //选择排序方式
+                    case R.id.action_sequence:
+                        break;
+                    //获取封面歌词
+                    case R.id.action_list_lrc:
+                        break;
+                    //升级音质
+                    case R.id.action_tone_quality:
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     //滑动布局
@@ -113,6 +140,13 @@ public class MusicInfoActivity extends AppCompatActivity {
     }
 
 
+    //添加菜单选项
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.music_menu, menu);
+        return true;
+    }
+
     private void applyKitKatTranslucency() {
 
         // KitKat translucent navigation/status bar.
@@ -125,6 +159,7 @@ public class MusicInfoActivity extends AppCompatActivity {
         }
 
     }
+
 
     @TargetApi(19)
     private void setTranslucentStatus(boolean on) {
@@ -165,5 +200,22 @@ public class MusicInfoActivity extends AppCompatActivity {
         public void destroyItem(ViewGroup container, int position, Object object) {
             super.destroyItem(container, position, object);
         }
+    }
+
+    @Override
+    protected boolean onPrepareOptionsPanel(View view, Menu menu) {
+        if (menu != null) {
+            if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
+                try {
+                    Method m = menu.getClass().getDeclaredMethod(
+                            "setOptionalIconsVisible", Boolean.TYPE);
+                    m.setAccessible(true);
+                    m.invoke(menu, true);
+                } catch (Exception e) {
+                    Log.e(getClass().getSimpleName(), "onMenuOpened...unable to set icons for overflow menu", e);
+                }
+            }
+        }
+        return super.onPrepareOptionsPanel(view, menu);
     }
 }

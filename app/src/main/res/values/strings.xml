@@ -15,6 +15,11 @@
     <string name="detail_txt">(0)</string>
     <string name="detail_expand_creat">创建的歌单 (0)</string>
     <string name="detail_expand_collect">收藏的歌单 (0)</string>
+    <string name="search_local">搜索本地歌曲</string>
+    <string name="scan">扫描歌曲</string>
+    <string name="sequence">选择排序方式</string>
+    <string name="list_lrc">一键获取封面歌词</string>
+    <string name="tone_quality">升级音质</string>
     <string-array name="drag_lv_data">
         <item>推荐歌单</item>
         <item>独家放送</item>
