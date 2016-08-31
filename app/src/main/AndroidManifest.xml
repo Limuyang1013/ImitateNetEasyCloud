@@ -30,13 +30,17 @@
             android:name=".SearchActivity"
             android:label="@string/app_name"
             android:theme="@style/ImageTranslucentTheme"
-            android:windowSoftInputMode="stateVisible"
-            />
+            android:windowSoftInputMode="stateVisible"/>
 
         <service
             android:name="com.stest.service.NetworkStateService"
             android:enabled="true"/>
 
+        <activity
+            android:name=".MusicInfoActivity"
+            android:label="@string/app_name"
+            android:theme="@style/ImageTranslucentTheme"
+            />
     </application>
 
 </manifest>

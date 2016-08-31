@@ -6,6 +6,7 @@
     <string name="no_net">无可用网络</string>
     <string name="net_ok">网络状况良好</string>
     <string name="change_item">调整栏目顺序</string>
+    <string name="local_music">本地音乐</string>
     <string name="drag_item">拖拽条目</string>
     <string name="drag_info">想调整首页栏目的顺序？按住右边的按钮拖动即可</string>
     <string name="default_order">恢复默认排序</string>
@@ -29,4 +30,7 @@
         <item>我的电台</item>
         <item>我的MV</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
