@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.adapter.MusicDetailAdapter;
+import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.MusicInfoActivity;
 import com.stest.neteasycloud.R;
 import com.stest.view.DividerListView;
@@ -35,6 +36,7 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     private MusicDetailAdapter mMusicDetailAdapter;
     //数据
     private List<String> data;
+    private List<MusicInfoDetail> musicList;
     @ViewInject(R.id.lv)
     private DividerListView lv;
     @ViewInject(R.id.detail_number)
@@ -51,7 +53,7 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     private ImageView collect_expand_img;
     private boolean isCreatRotate = true;
     private boolean isCollectRotate = true;
-
+    private static final String TAG = "MusicFragment";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
