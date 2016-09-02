@@ -85,7 +85,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
                 android:paddingTop="3dp"
-                android:maxLines="1"
+                android:lines="1"
+                android:ellipsize="end"
                 android:textColor="@color/listSubTextColor"
                 android:textSize="10sp"/>
         </LinearLayout>
