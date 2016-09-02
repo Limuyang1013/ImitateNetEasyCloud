@@ -31,8 +31,7 @@
             android:id="@+id/song_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="39dp"
-            android:singleLine="true"
+            android:maxLines="1"
             android:textColor="@color/listTextColor"
             android:textSize="16sp"/>
 
@@ -66,7 +65,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
                 android:paddingTop="3dp"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:textColor="@color/listSubTextColor"
                 android:textSize="10sp"/>
 
@@ -86,7 +85,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
                 android:paddingTop="3dp"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:textColor="@color/listSubTextColor"
                 android:textSize="10sp"/>
         </LinearLayout>

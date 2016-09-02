@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.adapter.MusicListAdapter;
+import com.stest.model.ListHeaderView;
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.R;
 import com.stest.view.DividerListView;
@@ -23,10 +24,6 @@ import java.util.List;
 // 单曲
 public class SinglesFragment extends Fragment implements View.OnClickListener {
 
-    @ViewInject(R.id.play_all_layout)
-    private RelativeLayout play_layout;
-    @ViewInject(R.id.play_all_select)
-    private ImageView select;
     @ViewInject(R.id.lv)
     private DividerListView lv;
     private View v;
@@ -48,8 +45,6 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
      * 初始化
      */
     private void initWidgets() {
-        play_layout.setOnClickListener(this);
-        select.setOnClickListener(this);
         musicInfo = new ArrayList<>();
         Log.d("wqeqw", musicInfo.size() + "");
         mAdapter = new MusicListAdapter(getContext(), musicInfo, R.layout.music_list_item_layout);
@@ -59,6 +54,9 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
 
             }
         });
+        ListHeaderView headerView = new ListHeaderView(getContext());
+        headerView.setTextView("(" + musicInfo.size() + ")");
+        mAdapter.addHeaderView(headerView);
         lv.setAdapter(mAdapter);
     }
 

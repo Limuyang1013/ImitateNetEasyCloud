@@ -6,66 +6,6 @@
               android:orientation="vertical"
     >
 
-    <RelativeLayout
-        android:id="@+id/play_all_layout"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_gravity="center"
-        android:background="?android:attr/selectableItemBackground"
-        android:paddingLeft="10dp"
-        >
-
-        <ImageView
-            android:id="@+id/play_all_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:background="@drawable/lay_icn_play"
-            />
-
-        <TextView
-            android:id="@+id/play_all_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:layout_toEndOf="@+id/play_all_img"
-            android:text="@string/play_all"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
-
-        <TextView
-            android:id="@+id/play_all_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="2dp"
-            android:layout_toEndOf="@+id/play_all_txt"
-            android:textColor="#7D7D7D"
-            android:textSize="12sp"
-            />
-
-
-        <ImageView
-            android:id="@+id/play_all_select"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center|clip_vertical"
-            android:background="?android:attr/selectableItemBackground"
-            android:gravity="end"
-            android:paddingLeft="15dp"
-            android:paddingRight="12dp"
-            android:src="@drawable/list_icn_mng"
-            />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#F5F5F5"
-        />
 
     <com.stest.view.DividerListView
         android:id="@+id/lv"
@@ -76,6 +16,12 @@
         android:listSelector="@drawable/drag_lv_selector"
         android:scrollbars="none"
         divider:dividerPaddingLeft="15dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F5F5F5"
         />
 
 </LinearLayout>
