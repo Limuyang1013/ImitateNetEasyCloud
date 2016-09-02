@@ -46,7 +46,6 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
      */
     private void initWidgets() {
         musicInfo = new ArrayList<>();
-        Log.d("wqeqw", musicInfo.size() + "");
         mAdapter = new MusicListAdapter(getContext(), musicInfo, R.layout.music_list_item_layout);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
