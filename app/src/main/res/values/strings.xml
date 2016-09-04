@@ -6,6 +6,7 @@
     <string name="no_net">无可用网络</string>
     <string name="net_ok">网络状况良好</string>
     <string name="change_item">调整栏目顺序</string>
+    <string name="local_music">本地音乐</string>
     <string name="drag_item">拖拽条目</string>
     <string name="drag_info">想调整首页栏目的顺序？按住右边的按钮拖动即可</string>
     <string name="default_order">恢复默认排序</string>
@@ -14,6 +15,12 @@
     <string name="detail_txt">(0)</string>
     <string name="detail_expand_creat">创建的歌单 (0)</string>
     <string name="detail_expand_collect">收藏的歌单 (0)</string>
+    <string name="search_local">搜索本地歌曲</string>
+    <string name="scan">扫描歌曲</string>
+    <string name="sequence">选择排序方式</string>
+    <string name="list_lrc">一键获取封面歌词</string>
+    <string name="tone_quality">升级音质</string>
+    <string name="play_all">播放全部</string>
     <string-array name="drag_lv_data">
         <item>推荐歌单</item>
         <item>独家放送</item>
@@ -29,4 +36,7 @@
         <item>我的电台</item>
         <item>我的MV</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

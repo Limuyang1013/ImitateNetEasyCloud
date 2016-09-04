@@ -1,16 +1,16 @@
 package com.stest;
 
-import android.app.Application;
-
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.gson.Gson;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
+import org.litepal.LitePalApplication;
+
 /**
  * Created by Limuyang on 2016/8/15.
  */
-public class NetEasyApplication extends Application {
+public class NetEasyApplication extends LitePalApplication {
     private static Gson gson;
     private static NetEasyApplication instance;
     private static RefWatcher sRefWatcher;

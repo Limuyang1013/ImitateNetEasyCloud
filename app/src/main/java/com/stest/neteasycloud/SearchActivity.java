@@ -16,6 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -32,6 +33,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private EditText edit_text;
     @ViewInject(R.id.line)
     private View line;
+    @ViewInject(R.id.bar_search)
+    private ImageView bar_search;
     private ActionBar actionBar;
 
     @Override
@@ -48,6 +51,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     public void initViews() {
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
+        bar_search.setOnClickListener(this);
         //获取焦点
         //获取编辑框焦点
         edit_text.setFocusable(true);

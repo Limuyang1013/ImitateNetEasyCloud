@@ -67,12 +67,17 @@
         <!--<item name="colorAccent">@color/theme_color_PrimaryAccent</item>-->
     </style>
 
-    <style name="MySearchViewStyle" parent="@style/Widget.AppCompat.SearchView" />
+    <style name="MySearchViewStyle" parent="@style/Widget.AppCompat.SearchView"/>
 
 
     <style name="anim_menu_bottombar">
         <item name="android:windowEnterAnimation">@anim/menu_bottombar_in</item>
         <item name="android:windowExitAnimation">@anim/menu_bottombar_out</item>
+    </style>
+
+    <style name="Theme.ToolBar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:textColor">@color/listItemPressedNightColorWhite</item>
     </style>
 
 </resources>

@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.adapter.MusicDetailAdapter;
+import com.stest.model.MusicInfoDetail;
+import com.stest.neteasycloud.MusicInfoActivity;
 import com.stest.neteasycloud.R;
 import com.stest.view.DividerListView;
 import com.stest.view.NetEasyRefreshLayout;
@@ -34,6 +36,7 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     private MusicDetailAdapter mMusicDetailAdapter;
     //数据
     private List<String> data;
+    private List<MusicInfoDetail> musicList;
     @ViewInject(R.id.lv)
     private DividerListView lv;
     @ViewInject(R.id.detail_number)
@@ -50,7 +53,7 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     private ImageView collect_expand_img;
     private boolean isCreatRotate = true;
     private boolean isCollectRotate = true;
-
+    private static final String TAG = "MusicFragment";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,8 +72,6 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         refreshLayout.setOnRefreshListener(this);
         creat_layout.setOnClickListener(this);
         collect_layout.setOnClickListener(this);
-        creat_expand_img.setOnClickListener(this);
-        collect_expand_img.setOnClickListener(this);
         refreshLayout.setColorSchemeResources(R.color.themeColor);
         data = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.music_icn_data)));
         mMusicDetailAdapter = new MusicDetailAdapter(getActivity(), data, R.layout.music_detail_item);
@@ -80,6 +81,7 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                 switch (position) {
                     //本地音乐
                     case 0:
+                        MusicInfoActivity.start(getContext());
                         break;
                     //最近播放
                     case 1:
@@ -138,7 +140,7 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             case R.id.detail_collect:
                 if (isCollectRotate) {
                     animCollect().start();
-                    isCollectRotate=false;
+                    isCollectRotate = false;
                 } else {
                     animCollect().reverse();
                     isCollectRotate = true;

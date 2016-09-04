@@ -35,5 +35,9 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
     </style>
+    <style name="Theme.ToolBar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:textColor">@color/listItemPressedNightColorWhite</item>
+    </style>
 
 </resources>

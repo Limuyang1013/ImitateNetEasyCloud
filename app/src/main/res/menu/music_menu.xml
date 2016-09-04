@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".MusicInfoActivity"
+    >
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/actionbar_search"
+        android:title="@string/search_local"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_scanning"
+        android:icon="@drawable/actionbar_menu_icn_scan"
+        android:title="@string/scan"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/action_sequence"
+        android:icon="@drawable/actionbar_menu_icn_order_default"
+        android:title="@string/sequence"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/action_list_lrc"
+        android:icon="@drawable/actionbar_menu_icn_lrc"
+        android:title="@string/list_lrc"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/action_tone_quality"
+        android:icon="@drawable/actionbar_menu_icn_upquality"
+        android:title="@string/tone_quality"
+        app:showAsAction="never"
+        />
+</menu>
