@@ -92,10 +92,6 @@
             android:layout_height="match_parent"
             android:background="#ffffff" />
     </LinearLayout>
-    <!--底部唱片布局-->
-    <include
-        android:id="@+id/bottom_nusic_nav"
-        layout="@layout/bottom_music_layout"></include>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"

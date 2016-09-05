@@ -50,10 +50,6 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     private ImageView bar_friends;
     @ViewInject(R.id.view_pager)
     private ViewPager view_pager;
-    @ViewInject(R.id.play_btn)
-    private ImageView play_btn;
-    @ViewInject(R.id.bottom_music_more)
-    private LinearLayout bottom_music_more;
     @ViewInject(R.id.search_layout)
     private LinearLayout search_layout;
     private boolean isOpen;
