@@ -55,7 +55,7 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
         });
         ListHeaderView headerView = new ListHeaderView(getContext());
         headerView.setTextView("(" + musicInfo.size() + ")");
-        mAdapter.addHeaderView(headerView);
+        lv.addHeaderView(headerView);
         lv.setAdapter(mAdapter);
     }
 

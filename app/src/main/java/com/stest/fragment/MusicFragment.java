@@ -20,6 +20,7 @@ import com.stest.adapter.MusicDetailAdapter;
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.MusicInfoActivity;
 import com.stest.neteasycloud.R;
+import com.stest.utils.MusicUtils;
 import com.stest.view.DividerListView;
 import com.stest.view.NetEasyRefreshLayout;
 
@@ -39,8 +40,6 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     private List<MusicInfoDetail> musicList;
     @ViewInject(R.id.lv)
     private DividerListView lv;
-    @ViewInject(R.id.detail_number)
-    private TextView detail_number;
     @ViewInject(R.id.refresh)
     private NetEasyRefreshLayout refreshLayout;
     @ViewInject(R.id.detail_creat)
@@ -54,6 +53,7 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     private boolean isCreatRotate = true;
     private boolean isCollectRotate = true;
     private static final String TAG = "MusicFragment";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
