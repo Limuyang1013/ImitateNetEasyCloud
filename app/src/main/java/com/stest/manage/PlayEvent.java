@@ -20,11 +20,11 @@ public class PlayEvent {
     private int seekTo;
     private int position;
 
-    public MusicInfoDetail getDetail() {
+    public MusicInfoDetail getSong() {
         return mDetail;
     }
 
-    public void setDetail(MusicInfoDetail detail) {
+    public void setSong(MusicInfoDetail detail) {
         mDetail = detail;
     }
 

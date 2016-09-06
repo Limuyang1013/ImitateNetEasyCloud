@@ -44,6 +44,8 @@ public class MusicPlayService extends Service {
             case NEXT:
                 MusicPlayer.getPlayer().next();
                 break;
+            case PREVIOES:
+                MusicPlayer.getPlayer().previous();
 
         }
 
