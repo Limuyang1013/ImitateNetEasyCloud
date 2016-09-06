@@ -39,7 +39,7 @@ public class MusicPlayService extends Service {
     public void onEvent(PlayEvent playevent) {
         switch (playevent.getAction()) {
             case PLAY:
-                MusicPlayer.getPlayer().setQueue(playevent.getQueue(), 0);
+                MusicPlayer.getPlayer().setQueue(playevent.getQueue(), playevent.getCurrentIndex());
                 break;
             case NEXT:
                 MusicPlayer.getPlayer().next();
@@ -48,6 +48,7 @@ public class MusicPlayService extends Service {
         }
 
     }
+
 
     @Override
     public void onDestroy() {

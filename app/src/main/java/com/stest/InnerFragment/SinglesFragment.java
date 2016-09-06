@@ -61,7 +61,11 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                EventBus.getDefault().post(playEvent);
+                if (position > 0) {
+                    playEvent.setCurrentIndex(position - 1);
+                    EventBus.getDefault().post(playEvent);
+
+                }
             }
         });
         ListHeaderView headerView = new ListHeaderView(getContext());
