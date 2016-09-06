@@ -54,10 +54,10 @@ public class MusicPlayer implements OnCompletionListener {
         play(getNowPlaying());
     }
 
-    public void play(MusicInfoDetail song) {
+    public void play(MusicInfoDetail detail) {
         try {
             mMediaPlayer.reset();
-            mMediaPlayer.setDataSource(song.getUri());
+            mMediaPlayer.setDataSource(detail.getUri());
             mMediaPlayer.prepareAsync();
             mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override

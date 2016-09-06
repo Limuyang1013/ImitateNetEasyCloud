@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by Limuyang on 2016/9/6.
+ * 播放事件控制
  */
 
 public class PlayEvent {
@@ -14,17 +15,17 @@ public class PlayEvent {
     }
 
     private Action mAction;
-    private MusicInfoDetail mSong;
+    private MusicInfoDetail mDetail;
     private List<MusicInfoDetail> mQueue;
     private int seekTo;
     private int position;
 
-    public MusicInfoDetail getSong() {
-        return mSong;
+    public MusicInfoDetail getDetail() {
+        return mDetail;
     }
 
-    public void setSong(MusicInfoDetail song) {
-        mSong = song;
+    public void setDetail(MusicInfoDetail detail) {
+        mDetail = detail;
     }
 
     public Action getAction() {
