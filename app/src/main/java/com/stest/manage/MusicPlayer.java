@@ -45,7 +45,7 @@ public class MusicPlayer implements OnCompletionListener {
         mQueue = new ArrayList<>();
         mQueueIndex = 0;
 
-        mPlayMode = PlayMode.LOOP;
+        mPlayMode = PlayMode.RANDOM;
     }
 
     public void setQueue(List<MusicInfoDetail> queue, int index) {

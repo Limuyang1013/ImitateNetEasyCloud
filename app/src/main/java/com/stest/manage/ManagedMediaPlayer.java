@@ -22,6 +22,7 @@ public class ManagedMediaPlayer extends MediaPlayer implements MediaPlayer.OnCom
 
     public ManagedMediaPlayer() {
         super();
+        //空闲状态
         mState = Status.IDLE;
         super.setOnCompletionListener(this);
     }
