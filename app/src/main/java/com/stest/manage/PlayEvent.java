@@ -56,6 +56,7 @@ public class PlayEvent {
         return seekTo;
     }
 
+    //定位
     public void setSeekTo(int seekTo) {
         this.seekTo = seekTo;
     }
