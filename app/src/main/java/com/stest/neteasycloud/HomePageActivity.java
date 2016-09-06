@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -124,7 +125,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
             case R.id.drawerIcon:
                 if (!isOpen) {
                     //LEFT和RIGHT指的是现存DrawerLayout的方向
-                    mDrawerLayout.openDrawer(Gravity.LEFT);
+                    mDrawerLayout.openDrawer(GravityCompat.START);
                     isOpen = true;
                 }
             case R.id.bar_disco:

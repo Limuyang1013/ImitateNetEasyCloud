@@ -30,7 +30,7 @@ public class API {
      * 网易单曲 /music/163/songs/{id}
      * 网易专辑 /music/163/albums/{id}
      * 网易歌手 /music/163/artists/{id}
-     * 网易歌单 /music/163/collections/{id}
+     * 网易歌单 /music/163/collections/{id} 可以找到我喜欢的歌单
      * 虾米专辑歌曲 ID /music/xiami/albums/ids/{id}
      * 虾米歌手歌曲 ID /music/xiami/artists/ids/{id}
      * 虾米精选集歌曲 ID /music/xiami/collections/ids/{id}

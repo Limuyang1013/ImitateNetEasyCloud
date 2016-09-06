@@ -111,6 +111,11 @@ public class MusicInfoActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     //滑动布局
     private void addView() {
         mTitleList.add("单曲");
@@ -221,4 +226,5 @@ public class MusicInfoActivity extends AppCompatActivity {
         }
         return super.onPrepareOptionsPanel(view, menu);
     }
+
 }
