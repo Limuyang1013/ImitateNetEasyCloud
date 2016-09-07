@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -204,11 +205,26 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    long time = 0;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            mDrawerLayout.closeDrawer(mNavigationView);
-            isOpen = false;
+            if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+                mDrawerLayout.closeDrawer(mNavigationView);
+                isOpen = false;
+                return true;
+            } else {
+                if ((System.currentTimeMillis() - time > 1000)) {
+                    Toast.makeText(this, "再按一次返回桌面", Toast.LENGTH_SHORT).show();
+                    time = System.currentTimeMillis();
+                } else {
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    startActivity(intent);
+                }
+                return true;
+            }
         }
         return super.onKeyDown(keyCode, event);
     }

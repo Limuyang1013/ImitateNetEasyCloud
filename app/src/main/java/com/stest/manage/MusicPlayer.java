@@ -51,6 +51,7 @@ public class MusicPlayer implements OnCompletionListener {
     public void setQueue(List<MusicInfoDetail> queue, int index) {
         mQueue = queue;
         mQueueIndex = index;
+        queue.get(index).setPlaying(true);
         play(getNowPlaying());
     }
 
@@ -171,5 +172,6 @@ public class MusicPlayer implements OnCompletionListener {
         mMediaPlayer = null;
         mContext = null;
     }
+
 
 }

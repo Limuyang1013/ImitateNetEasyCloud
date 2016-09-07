@@ -64,6 +64,7 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
                 if (position > 0) {
                     playEvent.setCurrentIndex(position - 1);
                     EventBus.getDefault().post(playEvent);
+
                 } else {
                     //跳转
                 }
@@ -86,5 +87,6 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
         }
     }
+
 
 }
