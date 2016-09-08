@@ -1,5 +1,6 @@
 package com.stest.fragment;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.stest.manage.MusicPlayer;
 import com.stest.neteasycloud.R;
 
 /**
@@ -63,6 +65,8 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         playlist.setOnClickListener(this);
         play.setOnClickListener(this);
         next.setOnClickListener(this);
+        mProgress.setMax(MusicPlayer.getPlayer().getDuration());
+        mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
     }
 
     @Override
@@ -76,6 +80,14 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                 break;
             //播放控制
             case R.id.play_btn:
+                if (MusicPlayer.getPlayer().isNowPlaying()) {
+                    play.setImageResource(R.drawable.pause_btn);
+                    MusicPlayer.getPlayer().pause();
+                    MusicPlayer.getPlayer().setNowPlaying(false);
+                } else {
+                    play.setImageResource(R.drawable.play_btn);
+                    MusicPlayer.getPlayer().setNowPlaying(true);
+                }
                 break;
             //下一曲
             case R.id.next_btn:

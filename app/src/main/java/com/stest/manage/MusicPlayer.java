@@ -23,6 +23,7 @@ public class MusicPlayer implements OnCompletionListener {
     private List<MusicInfoDetail> mQueue;
     private int mQueueIndex;
     private PlayMode mPlayMode;
+    private boolean isNowPlaying;
 
 
     private enum PlayMode {
@@ -51,7 +52,6 @@ public class MusicPlayer implements OnCompletionListener {
     public void setQueue(List<MusicInfoDetail> queue, int index) {
         mQueue = queue;
         mQueueIndex = index;
-        queue.get(index).setPlaying(true);
         play(getNowPlaying());
     }
 
@@ -173,5 +173,13 @@ public class MusicPlayer implements OnCompletionListener {
         mContext = null;
     }
 
+
+    public boolean isNowPlaying() {
+        return isNowPlaying;
+    }
+
+    public void setNowPlaying(boolean nowPlaying) {
+        isNowPlaying = nowPlaying;
+    }
 
 }

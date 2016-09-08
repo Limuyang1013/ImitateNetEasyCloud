@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.adapter.MusicListAdapter;
+import com.stest.manage.MusicPlayer;
 import com.stest.manage.PlayEvent;
 import com.stest.model.ListHeaderView;
 import com.stest.model.MusicInfoDetail;
@@ -59,7 +60,7 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
      */
     private void initWidgets() {
         musicInfo = new ArrayList<>();
-        musicInfo= DataSupport.findAll(MusicInfoDetail.class);
+        musicInfo = DataSupport.findAll(MusicInfoDetail.class);
         playEvent = new PlayEvent();
         mAdapter = new MusicListAdapter(getContext(), musicInfo, R.layout.music_list_item_layout);
         playEvent.setAction(PlayEvent.Action.PLAY);
@@ -69,11 +70,13 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 0) {
                     currentlyPlayingPosition = position - 1;
+                    playEvent.setSong(musicInfo.get(currentlyPlayingPosition));
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
                             playEvent.setCurrentIndex(currentlyPlayingPosition);
                             EventBus.getDefault().post(playEvent);
+                            MusicPlayer.getPlayer().setNowPlaying(true);
                         }
                     }).start();
                 } else {
