@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.R;
@@ -21,7 +22,6 @@ import java.util.List;
 public class MusicListAdapter extends SuperAdapter<MusicInfoDetail> {
     public MusicListAdapter(Context context, List<MusicInfoDetail> items, int layoutResId) {
         super(context, items, layoutResId);
-        MusicUtils.scanMusic(getContext(), items);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class MusicListAdapter extends SuperAdapter<MusicInfoDetail> {
         holder.setImageResource(R.id.dld_ok, R.drawable.list_icn_dld_ok);
         holder.setImageResource(R.id.hq, R.drawable.list_icn_hq_sml);
         holder.setImageResource(R.id.popup_menu, R.drawable.list_icn_more);
-
+        holder.getView(R.id.playing).setVisibility(View.GONE);
     }
 
     @Override

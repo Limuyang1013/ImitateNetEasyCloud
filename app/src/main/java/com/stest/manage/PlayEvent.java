@@ -11,7 +11,7 @@ import java.util.List;
 
 public class PlayEvent {
     public enum Action {
-        PLAY, STOP, RESUME, NEXT, PREVIOES, SEEK
+        PLAY, PAUSE, RESUME, NEXT, PREVIOES, SEEK
     }
 
     private Action mAction;

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="music">
+
+    </dbname>
+
+    <version value="1">
+
+    </version>
+
+    <list>
+        <mapping class="com.stest.model.MusicInfoDetail"></mapping>
+    </list>
+
+</litepal>

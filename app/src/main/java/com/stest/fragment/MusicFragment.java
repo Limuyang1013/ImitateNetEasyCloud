@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -23,6 +22,8 @@ import com.stest.neteasycloud.R;
 import com.stest.utils.MusicUtils;
 import com.stest.view.DividerListView;
 import com.stest.view.NetEasyRefreshLayout;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,7 +38,6 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     private MusicDetailAdapter mMusicDetailAdapter;
     //数据
     private List<String> data;
-    private List<MusicInfoDetail> musicList;
     @ViewInject(R.id.lv)
     private DividerListView lv;
     @ViewInject(R.id.refresh)

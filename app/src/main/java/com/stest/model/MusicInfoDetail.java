@@ -6,7 +6,9 @@ package com.stest.model;
 
 import android.graphics.Bitmap;
 
-public class MusicInfoDetail {
+import org.litepal.crud.DataSupport;
+
+public class MusicInfoDetail extends DataSupport {
     // 歌曲类型 本地/网络
     private Type type;
     // [本地歌曲]歌曲id

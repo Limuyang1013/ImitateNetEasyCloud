@@ -1,8 +1,8 @@
 package com.stest.InnerFragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.lidroid.xutils.ViewUtils;
@@ -24,6 +25,8 @@ import com.stest.service.MusicPlayService;
 import com.stest.view.DividerListView;
 
 import org.greenrobot.eventbus.EventBus;
+import org.litepal.crud.DataSupport;
+import org.litepal.tablemanager.Connector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,8 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
     private MusicListAdapter mAdapter;
     private List<MusicInfoDetail> musicInfo;
     private PlayEvent playEvent;
+    private int currentlyPlayingPosition = -1;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +59,7 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
      */
     private void initWidgets() {
         musicInfo = new ArrayList<>();
+        musicInfo= DataSupport.findAll(MusicInfoDetail.class);
         playEvent = new PlayEvent();
         mAdapter = new MusicListAdapter(getContext(), musicInfo, R.layout.music_list_item_layout);
         playEvent.setAction(PlayEvent.Action.PLAY);
@@ -62,9 +68,14 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 0) {
-                    playEvent.setCurrentIndex(position - 1);
-                    EventBus.getDefault().post(playEvent);
-
+                    currentlyPlayingPosition = position - 1;
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            playEvent.setCurrentIndex(currentlyPlayingPosition);
+                            EventBus.getDefault().post(playEvent);
+                        }
+                    }).start();
                 } else {
                     //跳转
                 }
@@ -87,6 +98,5 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
         }
     }
-
 
 }
