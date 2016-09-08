@@ -1,4 +1,4 @@
-package com.stest.neteasycloud;
+package com.stest.constant;
 
 import android.graphics.Rect;
 

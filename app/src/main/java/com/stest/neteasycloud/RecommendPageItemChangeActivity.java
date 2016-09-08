@@ -36,7 +36,7 @@ import java.util.List;
  * Created by Limuyang on 2016/8/17.
  * 个性推荐页面改变布局
  */
-public class RecommendPageItemChangeActivity extends AppCompatActivity {
+public class RecommendPageItemChangeActivity extends BaseActivity {
 
     @ViewInject(R.id.tool_bar)
     private Toolbar toolbar;

@@ -34,7 +34,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MusicInfoActivity extends AppCompatActivity {
+public class MusicInfoActivity extends BaseActivity {
     @ViewInject(R.id.tool_bar)
     private Toolbar toolbar;
     @ViewInject(R.id.infos_tab)

@@ -5,7 +5,7 @@ import android.graphics.ColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
-import com.stest.neteasycloud.DividerBounds;
+import com.stest.constant.DividerBounds;
 
 /**
  * Created by Limuyang on 2016/8/17.

@@ -26,7 +26,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
  * Created by Limuyang on 2016/8/19.
  * 搜索音乐、歌手、歌词、用户
  */
-public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchActivity extends BaseActivity implements View.OnClickListener {
     @ViewInject(R.id.tool_bar)
     private Toolbar toolbar;
     @ViewInject(R.id.search_edittext)

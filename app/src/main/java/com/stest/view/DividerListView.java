@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ListView;
 
-import com.stest.neteasycloud.DividerBounds;
+import com.stest.constant.DividerBounds;
 import com.stest.neteasycloud.R;
 
 /**

@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * Limuyang
  */
-public class HomePageActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
+public class HomePageActivity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
     @ViewInject(R.id.navigation_view)
     private NavigationView mNavigationView;
