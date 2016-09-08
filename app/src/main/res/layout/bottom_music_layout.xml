@@ -7,15 +7,15 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/music_control"
+        android:id="@+id/music_control_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:background="#ffffff"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:orientation="horizontal">
 
         <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/playbar_img"
+            android:id="@+id/albumn_pic"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="5dp"
@@ -32,6 +32,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/song"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"
@@ -41,6 +42,7 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/singer"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="50"
@@ -61,6 +63,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/playlist_btn"
                 android:layout_width="45dp"
                 android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -80,7 +83,7 @@
                 android:id="@+id/play_btn"
                 android:layout_width="45dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/list_bg"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/playbar_btn_play" />
         </LinearLayout>
 
@@ -93,6 +96,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/next_btn"
                 android:layout_width="45dp"
                 android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -102,7 +106,7 @@
     </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/song_progress_normal"
+        android:id="@+id/progress"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="1.5dp"

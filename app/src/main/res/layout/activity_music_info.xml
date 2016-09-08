@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,7 +16,7 @@
         app:contentInsetStart="0.0dp"
         app:layout_scrollFlags="enterAlways|scroll"
         app:popupTheme="@style/Theme.ToolBar"
-        app:theme="@style/ToolbarStyle"/>
+        app:theme="@style/ToolbarStyle" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/infos_tab"
@@ -26,14 +25,19 @@
         android:background="#ffffff"
         app:tabIndicatorColor="@color/themeColor"
         app:tabSelectedTextColor="@color/themeColor"
-        app:tabTextColor="#7D7D7D"/>
+        app:tabTextColor="#7D7D7D" />
 
 
     <android.support.v4.view.ViewPager
         android:id="@+id/infos_viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"/>
+        android:background="#ffffff" />
 
+    <FrameLayout
+        android:id="@+id/bottom_container"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true" />
 
 </LinearLayout>
