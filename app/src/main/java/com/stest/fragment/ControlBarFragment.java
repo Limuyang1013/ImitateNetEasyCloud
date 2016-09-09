@@ -91,6 +91,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                 break;
             //下一曲
             case R.id.next_btn:
+                MusicPlayer.getPlayer().next();
                 break;
         }
 
