@@ -1,6 +1,6 @@
 ##仿网易云音乐界面效果
 
-![](http://oasusatoz.bkt.clouddn.com/neteasy.gif)
+![](https://img.shields.io/badge/license-Apache%202-blue.svg)
 
 ###注意事项
 - 所用图片素材均从网易云官方APP获取，该源码纯作学习使用
