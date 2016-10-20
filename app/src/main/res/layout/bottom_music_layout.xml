@@ -1,119 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
     android:id="@+id/bottom_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="#fefefe"
+    >
 
     <LinearLayout
-        android:id="@+id/music_control_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/albumn_pic"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="5dp"
+        <LinearLayout
+            android:id="@+id/music_control_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:orientation="horizontal">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/albumn_pic"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_gravity="center_vertical"
+                fresco:placeholderImage="@drawable/placeholder_disk_210"
+                fresco:placeholderImageScaleType="fitXY" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/song"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="50"
+                    android:text="思念是一种病"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/singer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="50"
+                    android:text="张震岳"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#7D7D7D"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bottom_music_more"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/playlist_btn"
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/playbar_btn_playlist" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/play_btn"
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/playbar_btn_play" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/next_btn"
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/playbar_btn_next" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:layout_gravity="bottom"
             android:layout_marginTop="2dp"
-            android:layout_gravity="center_vertical"
-            fresco:placeholderImage="@drawable/placeholder_disk_210"
-            fresco:placeholderImageScaleType="fitXY" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/song"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="50"
-                android:text="思念是一种病"
-                android:textColor="#000000"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/singer"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="50"
-                android:text="张震岳"
-                android:layout_marginTop="5dp"
-                android:textColor="#7D7D7D"
-                android:textSize="10sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/bottom_music_more"
-            android:layout_width="45dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/list_bg"
-            android:clickable="true"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/playlist_btn"
-                android:layout_width="45dp"
-                android:layout_height="match_parent"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="fitCenter"
-                android:src="@drawable/playbar_btn_playlist" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="45dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/list_bg"
-            android:clickable="true"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/play_btn"
-                android:layout_width="45dp"
-                android:layout_height="match_parent"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/playbar_btn_play" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="45dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/list_bg"
-            android:clickable="true"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/next_btn"
-                android:layout_width="45dp"
-                android:layout_height="match_parent"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="fitCenter"
-                android:src="@drawable/playbar_btn_next" />
-        </LinearLayout>
+            android:maxHeight="3dp"
+            android:progress="30"
+            android:progressDrawable="@drawable/progressbar_color"
+            android:tag="tint_accent_color" />
     </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/progress"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="1.5dp"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="2dp"
-        android:maxHeight="3dp"
-        android:progress="30"
-        android:progressDrawable="@drawable/progressbar_color"
-        android:tag="tint_accent_color" />
-</LinearLayout>
+</RelativeLayout>

@@ -74,11 +74,11 @@
         android:layout_below="@+id/tool_bar"
         android:background="@color/white"
         >
-        <FrameLayout
-            android:layout_alignParentBottom="true"
-            android:id="@+id/bottom_container"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"/>
     </RelativeLayout>
+    <FrameLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottom_container"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
 
 </RelativeLayout>
