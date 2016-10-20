@@ -2,17 +2,12 @@ package com.stest.InnerFragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -27,7 +22,6 @@ import com.stest.view.DividerListView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.litepal.crud.DataSupport;
-import org.litepal.tablemanager.Connector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +71,7 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
                             playEvent.setCurrentIndex(currentlyPlayingPosition);
                             EventBus.getDefault().post(playEvent);
                             MusicPlayer.getPlayer().setNowPlaying(true);
+                            EventBus.getDefault().post(musicInfo.get(currentlyPlayingPosition));
                         }
                     }).start();
                 } else {

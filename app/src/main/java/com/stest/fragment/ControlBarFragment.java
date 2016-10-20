@@ -17,7 +17,13 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.manage.MusicPlayer;
+import com.stest.manage.PlayEvent;
+import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by Limuyang on 2016/9/8.
@@ -47,6 +53,12 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         return new ControlBarFragment();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,6 +79,11 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         next.setOnClickListener(this);
         mProgress.setMax(MusicPlayer.getPlayer().getDuration());
         mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
+        //如果正在播放
+        if (MusicPlayer.getPlayer().isNowPlaying()) {
+            getActivity().findViewById(R.id.bottom_layout).setVisibility(View.VISIBLE);
+            play.setImageResource(R.drawable.pause_btn);
+        }
     }
 
     @Override
@@ -80,14 +97,6 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                 break;
             //播放控制
             case R.id.play_btn:
-                if (MusicPlayer.getPlayer().isNowPlaying()) {
-                    play.setImageResource(R.drawable.pause_btn);
-                    MusicPlayer.getPlayer().pause();
-                    MusicPlayer.getPlayer().setNowPlaying(false);
-                } else {
-                    play.setImageResource(R.drawable.play_btn);
-                    MusicPlayer.getPlayer().setNowPlaying(true);
-                }
                 break;
             //下一曲
             case R.id.next_btn:
@@ -95,5 +104,17 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                 break;
         }
 
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUpdateUI(MusicInfoDetail info) {
+        song_txt.setText(info.getTitle());
+        singer_txt.setText(info.getArtist());
+        play.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.pause_btn : R.drawable.play_btn);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
