@@ -74,7 +74,7 @@
                     android:id="@+id/playlist_btn"
                     android:layout_width="45dp"
                     android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:background="?attr/selectableItemBackground"
                     android:scaleType="fitCenter"
                     android:src="@drawable/playbar_btn_playlist" />
             </LinearLayout>
@@ -90,7 +90,7 @@
                     android:id="@+id/play_btn"
                     android:layout_width="45dp"
                     android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:background="?attr/selectableItemBackground"
                     android:src="@drawable/play_btn" />
             </LinearLayout>
 
@@ -105,7 +105,7 @@
                     android:id="@+id/next_btn"
                     android:layout_width="45dp"
                     android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:background="?attr/selectableItemBackground"
                     android:scaleType="fitCenter"
                     android:src="@drawable/playbar_btn_next" />
             </LinearLayout>
