@@ -227,4 +227,8 @@ public class MusicInfoActivity extends BaseActivity {
         return super.onPrepareOptionsPanel(view, menu);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 }

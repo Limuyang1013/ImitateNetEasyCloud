@@ -1,8 +1,10 @@
 package com.stest.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,11 +33,13 @@ import org.greenrobot.eventbus.ThreadMode;
  */
 
 public class ControlBarFragment extends Fragment implements View.OnClickListener {
+    private final static String TAG = ControlBarFragment.class.getSimpleName();
     private View v;
     @ViewInject(R.id.progress)
     private ProgressBar mProgress;
     @ViewInject(R.id.bottom_layout)
     private RelativeLayout control_layout;
+    //专辑封面
     @ViewInject(R.id.albumn_pic)
     private SimpleDraweeView albumn;
     @ViewInject(R.id.song)
@@ -48,8 +52,12 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
     private ImageView play;
     @ViewInject(R.id.next_btn)
     private ImageView next;
+//    private static ControlBarFragment fragment;
 
     public static ControlBarFragment newInstance() {
+//        if (fragment==null){
+//            fragment=new ControlBarFragment();
+//        }
         return new ControlBarFragment();
     }
 
@@ -57,6 +65,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
+        setRetainInstance(true);
     }
 
     @Nullable
@@ -72,13 +81,27 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         return v;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        Log.d(TAG, "onViewStateRestored被执行");
+    }
+
     private void addView() {
         control_layout.setOnClickListener(this);
         playlist.setOnClickListener(this);
         play.setOnClickListener(this);
         next.setOnClickListener(this);
-        mProgress.setMax(MusicPlayer.getPlayer().getDuration());
-        mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
+        if (MusicPlayer.getPlayer().isNowPlaying()) {
+            play.setImageResource(R.drawable.play_btn);
+        } else if (!MusicPlayer.getPlayer().isNowPlaying()) {
+            play.setImageResource(R.drawable.pause_btn);
+        }
     }
 
     @Override
@@ -94,11 +117,10 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
             case R.id.play_btn:
                 //如果正在播放
                 if (MusicPlayer.getPlayer().isNowPlaying()) {
-                    getActivity().findViewById(R.id.bottom_layout).setVisibility(View.VISIBLE);
                     play.setImageResource(R.drawable.play_btn);
                     MusicPlayer.getPlayer().setNowPlaying(false);
                     MusicPlayer.getPlayer().pause();
-                }else if (!MusicPlayer.getPlayer().isNowPlaying()){
+                } else if (!MusicPlayer.getPlayer().isNowPlaying()) {
                     play.setImageResource(R.drawable.pause_btn);
                     MusicPlayer.getPlayer().setNowPlaying(true);
                     MusicPlayer.getPlayer().resume();
@@ -113,11 +135,19 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         }
 
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onUpdateUI(MusicInfoDetail info) {
-        song_txt.setText(info.getTitle());
-        singer_txt.setText(info.getArtist());
-        play.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.pause_btn : R.drawable.play_btn);
+    public void UpdateUI(final MusicInfoDetail info) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                song_txt.setText(info.getTitle());
+                singer_txt.setText(info.getArtist());
+                play.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.pause_btn : R.drawable.play_btn);
+                mProgress.setMax(100);
+                mProgress.setProgress(60);
+            }
+        }, 60);
     }
 
     @Override
@@ -125,4 +155,16 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d(TAG, "onDestroyView被调用");
+    }
 }
+

@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.adapter.MusicListAdapter;
+import com.stest.fragment.ControlBarFragment;
 import com.stest.manage.MusicPlayer;
 import com.stest.manage.PlayEvent;
 import com.stest.model.ListHeaderView;
@@ -71,6 +72,7 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
                             playEvent.setCurrentIndex(currentlyPlayingPosition);
                             EventBus.getDefault().post(playEvent);
                             MusicPlayer.getPlayer().setNowPlaying(true);
+//                            EventBus.getDefault().postSticky(musicInfo.get(currentlyPlayingPosition));
                             EventBus.getDefault().post(musicInfo.get(currentlyPlayingPosition));
                         }
                     }).start();
