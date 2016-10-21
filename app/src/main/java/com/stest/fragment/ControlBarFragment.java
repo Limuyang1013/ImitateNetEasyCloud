@@ -79,11 +79,6 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         next.setOnClickListener(this);
         mProgress.setMax(MusicPlayer.getPlayer().getDuration());
         mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
-        //如果正在播放
-        if (MusicPlayer.getPlayer().isNowPlaying()) {
-            getActivity().findViewById(R.id.bottom_layout).setVisibility(View.VISIBLE);
-            play.setImageResource(R.drawable.pause_btn);
-        }
     }
 
     @Override
@@ -97,6 +92,17 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                 break;
             //播放控制
             case R.id.play_btn:
+                //如果正在播放
+                if (MusicPlayer.getPlayer().isNowPlaying()) {
+                    getActivity().findViewById(R.id.bottom_layout).setVisibility(View.VISIBLE);
+                    play.setImageResource(R.drawable.play_btn);
+                    MusicPlayer.getPlayer().setNowPlaying(false);
+                    MusicPlayer.getPlayer().pause();
+                }else if (!MusicPlayer.getPlayer().isNowPlaying()){
+                    play.setImageResource(R.drawable.pause_btn);
+                    MusicPlayer.getPlayer().setNowPlaying(true);
+                    MusicPlayer.getPlayer().resume();
+                }
                 break;
             //下一曲
             case R.id.next_btn:

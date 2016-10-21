@@ -50,6 +50,8 @@ public class MusicPlayService extends Service {
             case PAUSE:
                 MusicPlayer.getPlayer().pause();
                 break;
+            case RESUME:
+                MusicPlayer.getPlayer().resume();
 
         }
 
