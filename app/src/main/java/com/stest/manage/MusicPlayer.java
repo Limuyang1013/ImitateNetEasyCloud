@@ -6,6 +6,8 @@ import android.media.MediaPlayer.OnCompletionListener;
 
 import com.stest.model.MusicInfoDetail;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,7 @@ public class MusicPlayer implements OnCompletionListener {
     private int mQueueIndex;
     private PlayMode mPlayMode;
     private boolean isNowPlaying;
+    private MusicInfoDetail mNextSong;
 
 
     private enum PlayMode {
@@ -47,6 +50,8 @@ public class MusicPlayer implements OnCompletionListener {
         mQueueIndex = 0;
 
         mPlayMode = PlayMode.RANDOM;
+
+        mNextSong=new MusicInfoDetail();
     }
 
     public void setQueue(List<MusicInfoDetail> queue, int index) {
@@ -80,7 +85,9 @@ public class MusicPlayer implements OnCompletionListener {
     }
 
     public void next() {
-        play(getNextSong());
+        mNextSong=getNextSong();
+        play(mNextSong);
+        EventBus.getDefault().post(mNextSong);
     }
 
     public void previous() {

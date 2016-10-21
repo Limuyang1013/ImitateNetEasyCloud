@@ -44,7 +44,7 @@
                     android:id="@+id/song"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="5dp"
                     android:layout_weight="50"
                     android:text="思念是一种病"
                     android:textColor="#000000"
@@ -56,7 +56,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="50"
                     android:text="张震岳"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="8dp"
                     android:textColor="#7D7D7D"
                     android:textSize="10sp" />
 
