@@ -141,12 +141,15 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                 song_txt.setText(info.getTitle());
                 singer_txt.setText(info.getArtist());
                 play.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.pause_btn : R.drawable.play_btn);
-                Glide.with(getActivity())
-                        .load(info.getCoverUri())
-                        .error(R.drawable.placeholder_disk_210)
-                        .into(albumn);
             }
         }, 20);
+        //加载专辑图片
+        Glide.with(getActivity())
+                .load(info.getCoverUri())
+                .placeholder(R.drawable.placeholder_disk_210)
+                .error(R.drawable.placeholder_disk_210)
+                .crossFade(20)
+                .into(albumn);
     }
 
     @Override
