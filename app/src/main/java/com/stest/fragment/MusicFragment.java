@@ -16,14 +16,10 @@ import android.widget.RelativeLayout;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.adapter.MusicDetailAdapter;
-import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.MusicInfoActivity;
 import com.stest.neteasycloud.R;
-import com.stest.utils.MusicUtils;
 import com.stest.view.DividerListView;
 import com.stest.view.NetEasyRefreshLayout;
-
-import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.Arrays;

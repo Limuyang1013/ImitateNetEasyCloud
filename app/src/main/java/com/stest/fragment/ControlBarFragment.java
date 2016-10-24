@@ -19,6 +19,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.manage.MusicPlayer;
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.R;
+import com.stest.neteasycloud.SplashActivity;
+import com.stest.utils.SPUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -49,12 +51,10 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
     private ImageView play;
     @ViewInject(R.id.next_btn)
     private ImageView next;
-//    private static ControlBarFragment fragment;
+    @ViewInject(R.id.bottom_layout)
+    private RelativeLayout bottom_layout;
 
     public static ControlBarFragment newInstance() {
-//        if (fragment==null){
-//            fragment=new ControlBarFragment();
-//        }
         return new ControlBarFragment();
     }
 
@@ -85,8 +85,15 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        // 在onActivityCreated()和onStart()之间调用
         super.onViewStateRestored(savedInstanceState);
-        Log.d(TAG, "onViewStateRestored被执行");
+        if (savedInstanceState!=null) {
+            song_txt.setText(savedInstanceState.getString("song_txt"));
+            Log.d(TAG,"onSaveInstanceState"+song_txt.getText().toString());
+            singer_txt.setText(savedInstanceState.getString("singer_txt"));
+            song_txt.setText(savedInstanceState.getString("song_txt"));
+            play.setImageResource(savedInstanceState.getBoolean("isPlaying")? R.drawable.pause_btn : R.drawable.play_btn);
+        }
     }
 
     private void addView() {
@@ -135,6 +142,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void UpdateUI(final MusicInfoDetail info) {
+        bottom_layout.setVisibility(View.VISIBLE);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -161,6 +169,9 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putString("song_txt",song_txt.getText().toString());
+        outState.putString("singer_txt",singer_txt.getText().toString());
+        outState.putBoolean("isPlaying",MusicPlayer.getPlayer().isNowPlaying());
     }
 
     @Override

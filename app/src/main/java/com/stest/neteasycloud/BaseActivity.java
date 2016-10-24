@@ -26,7 +26,7 @@ public class BaseActivity extends AppCompatActivity {
             fragment = ControlBarFragment.newInstance();
             ft.add(R.id.bottom_container, fragment).commit();
         }else {
-            ft.show(fragment).commitAllowingStateLoss();
+            ft.show(fragment).commit();
         }
     }
 

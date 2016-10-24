@@ -10,6 +10,7 @@
 
     <list>
         <mapping class="com.stest.model.MusicInfoDetail"></mapping>
+        <mapping class="com.stest.model.RecentSongDetail"></mapping>
     </list>
 
 </litepal>
