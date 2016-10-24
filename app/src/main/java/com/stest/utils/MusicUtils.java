@@ -1,6 +1,5 @@
 package com.stest.utils;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -8,7 +7,6 @@ import android.provider.MediaStore;
 
 import com.stest.model.MusicInfoDetail;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

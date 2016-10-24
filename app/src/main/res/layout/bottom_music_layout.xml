@@ -23,15 +23,14 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:orientation="horizontal">
 
-            <com.facebook.drawee.view.SimpleDraweeView
+            <ImageView
                 android:id="@+id/albumn_pic"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="2dp"
                 android:layout_gravity="center_vertical"
-                fresco:placeholderImage="@drawable/placeholder_disk_210"
-                fresco:placeholderImageScaleType="fitXY"
+               android:background="@drawable/placeholder_disk_210"
                 />
 
             <LinearLayout

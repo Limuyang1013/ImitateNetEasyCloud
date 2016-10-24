@@ -9,17 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.bumptech.glide.Glide;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.manage.MusicPlayer;
-import com.stest.manage.PlayEvent;
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.R;
 
@@ -41,7 +38,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
     private RelativeLayout control_layout;
     //专辑封面
     @ViewInject(R.id.albumn_pic)
-    private SimpleDraweeView albumn;
+    private ImageView albumn;
     @ViewInject(R.id.song)
     private TextView song_txt;
     @ViewInject(R.id.singer)
@@ -144,10 +141,12 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                 song_txt.setText(info.getTitle());
                 singer_txt.setText(info.getArtist());
                 play.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.pause_btn : R.drawable.play_btn);
-                mProgress.setMax(100);
-                mProgress.setProgress(60);
+                Glide.with(getActivity())
+                        .load(info.getCoverUri())
+                        .error(R.drawable.placeholder_disk_210)
+                        .into(albumn);
             }
-        }, 60);
+        }, 20);
     }
 
     @Override
