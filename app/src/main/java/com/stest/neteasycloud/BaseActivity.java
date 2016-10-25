@@ -24,7 +24,7 @@ public class BaseActivity extends AppCompatActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (fragment == null) {
             fragment = ControlBarFragment.newInstance();
-            ft.add(R.id.bottom_container, fragment).commit();
+            ft.add(R.id.bottom_container, fragment,"fragment").commit();
         }else {
             ft.show(fragment).commit();
         }

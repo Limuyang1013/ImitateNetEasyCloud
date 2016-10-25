@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:visibility="gone"
     android:background="#fefefe">
 
     <LinearLayout
@@ -111,12 +110,10 @@
             android:id="@+id/progress"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="2.5dp"
             android:layout_gravity="bottom"
-            android:layout_marginTop="2dp"
             android:maxHeight="3dp"
-            android:progress="30"
             android:progressDrawable="@drawable/progressbar_color"
-            android:tag="tint_accent_color" />
+            />
     </LinearLayout>
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.stest.fragment;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -97,6 +98,7 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
                 }
             }
+
         });
         lv.setAdapter(mMusicDetailAdapter);
     }
@@ -157,4 +159,5 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         anim_collect.setDuration(300);
         return anim_collect;
     }
+
 }

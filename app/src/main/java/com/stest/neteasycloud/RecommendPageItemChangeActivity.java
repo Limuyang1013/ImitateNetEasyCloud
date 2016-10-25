@@ -12,6 +12,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
@@ -194,4 +196,5 @@ public class RecommendPageItemChangeActivity extends BaseActivity {
         }
         win.setAttributes(winParams);
     }
+
 }

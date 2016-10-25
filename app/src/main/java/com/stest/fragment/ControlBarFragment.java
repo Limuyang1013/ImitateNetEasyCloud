@@ -19,12 +19,13 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.manage.MusicPlayer;
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.R;
-import com.stest.neteasycloud.SplashActivity;
-import com.stest.utils.SPUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Limuyang on 2016/9/8.
@@ -63,7 +64,10 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
         setRetainInstance(true);
+
     }
+
+
 
     @Nullable
     @Override
@@ -142,7 +146,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void UpdateUI(final MusicInfoDetail info) {
-        bottom_layout.setVisibility(View.VISIBLE);
+//        bottom_layout.setVisibility(View.VISIBLE);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -158,7 +162,30 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                 .error(R.drawable.placeholder_disk_210)
                 .crossFade(20)
                 .into(albumn);
+        mProgress.setMax((int) info.getDuration());
+        mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
+        Log.d("bar",MusicPlayer.getPlayer().getCurrentPosition()+"11");
+        Timer timer = new Timer();
+
+        TimerTask timerTask = new TimerTask() {
+
+            @Override
+            public void run() {
+
+                if(MusicPlayer.getPlayer().isNowPlaying()){
+                    mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
+                }else {
+                    mProgress.removeCallbacks(this);
+                }
+
+            }
+        };
+
+        timer.schedule(timerTask,0 , 50);
+
     }
+
+
 
     @Override
     public void onDestroy() {
