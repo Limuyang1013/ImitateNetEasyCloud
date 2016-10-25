@@ -117,6 +117,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         switch (v.getId()) {
             //整个底部播放栏布局
             case R.id.bottom_layout:
+
                 break;
             //播放列表
             case R.id.playlist_btn:
@@ -182,6 +183,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         };
 
         timer.schedule(timerTask,0 , 50);
+        bottom_layout.setVisibility(View.VISIBLE);
 
     }
 
