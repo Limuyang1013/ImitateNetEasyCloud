@@ -7,4 +7,10 @@
 - 已实现本地播放，实现效果待优化
 - 不定期进行更新
 
+###部分截图
+
+![](http://oasusatoz.bkt.clouddn.com/16-10-25/85352746.jpg)
+![](http://oasusatoz.bkt.clouddn.com/16-10-25/27227405.jpg)
+
+
  
