@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/play_all"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_gravity="center"

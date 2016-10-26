@@ -1,5 +1,6 @@
 package com.stest.fragment;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -23,7 +24,10 @@ import com.stest.neteasycloud.R;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.litepal.crud.DataSupport;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -54,6 +58,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
     private ImageView next;
     @ViewInject(R.id.bottom_layout)
     private RelativeLayout bottom_layout;
+    private List<MusicInfoDetail> musicInfo;
 
     public static ControlBarFragment newInstance() {
         return new ControlBarFragment();
@@ -64,9 +69,10 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
         setRetainInstance(true);
+        musicInfo = new ArrayList<>();
+        musicInfo = DataSupport.findAll(MusicInfoDetail.class);
 
     }
-
 
 
     @Nullable
@@ -91,12 +97,12 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         // 在onActivityCreated()和onStart()之间调用
         super.onViewStateRestored(savedInstanceState);
-        if (savedInstanceState!=null) {
+        if (savedInstanceState != null) {
             song_txt.setText(savedInstanceState.getString("song_txt"));
-            Log.d(TAG,"onSaveInstanceState"+song_txt.getText().toString());
+            Log.d(TAG, "onSaveInstanceState" + song_txt.getText().toString());
             singer_txt.setText(savedInstanceState.getString("singer_txt"));
             song_txt.setText(savedInstanceState.getString("song_txt"));
-            play.setImageResource(savedInstanceState.getBoolean("isPlaying")? R.drawable.pause_btn : R.drawable.play_btn);
+            play.setImageResource(savedInstanceState.getBoolean("isPlaying") ? R.drawable.pause_btn : R.drawable.play_btn);
         }
     }
 
@@ -105,11 +111,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         playlist.setOnClickListener(this);
         play.setOnClickListener(this);
         next.setOnClickListener(this);
-        if (MusicPlayer.getPlayer().isNowPlaying()) {
-            play.setImageResource(R.drawable.play_btn);
-        } else if (!MusicPlayer.getPlayer().isNowPlaying()) {
-            play.setImageResource(R.drawable.pause_btn);
-        }
+        play.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.pause_btn : R.drawable.play_btn);
     }
 
     @Override
@@ -137,6 +139,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                 break;
             //下一曲
             case R.id.next_btn:
+                mProgress.setProgress(0);
                 MusicPlayer.getPlayer().setNowPlaying(true);
                 play.setImageResource(R.drawable.pause_btn);
                 MusicPlayer.getPlayer().next();
@@ -152,7 +155,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
             public void run() {
                 song_txt.setText(info.getTitle());
                 singer_txt.setText(info.getArtist());
-                play.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.pause_btn : R.drawable.play_btn);
+                play.setImageResource(R.drawable.pause_btn);
             }
         }, 20);
         //加载专辑图片
@@ -163,26 +166,22 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                 .crossFade(20)
                 .into(albumn);
         mProgress.setMax((int) info.getDuration());
-        Log.d("bar",MusicPlayer.getPlayer().getCurrentPosition()+"11");
+        mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
         Timer timer = new Timer();
-
         TimerTask timerTask = new TimerTask() {
 
             @Override
             public void run() {
-
-                if(MusicPlayer.getPlayer().isNowPlaying()){
-                    mProgress.setMax((int) info.getDuration());
+                if (MusicPlayer.getPlayer().isNowPlaying()) {
                     mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
-                }else {
+                } else {
                     mProgress.removeCallbacks(this);
                 }
 
             }
         };
 
-        timer.schedule(timerTask,0 , 50);
-        bottom_layout.setVisibility(View.VISIBLE);
+        timer.schedule(timerTask, 0, 50);
 
     }
 
@@ -197,15 +196,36 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("song_txt",song_txt.getText().toString());
-        outState.putString("singer_txt",singer_txt.getText().toString());
-        outState.putBoolean("isPlaying",MusicPlayer.getPlayer().isNowPlaying());
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         Log.d(TAG, "onDestroyView被调用");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        play.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.pause_btn : R.drawable.play_btn);
+        mProgress.setMax(MusicPlayer.getPlayer().getDuration());
+        mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+
+            @Override
+            public void run() {
+                if (MusicPlayer.getPlayer().isNowPlaying()) {
+                    mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
+                } else {
+                    mProgress.removeCallbacks(this);
+                }
+
+            }
+        };
+
+        timer.schedule(timerTask, 0, 50);
+
     }
 }
 
