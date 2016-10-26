@@ -34,7 +34,7 @@ public class MusicListAdapter extends SuperAdapter<MusicInfoDetail> {
 
     @Override
     public SuperViewHolder onCreate(View convertView, ViewGroup parent, int viewType) {
-        SuperViewHolder holder = super.onCreate(convertView, parent, viewType);
+        final SuperViewHolder holder = super.onCreate(convertView, parent, viewType);
         holder.findViewById(R.id.popup_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

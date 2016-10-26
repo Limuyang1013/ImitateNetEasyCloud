@@ -19,6 +19,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.manage.MusicPlayer;
 import com.stest.model.MusicInfoDetail;
+import com.stest.neteasycloud.PlayingActiivty;
 import com.stest.neteasycloud.R;
 import com.stest.utils.SPUtils;
 
@@ -116,7 +117,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         switch (v.getId()) {
             //整个底部播放栏布局
             case R.id.bottom_layout:
-
+                PlayingActiivty.start(getContext());
                 break;
             //播放列表
             case R.id.playlist_btn:
@@ -181,7 +182,6 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         timer.schedule(timerTask, 0, 50);
         bottom_layout.setVisibility(View.VISIBLE);
     }
-
 
 
     @Override
