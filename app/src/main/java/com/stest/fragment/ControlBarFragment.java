@@ -20,6 +20,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.manage.MusicPlayer;
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.R;
+import com.stest.utils.SPUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -58,7 +59,6 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
     private ImageView next;
     @ViewInject(R.id.bottom_layout)
     private RelativeLayout bottom_layout;
-    private List<MusicInfoDetail> musicInfo;
 
     public static ControlBarFragment newInstance() {
         return new ControlBarFragment();
@@ -69,9 +69,6 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
         setRetainInstance(true);
-        musicInfo = new ArrayList<>();
-        musicInfo = DataSupport.findAll(MusicInfoDetail.class);
-
     }
 
 
@@ -182,7 +179,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         };
 
         timer.schedule(timerTask, 0, 50);
-
+        bottom_layout.setVisibility(View.VISIBLE);
     }
 
 
