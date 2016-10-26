@@ -26,6 +26,7 @@ import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
 
 // 单曲
 public class SinglesFragment extends Fragment implements View.OnClickListener {
@@ -37,6 +38,7 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
     private List<MusicInfoDetail> musicInfo;
     private PlayEvent playEvent;
     private int currentlyPlayingPosition = -1;
+    Timer timer = new Timer();
 
 
     @Override
@@ -84,6 +86,10 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
         headerView.setTextView("(" + musicInfo.size() + ")");
         lv.addHeaderView(headerView);
         lv.setAdapter(mAdapter);
+    }
+
+    public void refreshUI(){
+
     }
 
     @Override
