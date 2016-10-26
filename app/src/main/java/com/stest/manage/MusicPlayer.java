@@ -51,7 +51,7 @@ public class MusicPlayer implements OnCompletionListener {
 
         mPlayMode = PlayMode.RANDOM;
 
-        mNextSong=new MusicInfoDetail();
+        mNextSong = new MusicInfoDetail();
     }
 
     public void setQueue(List<MusicInfoDetail> queue, int index) {
@@ -85,9 +85,15 @@ public class MusicPlayer implements OnCompletionListener {
     }
 
     public void next() {
-        mNextSong=getNextSong();
+        mNextSong = getNextSong();
         play(mNextSong);
         EventBus.getDefault().post(mNextSong);
+        mMediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                return true;
+            }
+        });
     }
 
     public void previous() {
@@ -188,5 +194,6 @@ public class MusicPlayer implements OnCompletionListener {
     public void setNowPlaying(boolean nowPlaying) {
         isNowPlaying = nowPlaying;
     }
+
 
 }

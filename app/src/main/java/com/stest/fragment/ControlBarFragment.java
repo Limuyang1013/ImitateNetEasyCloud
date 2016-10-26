@@ -147,7 +147,6 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void UpdateUI(final MusicInfoDetail info) {
-//        bottom_layout.setVisibility(View.VISIBLE);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -164,7 +163,6 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                 .crossFade(20)
                 .into(albumn);
         mProgress.setMax((int) info.getDuration());
-        mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
         Log.d("bar",MusicPlayer.getPlayer().getCurrentPosition()+"11");
         Timer timer = new Timer();
 
@@ -174,6 +172,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
             public void run() {
 
                 if(MusicPlayer.getPlayer().isNowPlaying()){
+                    mProgress.setMax((int) info.getDuration());
                     mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
                 }else {
                     mProgress.removeCallbacks(this);
