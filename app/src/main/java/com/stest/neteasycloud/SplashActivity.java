@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.lidroid.xutils.ViewUtils;
 import com.stest.model.MusicInfoDetail;
@@ -30,15 +31,18 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ViewUtils.inject(this);
         musicInfo = new ArrayList<>();
+        Log.d("ThreadName 1",Thread.currentThread().getName());
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                Log.d("ThreadName 2",Thread.currentThread().getName());
                 //第一次登陆扫描本地音乐
                 if (SPUtils.getValue(SplashActivity.this, "isFirst", "First", true)) {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
                             //清空表
+                            Log.d("ThreadName 3",Thread.currentThread().getName());
                             DataSupport.deleteAll(MusicInfoDetail.class);
                             MusicUtils.scanMusic(SplashActivity.this, musicInfo);
                             DataSupport.saveAll(musicInfo);
@@ -49,6 +53,7 @@ public class SplashActivity extends AppCompatActivity {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
+                            Log.d("ThreadName 4",Thread.currentThread().getName());
                             DataSupport.deleteAll(MusicInfoDetail.class);
                             MusicUtils.scanMusic(SplashActivity.this, musicInfo);
                             DataSupport.saveAll(musicInfo);

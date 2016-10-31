@@ -8,7 +8,7 @@
         android:id="@+id/action_search"
         android:icon="@drawable/actionbar_search"
         android:title="@string/search_local"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_scanning"
         android:icon="@drawable/actionbar_menu_icn_scan"
