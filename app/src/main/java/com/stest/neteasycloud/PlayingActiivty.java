@@ -46,6 +46,7 @@ public class PlayingActiivty extends AppCompatActivity {
         context.startActivity(intent);
     }
     private void initWidgets(){
+
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
         if (actionBar != null) {
