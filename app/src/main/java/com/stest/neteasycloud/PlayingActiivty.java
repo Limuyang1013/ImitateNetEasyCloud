@@ -1,10 +1,16 @@
 package com.stest.neteasycloud;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,12 +20,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.commit451.nativestackblur.NativeStackBlur;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.stest.model.MusicInfoDetail;
 import com.stest.utils.NetWorkUtils;
 import com.stest.utils.ToastUtils;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by Limuyang on 2016/10/26.
@@ -34,11 +49,12 @@ public class PlayingActiivty extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_playing_music);
+        setContentView(R.layout.activity_playing);
         setTranslucent(PlayingActiivty.this);
         ViewUtils.inject(this);
         //初始化
         initWidgets();
+        applyKitKatTranslucency();
     }
 
     public static void start(Context context){
@@ -46,7 +62,6 @@ public class PlayingActiivty extends AppCompatActivity {
         context.startActivity(intent);
     }
     private void initWidgets(){
-
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -97,4 +112,31 @@ public class PlayingActiivty extends AppCompatActivity {
             rootView.setClipToPadding(true);
         }
     }
+
+    private void applyKitKatTranslucency() {
+
+        // KitKat translucent navigation/status bar.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setTranslucentStatus(true);
+            SystemBarTintManager mTintManager = new SystemBarTintManager(this);
+            mTintManager.setStatusBarTintEnabled(true);
+
+            mTintManager.setStatusBarTintResource(R.color.status_bar);//通知栏所需颜色
+        }
+
+    }
+
+    @TargetApi(19)
+    private void setTranslucentStatus(boolean on) {
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
+    }
+
 }
