@@ -14,6 +14,8 @@ import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -73,6 +75,7 @@ public class PlayingActiivty extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+                overridePendingTransition(R.anim.right_slide_in,R.anim.right_slide_out);
             }
         });
 
@@ -137,6 +140,15 @@ public class PlayingActiivty extends AppCompatActivity {
             winParams.flags &= ~bits;
         }
         win.setAttributes(winParams);
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            onBackPressed();
+            overridePendingTransition(R.anim.right_slide_in,R.anim.right_slide_out);
+                return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }

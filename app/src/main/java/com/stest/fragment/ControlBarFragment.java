@@ -1,6 +1,5 @@
 package com.stest.fragment;
 
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -21,15 +20,11 @@ import com.stest.manage.MusicPlayer;
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.PlayingActiivty;
 import com.stest.neteasycloud.R;
-import com.stest.utils.SPUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.litepal.crud.DataSupport;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -118,6 +113,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
             //整个底部播放栏布局
             case R.id.bottom_layout:
                 PlayingActiivty.start(getContext());
+                getActivity().overridePendingTransition(R.anim.left_slide_in,R.anim.left_slide_out);
                 break;
             //播放列表
             case R.id.playlist_btn:
