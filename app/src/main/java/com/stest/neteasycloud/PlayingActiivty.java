@@ -46,6 +46,8 @@ import org.greenrobot.eventbus.ThreadMode;
 public class PlayingActiivty extends AppCompatActivity {
     @ViewInject(R.id.toolbar)
     Toolbar toolbar;
+    @ViewInject(R.id.needle)
+    ImageView needle;
     private ActionBar actionBar;
     @Override
     public void onCreate(Bundle savedInstanceState) {
