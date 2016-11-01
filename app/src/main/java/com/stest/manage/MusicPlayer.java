@@ -71,6 +71,12 @@ public class MusicPlayer implements OnCompletionListener {
                     mMediaPlayer.start();
                 }
             });
+            mMediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                @Override
+                public boolean onError(MediaPlayer mp, int what, int extra) {
+                    return true;
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
