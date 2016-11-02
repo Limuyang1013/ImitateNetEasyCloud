@@ -11,9 +11,16 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/placeholder_disk_play_program"
+        android:background="@drawable/play_disc"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="130dp"
+        />
+    <ImageView
+        android:layout_width="178dp"
+        android:layout_height="178dp"
+        android:background="@drawable/placeholder_disk_play_program"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="175dp"
         />
 
     <android.support.percent.PercentRelativeLayout
@@ -165,7 +172,9 @@
                     android:maxHeight="8.0dip"
                     android:progressDrawable="@drawable/play_seekbar"
                     android:minHeight="8.0dip"
-                    android:layout_weight="0.83" />
+                    android:thumb="@drawable/play_plybar_btn"
+                    android:thumbOffset="3.0dip"
+                    android:layout_weight="1" />
 
                 <TextView
                     android:textSize="9.0sp"
