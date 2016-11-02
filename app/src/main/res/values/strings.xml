@@ -23,6 +23,8 @@
     <string name="list_lrc">一键获取封面歌词</string>
     <string name="tone_quality">升级音质</string>
     <string name="play_all">播放全部</string>
+    <string name="getlrc">获取封面和歌词</string>
+    <string name="default_time">00:00</string>
     <string-array name="drag_lv_data">
         <item>推荐歌单</item>
         <item>独家放送</item>

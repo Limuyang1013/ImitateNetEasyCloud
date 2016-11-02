@@ -5,6 +5,7 @@ android {
     buildToolsVersion '23.0.2'
     useLibrary 'org.apache.http.legacy'
 
+
     defaultConfig {
         applicationId "com.stest.neteasycloud"
         minSdkVersion 19

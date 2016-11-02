@@ -5,8 +5,7 @@
     <color name="abc_search_url_text_normal">#ff7fa87f</color>
     <color name="abc_search_url_text_pressed">@android:color/black</color>
     <color name="abc_search_url_text_selected">@android:color/black</color>
-    <color name="accent_material_dark">@color/material_deep_teal_200</color>
-    <color name="accent_material_light">@color/material_deep_teal_500</color>
+    <color name="accent_material_dark">@color/themeColor</color>
     <color name="actionBtnPrs">#ffd9dbdc</color>
     <color name="actionbarTabUnselected">#D3D3D3</color>
     <color name="addToPlayListDialogHeader">#ff303030</color>
@@ -291,4 +290,6 @@
     <color name="baiyan">#F5F5F5</color>
     <color name="whaite_text">#fafafa</color>
     <color name="status_bar">#70000000</color>
+    <color name="accent_material_light">@color/themeColor</color>
+
 </resources>
