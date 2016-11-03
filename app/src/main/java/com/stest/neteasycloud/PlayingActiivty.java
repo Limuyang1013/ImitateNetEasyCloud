@@ -4,12 +4,15 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,11 +20,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -46,7 +51,11 @@ public class PlayingActiivty extends AppCompatActivity {
     @ViewInject(R.id.playSeekBar)
     SeekBar seekBar;
     @ViewInject(R.id.default_disk_img)
-    ImageView disk_img;
+    //内部
+    ImageView img_disk;
+    @ViewInject(R.id.img_disc)
+    //外边盘
+    ImageView img_disc;
     @ViewInject(R.id.currentTime)
     TextView currentTime;
     @ViewInject(R.id.totalTime)
@@ -55,6 +64,8 @@ public class PlayingActiivty extends AppCompatActivity {
     TextView song_txt;
     @ViewInject(R.id.singer)
     TextView singer_txt;
+    @ViewInject(R.id.play_back)
+    ImageView play_back;
     private ActionBar actionBar;
 
     @Override
@@ -63,11 +74,14 @@ public class PlayingActiivty extends AppCompatActivity {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_playing);
         EventBus.getDefault().register(this);
-        setTranslucent(PlayingActiivty.this);
         ViewUtils.inject(this);
         //初始化
         initWidgets();
-        applyKitKatTranslucency();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     public static void start(Context context) {
@@ -119,6 +133,29 @@ public class PlayingActiivty extends AppCompatActivity {
             public void run() {
                 song_txt.setText(info.getTitle());
                 singer_txt.setText(info.getArtist());
+                //加载专辑图片
+                Glide.with(PlayingActiivty.this)
+                        .load(info.getCoverUri())
+                        .placeholder(R.drawable.placeholder_disk_play_song)
+                        .error(R.drawable.placeholder_disk_play_song)
+                        .centerCrop()
+                        .crossFade(300)
+                        .into(img_disk);
+
+                //背景高斯模糊
+                if (info.getCoverUri()!=null){
+                    Glide.with(PlayingActiivty.this)
+                            .load(info.getCoverUri())
+                            .placeholder(R.drawable.placeholder_disk_play_song)
+                            .error(R.drawable.placeholder_disk_play_song)
+                            .centerCrop()
+                            .crossFade(20)
+                            .into(play_back);
+
+                }else {
+                    //默认背景
+                    play_back.setImageResource(R.drawable.playpage_background);
+                }
             }
         }, 20);
 
@@ -130,42 +167,6 @@ public class PlayingActiivty extends AppCompatActivity {
         return true;
     }
 
-    public static void setTranslucent(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            // 设置状态栏透明
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            // 设置根布局的参数
-            ViewGroup rootView = (ViewGroup) ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
-            rootView.setFitsSystemWindows(true);
-            rootView.setClipToPadding(true);
-        }
-    }
-
-    private void applyKitKatTranslucency() {
-
-        // KitKat translucent navigation/status bar.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            setTranslucentStatus(true);
-            SystemBarTintManager mTintManager = new SystemBarTintManager(this);
-            mTintManager.setStatusBarTintEnabled(true);
-
-            mTintManager.setStatusBarTintResource(R.color.status_bar);//通知栏所需颜色
-        }
-
-    }
-
-    @TargetApi(19)
-    private void setTranslucentStatus(boolean on) {
-        Window win = getWindow();
-        WindowManager.LayoutParams winParams = win.getAttributes();
-        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        if (on) {
-            winParams.flags |= bits;
-        } else {
-            winParams.flags &= ~bits;
-        }
-        win.setAttributes(winParams);
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

@@ -90,6 +90,13 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         // 在onActivityCreated()和onStart()之间调用
         super.onViewStateRestored(savedInstanceState);
+        if (savedInstanceState != null) {
+            song_txt.setText(savedInstanceState.getString("song_txt"));
+            Log.d(TAG, "onSaveInstanceState" + song_txt.getText().toString());
+            singer_txt.setText(savedInstanceState.getString("singer_txt"));
+            song_txt.setText(savedInstanceState.getString("song_txt"));
+            play.setImageResource(savedInstanceState.getBoolean("isPlaying") ? R.drawable.pause_btn : R.drawable.play_btn);
+        }
     }
 
     private void addView() {
@@ -145,7 +152,6 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                 play.setImageResource(R.drawable.pause_btn);
             }
         }, 20);
-        //加载专辑图片
         Glide.with(getActivity())
                 .load(info.getCoverUri())
                 .placeholder(R.drawable.placeholder_disk_210)
