@@ -18,6 +18,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lidroid.xutils.ViewUtils;
@@ -38,6 +39,12 @@ public class PlayingActiivty extends AppCompatActivity {
     ImageView needle;
     @ViewInject(R.id.playSeekBar)
     SeekBar seekBar;
+    @ViewInject(R.id.default_disk_img)
+    ImageView disk_img;
+    @ViewInject(R.id.currentTime)
+    TextView currentTime;
+    @ViewInject(R.id.totalTime)
+    TextView endTime;
     private ActionBar actionBar;
     @Override
     public void onCreate(Bundle savedInstanceState) {

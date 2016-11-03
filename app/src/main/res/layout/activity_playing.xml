@@ -9,19 +9,36 @@
         android:background="#70000000" />
 
     <ImageView
+        android:layout_width="270dp"
+        android:layout_height="270dp"
+        android:layout_marginTop="129dp"
+        android:scaleType="fitCenter"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/play_disc_halo"
+       />
+    <RelativeLayout
+        android:id="@+id/rotate_disk_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/play_disc"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="130dp"
-        />
-    <ImageView
-        android:layout_width="178dp"
-        android:layout_height="178dp"
-        android:background="@drawable/placeholder_disk_play_program"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="175dp"
-        />
+        android:layout_marginTop="120dp"
+        android:padding="10dp"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/play_disc"
+            android:layout_gravity="center_horizontal"
+            />
+        <ImageView
+            android:id="@+id/default_disk_img"
+            android:layout_width="178dp"
+            android:layout_height="178dp"
+            android:layout_marginTop="45dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/placeholder_disk_play_program"
+            />
+    </RelativeLayout>
 
     <android.support.percent.PercentRelativeLayout
         android:layout_width="match_parent"
@@ -105,11 +122,11 @@
             android:orientation="vertical"
             >
             <LinearLayout
-                android:id="@+id/mmusic_tool"
+                android:id="@+id/music_tool"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginLeft="70dp"
                 android:layout_marginRight="70dp"
                 >
@@ -120,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:src="@drawable/play_rdi_icn_love" />
+                    android:src="@drawable/play_rdi_icn_loved" />
 
                 <ImageView
                     android:id="@+id/playing_down"
@@ -128,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:src="@drawable/play_icn_dlded_dis" />
+                    android:src="@drawable/play_icn_dlded" />
 
                 <ImageView
                     android:id="@+id/playing_cmt"
@@ -152,7 +169,7 @@
                 android:paddingLeft="20.0dp"
                 android:paddingRight="20.0dp"
                 android:clickable="true"
-                android:layout_marginTop="-15dp"
+                android:layout_marginTop="-10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 >
