@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 import com.stest.model.MusicInfoDetail;
+import com.stest.neteasycloud.R;
 
 import java.util.List;
 
@@ -79,6 +80,20 @@ public class MusicUtils {
         }
         return uri;
     }
+
+    //播放时间
+    public static final String makeShortTimeString(final Context context, long secs) {
+        long hours, mins;
+
+        hours = secs / 3600;
+        secs %= 3600;
+        mins = secs / 60;
+        secs %= 60;
+
+        final String durationFormat = context.getResources().getString(hours == 0 ? R.string.durationformatshort : R.string.durationformatlong);
+        return String.format(durationFormat, hours, mins, secs);
+    }
+
 
 
 }

@@ -75,6 +75,7 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
                             EventBus.getDefault().post(playEvent);
                             MusicPlayer.getPlayer().setNowPlaying(true);
                             EventBus.getDefault().post(musicInfo.get(currentlyPlayingPosition));
+                            EventBus.getDefault().postSticky(musicInfo.get(currentlyPlayingPosition));
                         }
                     }).start();
                 } else {

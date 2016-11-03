@@ -271,7 +271,32 @@
                 android:theme="@style/Theme.AppCompat"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:theme="@style/ToolbarStyle">
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
+                  android:layout_marginStart="10dp"
+                  >
+                  <TextView
+                      android:id="@+id/song"
+                      android:layout_width="wrap_content"
+                      android:layout_height="0dp"
+                      android:layout_marginTop="10dp"
+                      android:layout_weight="55"
+                      android:maxLines="1"
+                      android:text="1"
+                      android:textColor="#ffffff"
+                      android:textSize="17sp" />
 
+                  <TextView
+                      android:id="@+id/singer"
+                      android:layout_width="wrap_content"
+                      android:layout_height="0dp"
+                      android:layout_weight="45"
+                      android:text="2"
+                      android:textColor="#a7a7a7"
+                      android:textSize="12sp" />
+              </LinearLayout>
             </android.support.v7.widget.Toolbar>
             <ImageView
                 android:layout_width="match_parent"

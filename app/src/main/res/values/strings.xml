@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">网易云音乐</string>
     <string name="share">分享</string>
     <string name="open">open</string>
@@ -25,6 +25,8 @@
     <string name="play_all">播放全部</string>
     <string name="getlrc">获取封面和歌词</string>
     <string name="default_time">00:00</string>
+    <string name="durationformatshort" translatable="false"><xliff:g id="format">%2$d:%3$02d</xliff:g></string>
+    <string name="durationformatlong" translatable="false"><xliff:g id="format">%1$d:%2$02d:%3$02d</xliff:g></string>
     <string-array name="drag_lv_data">
         <item>推荐歌单</item>
         <item>独家放送</item>

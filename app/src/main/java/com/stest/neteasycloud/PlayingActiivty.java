@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,8 +25,13 @@ import android.widget.Toast;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.stest.model.MusicInfoDetail;
 import com.stest.utils.NetWorkUtils;
 import com.stest.utils.ToastUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by Limuyang on 2016/10/26.
@@ -45,12 +51,18 @@ public class PlayingActiivty extends AppCompatActivity {
     TextView currentTime;
     @ViewInject(R.id.totalTime)
     TextView endTime;
+    @ViewInject(R.id.song)
+    TextView song_txt;
+    @ViewInject(R.id.singer)
+    TextView singer_txt;
     private ActionBar actionBar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_playing);
+        EventBus.getDefault().register(this);
         setTranslucent(PlayingActiivty.this);
         ViewUtils.inject(this);
         //初始化
@@ -58,11 +70,12 @@ public class PlayingActiivty extends AppCompatActivity {
         applyKitKatTranslucency();
     }
 
-    public static void start(Context context){
-        Intent intent=new Intent(context,PlayingActiivty.class);
+    public static void start(Context context) {
+        Intent intent = new Intent(context, PlayingActiivty.class);
         context.startActivity(intent);
     }
-    private void initWidgets(){
+
+    private void initWidgets() {
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -74,20 +87,20 @@ public class PlayingActiivty extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
-                overridePendingTransition(R.anim.right_slide_in,R.anim.right_slide_out);
+                overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
             }
         });
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     //点击分享按钮
                     case R.id.action_share:
-                        if (!NetWorkUtils.isNetworkConnected(PlayingActiivty.this)){
+                        if (!NetWorkUtils.isNetworkConnected(PlayingActiivty.this)) {
                             //没有网
-                            ToastUtils.show(PlayingActiivty.this,getResources().getString(R.string.net_wrong), Toast.LENGTH_SHORT);
-                        }else{
+                            ToastUtils.show(PlayingActiivty.this, getResources().getString(R.string.net_wrong), Toast.LENGTH_SHORT);
+                        } else {
                             //分享到...
                         }
                         break;
@@ -97,12 +110,23 @@ public class PlayingActiivty extends AppCompatActivity {
         });
 
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    public void onStickyUpdateUI(final MusicInfoDetail info) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                song_txt.setText(info.getTitle());
+                singer_txt.setText(info.getArtist());
+            }
+        }, 20);
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.music_playing_item,menu);
+        getMenuInflater().inflate(R.menu.music_playing_item, menu);
         return true;
     }
 
@@ -142,14 +166,20 @@ public class PlayingActiivty extends AppCompatActivity {
         }
         win.setAttributes(winParams);
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             onBackPressed();
-            overridePendingTransition(R.anim.right_slide_in,R.anim.right_slide_out);
-                return true;
+            overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
+            return true;
         }
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }
