@@ -2,13 +2,8 @@ package com.stest.neteasycloud;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
-import android.provider.Settings;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,12 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.manage.MusicPlayer;
 import com.stest.model.MusicInfoDetail;
-import com.stest.utils.BitmapUtils;
 import com.stest.utils.MusicUtils;
 import com.stest.utils.NetWorkUtils;
 import com.stest.utils.ToastUtils;
@@ -52,8 +45,6 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     Toolbar toolbar;
     @ViewInject(R.id.needle)
     ImageView needle;
-    @ViewInject(R.id.playSeekBar)
-    SeekBar seekBar;
     @ViewInject(R.id.default_disk_img)
     ImageView img_disk;
     @ViewInject(R.id.img_disc)
@@ -81,8 +72,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     @ViewInject(R.id.playSeekBar)
     SeekBar bar;
     private ActionBar actionBar;
-    Timer timer = new Timer();
-    private final int UPDATE_CURRENT_TIME = 0;
+    private Timer timer;
 
 
     @Override
@@ -94,7 +84,6 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
         ViewUtils.inject(this);
         //初始化
         initWidgets();
-
 
         bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -125,6 +114,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initWidgets() {
+        bar.setIndeterminate(false);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -164,7 +154,6 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
         play_list.setOnClickListener(this);
         play_mode.setOnClickListener(this);
 
-        bar.setIndeterminate(false);
 
     }
 
@@ -196,26 +185,19 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                         .into(img_disk);
 
                 bar.setMax((int) info.getDuration());
-                bar.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
-                TimerTask timerTask = new TimerTask() {
-
-                    @Override
-                    public void run() {
-                        if (MusicPlayer.getPlayer().isNowPlaying()) {
-                            bar.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
-                        } else {
-                            bar.removeCallbacks(this);
-                        }
-
-                    }
-                };
-
-                timer.schedule(timerTask, 0, 50);
-
             }
         });
 
     }
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if (MusicPlayer.getPlayer().isNowPlaying()){
+                bar.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
+                bar.postDelayed(runnable, 50);
+            }
+        }
+    };
 
 
     @Override
@@ -239,6 +221,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        timer.cancel();
     }
 
     @Override
@@ -248,6 +231,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        bar.setProgress(0);
                         MusicPlayer.getPlayer().setNowPlaying(true);
                         play_btn.setImageResource(R.drawable.playing_btn_pause);
                         MusicPlayer.getPlayer().previous();
@@ -258,6 +242,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        bar.setProgress(0);
                         MusicPlayer.getPlayer().setNowPlaying(true);
                         play_btn.setImageResource(R.drawable.playing_btn_pause);
                         MusicPlayer.getPlayer().next();
@@ -287,13 +272,15 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onResume() {
         super.onResume();
+        if (timer==null)
+            timer=new Timer();
         play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
         TimerTask timerTask = new TimerTask() {
 
             @Override
             public void run() {
                 if (MusicPlayer.getPlayer().isNowPlaying()) {
-                    bar.setProgress(MusicPlayer.getPlayer().getCurrentPosition() / 1000);
+                    bar.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
                 } else {
                     bar.removeCallbacks(this);
                 }

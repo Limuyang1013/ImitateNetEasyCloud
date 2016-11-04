@@ -204,10 +204,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3.0dip"
                     android:maxHeight="8.0dip"
+                    android:thumbOffset="3dp"
                     android:progressDrawable="@drawable/play_seekbar"
                     android:minHeight="8.0dip"
                     android:thumb="@drawable/play_plybar_btn"
-                    android:thumbOffset="3.0dip"
                     android:layout_weight="1" />
 
                 <TextView
