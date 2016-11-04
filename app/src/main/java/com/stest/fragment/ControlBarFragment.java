@@ -134,10 +134,15 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                 break;
             //下一曲
             case R.id.next_btn:
-                mProgress.setProgress(0);
-                MusicPlayer.getPlayer().setNowPlaying(true);
-                play.setImageResource(R.drawable.pause_btn);
-                MusicPlayer.getPlayer().next();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mProgress.setProgress(0);
+                        MusicPlayer.getPlayer().setNowPlaying(true);
+                        play.setImageResource(R.drawable.pause_btn);
+                        MusicPlayer.getPlayer().next();
+                    }
+                },20);
                 break;
         }
 
@@ -163,23 +168,32 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
         if (timer==null)
             timer=new Timer();
-        TimerTask timerTask = new TimerTask() {
-
-            @Override
-            public void run() {
-                if (MusicPlayer.getPlayer().isNowPlaying()) {
-                    mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
-                } else {
-                    mProgress.removeCallbacks(this);
-                }
-
-            }
-        };
-
-        timer.schedule(timerTask, 0, 50);
+//        TimerTask timerTask = new TimerTask() {
+//
+//            @Override
+//            public void run() {
+//                if (MusicPlayer.getPlayer().isNowPlaying()) {
+//                    mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
+//                } else {
+//                    mProgress.removeCallbacks(this);
+//                }
+//
+//            }
+//        };
+//
+//        timer.schedule(timerTask, 0, 50);
         bottom_layout.setVisibility(View.VISIBLE);
     }
 
+    Runnable runnable=new Runnable() {
+        @Override
+        public void run() {
+      if (MusicPlayer.getPlayer().isNowPlaying()){
+          mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
+          mProgress.postDelayed(runnable,50);
+      }
+        }
+    };
 
     @Override
     public void onDestroy() {
