@@ -242,14 +242,13 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:src="@drawable/playing_btn_prev" />
-
                 <ImageView
                     android:id="@+id/playing_play"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:src="@drawable/play_btn_play" />
+                    android:src="@drawable/playing_btn_play" />
 
                 <ImageView
                     android:id="@+id/playing_next"

@@ -27,6 +27,7 @@ public class MusicPlayer implements OnCompletionListener {
     private PlayMode mPlayMode;
     private boolean isNowPlaying;
     private MusicInfoDetail mNextSong;
+    private MusicInfoDetail mPrevSone;
 
 
     private enum PlayMode {
@@ -52,6 +53,7 @@ public class MusicPlayer implements OnCompletionListener {
         mPlayMode = PlayMode.RANDOM;
 
         mNextSong = new MusicInfoDetail();
+        mPrevSone=new MusicInfoDetail();
     }
 
     public void setQueue(List<MusicInfoDetail> queue, int index) {
@@ -94,6 +96,7 @@ public class MusicPlayer implements OnCompletionListener {
         mNextSong = getNextSong();
         play(mNextSong);
         EventBus.getDefault().post(mNextSong);
+        EventBus.getDefault().postSticky(mNextSong);
         mMediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
@@ -103,7 +106,16 @@ public class MusicPlayer implements OnCompletionListener {
     }
 
     public void previous() {
-        play(getPreviousSong());
+        mPrevSone=getPreviousSong();
+        play(mPrevSone);
+        EventBus.getDefault().post(mPrevSone);
+        EventBus.getDefault().postSticky(mPrevSone);
+        mMediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                return true;
+            }
+        });
     }
 
     @Override

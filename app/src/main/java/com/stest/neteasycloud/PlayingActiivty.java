@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.stest.manage.MusicPlayer;
 import com.stest.model.MusicInfoDetail;
 import com.stest.utils.BitmapUtils;
 import com.stest.utils.NetWorkUtils;
@@ -66,6 +67,8 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     ImageView prev_btn;
     @ViewInject(R.id.playing_next)
     ImageView next_btn;
+    @ViewInject(R.id.playing_play)
+    ImageView play_btn;
     private ActionBar actionBar;
 
     @Override
@@ -125,6 +128,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
 
         prev_btn.setOnClickListener(this);
         next_btn.setOnClickListener(this);
+        play_btn.setOnClickListener(this);
 
     }
 
@@ -135,6 +139,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
             public void run() {
                 song_txt.setText(info.getTitle());
                 singer_txt.setText(info.getArtist());
+                play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
                 //高斯模糊的处理
                 Glide.with(PlayingActiivty.this)
                         .load(info.getCoverUri())
@@ -185,9 +190,33 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.playing_pre:
+                MusicPlayer.getPlayer().setNowPlaying(true);
+                play_btn.setImageResource(R.drawable.playing_btn_pause);
+                MusicPlayer.getPlayer().previous();
                 break;
             case R.id.playing_next:
+                MusicPlayer.getPlayer().setNowPlaying(true);
+                play_btn.setImageResource(R.drawable.playing_btn_pause);
+                MusicPlayer.getPlayer().next();
+                break;
+            case R.id.playing_play:
+                //如果正在播放
+                if (MusicPlayer.getPlayer().isNowPlaying()) {
+                    play_btn.setImageResource(R.drawable.playing_btn_play);
+                    MusicPlayer.getPlayer().setNowPlaying(false);
+                    MusicPlayer.getPlayer().pause();
+                } else if (!MusicPlayer.getPlayer().isNowPlaying()) {
+                    play_btn.setImageResource(R.drawable.playing_btn_pause);
+                    MusicPlayer.getPlayer().setNowPlaying(true);
+                    MusicPlayer.getPlayer().resume();
+                }
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
     }
 }
