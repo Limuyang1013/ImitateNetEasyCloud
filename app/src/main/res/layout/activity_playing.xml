@@ -241,7 +241,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:src="@drawable/play_btn_prev" />
+                    android:src="@drawable/playing_btn_prev" />
 
                 <ImageView
                     android:id="@+id/playing_play"
@@ -257,7 +257,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:src="@drawable/play_btn_next" />
+                    android:src="@drawable/playing_btn_next" />
 
                 <ImageView
                     android:id="@+id/playing_playlist"

@@ -39,7 +39,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
  * 播放音乐界面
  */
 
-public class PlayingActiivty extends AppCompatActivity {
+public class PlayingActiivty extends AppCompatActivity implements View.OnClickListener {
     @ViewInject(R.id.toolbar)
     Toolbar toolbar;
     @ViewInject(R.id.needle)
@@ -48,10 +48,10 @@ public class PlayingActiivty extends AppCompatActivity {
     SeekBar seekBar;
     @ViewInject(R.id.default_disk_img)
     //内部
-    ImageView img_disk;
+            ImageView img_disk;
     @ViewInject(R.id.img_disc)
     //外边盘
-    ImageView img_disc;
+            ImageView img_disc;
     @ViewInject(R.id.currentTime)
     TextView currentTime;
     @ViewInject(R.id.totalTime)
@@ -62,6 +62,10 @@ public class PlayingActiivty extends AppCompatActivity {
     TextView singer_txt;
     @ViewInject(R.id.play_back)
     ImageView play_back;
+    @ViewInject(R.id.playing_pre)
+    ImageView prev_btn;
+    @ViewInject(R.id.playing_next)
+    ImageView next_btn;
     private ActionBar actionBar;
 
     @Override
@@ -119,6 +123,8 @@ public class PlayingActiivty extends AppCompatActivity {
             }
         });
 
+        prev_btn.setOnClickListener(this);
+        next_btn.setOnClickListener(this);
 
     }
 
@@ -135,7 +141,7 @@ public class PlayingActiivty extends AppCompatActivity {
                         .placeholder(R.drawable.fm_run_result_bg)
                         .error(R.drawable.fm_run_result_bg)
                         .crossFade()
-                        .bitmapTransform(new BlurTransformation(PlayingActiivty.this,50))
+                        .bitmapTransform(new BlurTransformation(PlayingActiivty.this, 50))
                         .into(play_back);
 
                 //加载专辑图片
@@ -146,7 +152,6 @@ public class PlayingActiivty extends AppCompatActivity {
                         .centerCrop()
                         .crossFade()
                         .into(img_disk);
-
             }
         });
 
@@ -174,5 +179,15 @@ public class PlayingActiivty extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.playing_pre:
+                break;
+            case R.id.playing_next:
+                break;
+        }
     }
 }
