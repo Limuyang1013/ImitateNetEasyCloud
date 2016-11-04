@@ -3,7 +3,8 @@ package com.stest.neteasycloud;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -23,7 +24,7 @@ import com.bumptech.glide.Glide;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.model.MusicInfoDetail;
-import com.stest.utils.BitmapBlurHelper;
+import com.stest.utils.BitmapUtils;
 import com.stest.utils.NetWorkUtils;
 import com.stest.utils.ToastUtils;
 
@@ -121,13 +122,21 @@ public class PlayingActiivty extends AppCompatActivity {
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onStickyUpdateUI(final MusicInfoDetail info) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 song_txt.setText(info.getTitle());
                 singer_txt.setText(info.getArtist());
+                //高斯模糊的处理
+                Glide.with(PlayingActiivty.this)
+                        .load(info.getCoverUri())
+                        .placeholder(R.drawable.fm_run_result_bg)
+                        .error(R.drawable.fm_run_result_bg)
+                        .bitmapTransform(new BlurTransformation(PlayingActiivty.this,50))
+                        .into(play_back);
+
                 //加载专辑图片
                 Glide.with(PlayingActiivty.this)
                         .load(info.getCoverUri())
@@ -137,20 +146,11 @@ public class PlayingActiivty extends AppCompatActivity {
                         .crossFade()
                         .into(img_disk);
 
-                //背景高斯模糊
-//                Glide.with(PlayingActiivty.this)
-//                        .load(info.getCoverUri())
-//                        .crossFade()
-//                        .placeholder(R.drawable.playpage_background)
-//                        .bitmapTransform(new BlurTransformation(PlayingActiivty.this))
-//                        .into(play_back);
-                BitmapDrawable mDrawable =  (BitmapDrawable) play_back.getDrawable();
-                Bitmap b = mDrawable.getBitmap();
-                BitmapBlurHelper.doBlur(PlayingActiivty.this,b,20);
             }
         }, 20);
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

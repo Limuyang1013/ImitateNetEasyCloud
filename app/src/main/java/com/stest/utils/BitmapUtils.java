@@ -2,17 +2,56 @@ package com.stest.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 /**
- * Created by Limuyang on 2016/11/3.
+ * Created by Limuyang on 2016/11/4.
  */
 
-public class BitmapBlurHelper {
+
+//返回一个Bitmap对象
+public class BitmapUtils {
+    public static Bitmap getBitmapFromDrawable(Drawable drawable) {
+        final Bitmap.Config BITMAP_CONFIG = Bitmap.Config.ARGB_8888;
+        final int COLORDRAWABLE_DIMENSION = 2;
+
+        if (drawable == null) {
+            return null;
+        }
+
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        }
+
+        try {
+            Bitmap bitmap;
+
+            if (drawable instanceof ColorDrawable) {
+                bitmap = Bitmap.createBitmap(COLORDRAWABLE_DIMENSION, COLORDRAWABLE_DIMENSION, BITMAP_CONFIG);
+            } else {
+                bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), BITMAP_CONFIG);
+            }
+
+            Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+            return bitmap;
+        } catch (OutOfMemoryError e) {
+            return null;
+        }
+    }
+
     //缩放系数
     public final static int SCALE = 8;
 
@@ -272,4 +311,5 @@ public class BitmapBlurHelper {
         bitmap.setPixels(pix, 0, w, 0, 0, w, h);
         return (bitmap);
     }
+
 }

@@ -9,7 +9,8 @@
         android:id="@+id/play_back"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/playpage_background"
+        android:scaleType="fitXY"
+        android:background="@drawable/fm_run_result_bg"
         />
     <View
         android:layout_width="match_parent"
@@ -65,6 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="?attr/actionBarSize"
+            android:orientation="vertical"
             app:layout_heightPercent="60%">
 
             <android.support.percent.PercentRelativeLayout
