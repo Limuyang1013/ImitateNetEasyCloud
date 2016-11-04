@@ -233,7 +233,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:src="@drawable/play_icn_shuffle" />
+                    android:src="@drawable/playing_icn_shuffle" />
 
                 <ImageView
                     android:id="@+id/playing_pre"
@@ -264,7 +264,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:src="@drawable/play_icn_src" />
+                    android:src="@drawable/playing_icn_src" />
 
             </LinearLayout>
         </LinearLayout>

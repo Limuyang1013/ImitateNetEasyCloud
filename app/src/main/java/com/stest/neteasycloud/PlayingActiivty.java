@@ -69,6 +69,10 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     ImageView next_btn;
     @ViewInject(R.id.playing_play)
     ImageView play_btn;
+    @ViewInject(R.id.playing_playlist)
+    ImageView play_list;
+    @ViewInject(R.id.playing_mode)
+    ImageView play_mode;
     private ActionBar actionBar;
 
     @Override
@@ -129,6 +133,8 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
         prev_btn.setOnClickListener(this);
         next_btn.setOnClickListener(this);
         play_btn.setOnClickListener(this);
+        play_list.setOnClickListener(this);
+        play_mode.setOnClickListener(this);
 
     }
 
@@ -210,6 +216,11 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                     MusicPlayer.getPlayer().setNowPlaying(true);
                     MusicPlayer.getPlayer().resume();
                 }
+                break;
+            case R.id.playing_playlist:
+                break;
+            //播放模式
+            case R.id.playing_mode:
                 break;
         }
     }
