@@ -55,6 +55,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
     private ImageView next;
     @ViewInject(R.id.bottom_layout)
     private RelativeLayout bottom_layout;
+    Timer timer = new Timer();
 
     public static ControlBarFragment newInstance() {
         return new ControlBarFragment();
@@ -160,7 +161,6 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                 .into(albumn);
         mProgress.setMax((int) info.getDuration());
         mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
-        Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
 
             @Override
@@ -202,7 +202,6 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         play.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.pause_btn : R.drawable.play_btn);
         mProgress.setMax(MusicPlayer.getPlayer().getDuration());
         mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
-        Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
 
             @Override

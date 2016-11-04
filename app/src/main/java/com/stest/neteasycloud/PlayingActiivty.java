@@ -7,6 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
+import android.provider.Settings;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,17 +23,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.manage.MusicPlayer;
 import com.stest.model.MusicInfoDetail;
 import com.stest.utils.BitmapUtils;
+import com.stest.utils.MusicUtils;
 import com.stest.utils.NetWorkUtils;
 import com.stest.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
@@ -48,11 +55,9 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     @ViewInject(R.id.playSeekBar)
     SeekBar seekBar;
     @ViewInject(R.id.default_disk_img)
-    //内部
-            ImageView img_disk;
+    ImageView img_disk;
     @ViewInject(R.id.img_disc)
-    //外边盘
-            ImageView img_disc;
+    ImageView img_disc;
     @ViewInject(R.id.currentTime)
     TextView currentTime;
     @ViewInject(R.id.totalTime)
@@ -73,7 +78,12 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     ImageView play_list;
     @ViewInject(R.id.playing_mode)
     ImageView play_mode;
+    @ViewInject(R.id.playSeekBar)
+    SeekBar bar;
     private ActionBar actionBar;
+    Timer timer = new Timer();
+    private final int UPDATE_CURRENT_TIME = 0;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,6 +94,24 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
         ViewUtils.inject(this);
         //初始化
         initWidgets();
+
+
+        bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                currentTime.setText(MusicUtils.makeShortTimeString(PlayingActiivty.this, MusicPlayer.getPlayer().getCurrentPosition() / 1000));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     @Override
@@ -136,6 +164,8 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
         play_list.setOnClickListener(this);
         play_mode.setOnClickListener(this);
 
+        bar.setIndeterminate(false);
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
@@ -146,13 +176,14 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                 song_txt.setText(info.getTitle());
                 singer_txt.setText(info.getArtist());
                 play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
+                endTime.setText(MusicUtils.makeShortTimeString(PlayingActiivty.this, info.getDuration()/1000));
                 //高斯模糊的处理
                 Glide.with(PlayingActiivty.this)
                         .load(info.getCoverUri())
-                        .placeholder(R.drawable.fm_run_result_bg)
                         .error(R.drawable.fm_run_result_bg)
-                        .crossFade()
-                        .bitmapTransform(new BlurTransformation(PlayingActiivty.this, 50))
+                        .placeholder(play_back.getDrawable())
+                        .crossFade(android.R.anim.fade_in, 1000)
+                        .bitmapTransform(new BlurTransformation(PlayingActiivty.this))
                         .into(play_back);
 
                 //加载专辑图片
@@ -161,8 +192,26 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                         .placeholder(R.drawable.placeholder_disk_play_song)
                         .error(R.drawable.placeholder_disk_play_song)
                         .centerCrop()
-                        .crossFade()
+                        .crossFade(android.R.anim.fade_in, 500)
                         .into(img_disk);
+
+                bar.setMax((int) info.getDuration());
+                bar.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
+                TimerTask timerTask = new TimerTask() {
+
+                    @Override
+                    public void run() {
+                        if (MusicPlayer.getPlayer().isNowPlaying()) {
+                            bar.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
+                        } else {
+                            bar.removeCallbacks(this);
+                        }
+
+                    }
+                };
+
+                timer.schedule(timerTask, 0, 50);
+
             }
         });
 
@@ -196,14 +245,24 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.playing_pre:
-                MusicPlayer.getPlayer().setNowPlaying(true);
-                play_btn.setImageResource(R.drawable.playing_btn_pause);
-                MusicPlayer.getPlayer().previous();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        MusicPlayer.getPlayer().setNowPlaying(true);
+                        play_btn.setImageResource(R.drawable.playing_btn_pause);
+                        MusicPlayer.getPlayer().previous();
+                    }
+                }, 20);
                 break;
             case R.id.playing_next:
-                MusicPlayer.getPlayer().setNowPlaying(true);
-                play_btn.setImageResource(R.drawable.playing_btn_pause);
-                MusicPlayer.getPlayer().next();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        MusicPlayer.getPlayer().setNowPlaying(true);
+                        play_btn.setImageResource(R.drawable.playing_btn_pause);
+                        MusicPlayer.getPlayer().next();
+                    }
+                }, 20);
                 break;
             case R.id.playing_play:
                 //如果正在播放
@@ -229,5 +288,21 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     protected void onResume() {
         super.onResume();
         play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
+        TimerTask timerTask = new TimerTask() {
+
+            @Override
+            public void run() {
+                if (MusicPlayer.getPlayer().isNowPlaying()) {
+                    bar.setProgress(MusicPlayer.getPlayer().getCurrentPosition() / 1000);
+                } else {
+                    bar.removeCallbacks(this);
+                }
+
+            }
+        };
+
+        timer.schedule(timerTask, 0, 50);
     }
+
+
 }

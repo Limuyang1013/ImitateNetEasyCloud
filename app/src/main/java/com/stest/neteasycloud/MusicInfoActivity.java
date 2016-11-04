@@ -43,7 +43,6 @@ public class MusicInfoActivity extends BaseActivity {
     private ActionBar actionBar;
     private List<String> mTitleList = new ArrayList<>(4);
     private List<Fragment> fragments = new ArrayList<>(4);
-    private static final String TAG = MusicInfoActivity.class.getSimpleName();
     private SinglesFragment mSinglesFragment;
     private SingersFragment mSingersFragment;
     private AlbumsFragment mAlbumsFragment;
