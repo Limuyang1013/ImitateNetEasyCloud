@@ -124,7 +124,7 @@ public class PlayingActiivty extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onStickyUpdateUI(final MusicInfoDetail info) {
-        new Handler().postDelayed(new Runnable() {
+        new Handler().post(new Runnable() {
             @Override
             public void run() {
                 song_txt.setText(info.getTitle());
@@ -134,6 +134,7 @@ public class PlayingActiivty extends AppCompatActivity {
                         .load(info.getCoverUri())
                         .placeholder(R.drawable.fm_run_result_bg)
                         .error(R.drawable.fm_run_result_bg)
+                        .crossFade()
                         .bitmapTransform(new BlurTransformation(PlayingActiivty.this,50))
                         .into(play_back);
 
@@ -147,7 +148,7 @@ public class PlayingActiivty extends AppCompatActivity {
                         .into(img_disk);
 
             }
-        }, 20);
+        });
 
     }
 
