@@ -1,5 +1,7 @@
 package com.stest.neteasycloud;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,6 +17,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -75,7 +80,10 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     ImageView play_mode;
     @ViewInject(R.id.playSeekBar)
     SeekBar bar;
+    @ViewInject(R.id.rotate_layout)
+    FrameLayout rotate_layout;
     private ActionBar actionBar;
+    ObjectAnimator mRotateAnimation;
 
 
     @Override
@@ -122,6 +130,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initWidgets() {
+        rotateAnim();
         bar.setIndeterminate(false);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
@@ -161,8 +170,6 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
         play_btn.setOnClickListener(this);
         play_list.setOnClickListener(this);
         play_mode.setOnClickListener(this);
-
-
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
@@ -192,6 +199,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
 
                 bar.setMax((int) info.getDuration());
                 bar.postDelayed(runnable, 50);
+                mRotateAnimation.start();
             }
         });
 
@@ -234,12 +242,14 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
         super.onDestroy();
         EventBus.getDefault().unregister(this);
         bar.removeCallbacks(runnable);
+        mRotateAnimation.cancel();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         bar.removeCallbacks(runnable);
+        mRotateAnimation.pause();
     }
 
     @Override
@@ -253,6 +263,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                         MusicPlayer.getPlayer().setNowPlaying(true);
                         play_btn.setImageResource(R.drawable.playing_btn_pause);
                         MusicPlayer.getPlayer().previous();
+                        mRotateAnimation.start();
                     }
                 }, 20);
                 break;
@@ -264,6 +275,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                         MusicPlayer.getPlayer().setNowPlaying(true);
                         play_btn.setImageResource(R.drawable.playing_btn_pause);
                         MusicPlayer.getPlayer().next();
+                        mRotateAnimation.start();
                     }
                 }, 20);
                 break;
@@ -273,10 +285,12 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                     play_btn.setImageResource(R.drawable.playing_btn_play);
                     MusicPlayer.getPlayer().setNowPlaying(false);
                     MusicPlayer.getPlayer().pause();
+                    mRotateAnimation.pause();
                 } else if (!MusicPlayer.getPlayer().isNowPlaying()) {
                     play_btn.setImageResource(R.drawable.playing_btn_pause);
                     MusicPlayer.getPlayer().setNowPlaying(true);
                     MusicPlayer.getPlayer().resume();
+                    mRotateAnimation.resume();
                 }
                 break;
             case R.id.playing_playlist:
@@ -291,8 +305,16 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     protected void onResume() {
         super.onResume();
         play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
+        bar.postDelayed(runnable, 50);
+        mRotateAnimation.resume();
+    }
 
-                    bar.postDelayed(runnable, 50);
+    //黑胶旋转动画效果
+    public void rotateAnim(){
+        mRotateAnimation=ObjectAnimator.ofFloat(rotate_layout,"rotation",0.0f,360f);
+        mRotateAnimation.setInterpolator(new LinearInterpolator());
+        mRotateAnimation.setDuration(25*1000);
+        mRotateAnimation.setRepeatMode(ValueAnimator.RESTART);
     }
 
 
