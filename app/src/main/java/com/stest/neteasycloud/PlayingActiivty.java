@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -185,6 +186,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                         .into(img_disk);
 
                 bar.setMax((int) info.getDuration());
+                bar.postDelayed(runnable,10);
             }
         });
 
@@ -222,6 +224,13 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
         super.onDestroy();
         EventBus.getDefault().unregister(this);
         timer.cancel();
+        bar.removeCallbacks(runnable);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        bar.removeCallbacks(runnable);
     }
 
     @Override

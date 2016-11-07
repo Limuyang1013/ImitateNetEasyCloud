@@ -14,6 +14,6 @@ import com.youth.banner.loader.ImageLoader;
 public class GlideImageLoader extends ImageLoader {
     @Override
     public void displayImage(Context context, Object path, ImageView imageView) {
-        Glide.with(context).load(path).placeholder(R.drawable.placeholder_detail_radio_ban).into(imageView);
+        Glide.with(context).load(path).placeholder(R.drawable.placeholder_detail_radio_ban).error(R.drawable.placeholder_detail_radio_ban).into(imageView);
     }
 }
