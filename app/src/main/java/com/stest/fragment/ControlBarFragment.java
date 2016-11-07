@@ -1,5 +1,6 @@
 package com.stest.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.stest.NetEasyApplication;
 import com.stest.manage.MusicPlayer;
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.PlayingActiivty;
@@ -91,13 +93,6 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         // 在onActivityCreated()和onStart()之间调用
         super.onViewStateRestored(savedInstanceState);
-        if (savedInstanceState != null) {
-            song_txt.setText(savedInstanceState.getString("song_txt"));
-            Log.d(TAG, "onSaveInstanceState" + song_txt.getText().toString());
-            singer_txt.setText(savedInstanceState.getString("singer_txt"));
-            song_txt.setText(savedInstanceState.getString("song_txt"));
-            play.setImageResource(savedInstanceState.getBoolean("isPlaying") ? R.drawable.pause_btn : R.drawable.play_btn);
-        }
     }
 
     private void addView() {
@@ -113,7 +108,9 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         switch (v.getId()) {
             //整个底部播放栏布局
             case R.id.bottom_layout:
-                PlayingActiivty.start(getContext());
+                Intent intent = new Intent(NetEasyApplication.context, PlayingActiivty.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                NetEasyApplication.context.startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.left_slide_in,R.anim.left_slide_out);
                 break;
             //播放列表

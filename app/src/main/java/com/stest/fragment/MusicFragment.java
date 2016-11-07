@@ -31,7 +31,6 @@ import java.util.List;
  */
 public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
     private View v;
-    private static MusicFragment musicFragment;
     private MusicDetailAdapter mMusicDetailAdapter;
     //数据
     private List<String> data;
@@ -101,13 +100,6 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
         });
         lv.setAdapter(mMusicDetailAdapter);
-    }
-
-    public static MusicFragment getInstance() {
-        if (musicFragment == null) {
-            musicFragment = new MusicFragment();
-        }
-        return musicFragment;
     }
 
     @Override

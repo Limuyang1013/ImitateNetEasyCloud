@@ -16,14 +16,9 @@ import com.stest.neteasycloud.R;
  */
 public class SingersFragment extends Fragment {
 
-    private View v;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (v != null) {
-            return v;
-        }
         View v = inflater.inflate(R.layout.fragment_singers, container, false);
         ViewUtils.inject(this, v);
         return v;

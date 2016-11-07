@@ -14,14 +14,10 @@ import com.stest.neteasycloud.R;
  * Created by Limuyang on 2016/7/18.
  */
 public class NearbyFragment extends Fragment {
-    private View v;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (v!=null){
-            return v;
-        }
         View v = inflater.inflate(R.layout.nearby_fragment, container, false);
         ViewUtils.inject(this, v);
         return v;

@@ -55,7 +55,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private LinearLayout search_layout;
     private boolean isOpen;
     //ToolBar三个按钮对应的Fragment
-    private List<Fragment> fragmentlist = new ArrayList<>(3);
+    private List<Fragment> fragmentlist = new ArrayList<>();
     private MyFragmentPagerAdapter adapter;
     private static final String TAG = "HomePageActivity";
 
@@ -114,9 +114,9 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void addFragment() {
-        fragmentlist.add(DiscoFragment.getInstance());
-        fragmentlist.add(MusicFragment.getInstance());
-        fragmentlist.add(FriendFragment.getInstance());
+        fragmentlist.add(new DiscoFragment());
+        fragmentlist.add(new MusicFragment());
+        fragmentlist.add(new FriendFragment());
     }
 
     @Override

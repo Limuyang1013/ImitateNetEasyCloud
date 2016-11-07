@@ -36,6 +36,8 @@
         <activity
             android:name=".PlayingActiivty"
             android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/ImageTranslucentTheme" />
 
         <service

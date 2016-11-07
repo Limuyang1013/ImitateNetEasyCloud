@@ -22,14 +22,10 @@ public class DynamicFragment extends Fragment {
     private TextView txt;
     @ViewInject(R.id.nact_btn)
     private ImageButton nact_btn;
-    private View v;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (v!=null){
-            return v;
-        }
         View v = inflater.inflate(R.layout.dynamic_fragment, container, false);
         ViewUtils.inject(this, v);
         return v;

@@ -2,8 +2,10 @@ package com.stest.neteasycloud;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,6 +25,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.manage.MusicPlayer;
 import com.stest.model.MusicInfoDetail;
+import com.stest.utils.CoverLoader;
 import com.stest.utils.MusicUtils;
 import com.stest.utils.NetWorkUtils;
 import com.stest.utils.ToastUtils;
@@ -73,7 +76,6 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     @ViewInject(R.id.playSeekBar)
     SeekBar bar;
     private ActionBar actionBar;
-    private Timer timer;
 
 
     @Override
@@ -117,11 +119,6 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onStart() {
         super.onStart();
-    }
-
-    public static void start(Context context) {
-        Intent intent = new Intent(context, PlayingActiivty.class);
-        context.startActivity(intent);
     }
 
     private void initWidgets() {
@@ -182,17 +179,15 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                         .load(info.getCoverUri())
                         .error(R.drawable.fm_run_result_bg)
                         .placeholder(play_back.getDrawable())
-                        .crossFade(android.R.anim.fade_in, 1000)
+                        .crossFade(1000)
                         .bitmapTransform(new BlurTransformation(PlayingActiivty.this))
                         .into(play_back);
-
                 //加载专辑图片
                 Glide.with(PlayingActiivty.this)
                         .load(info.getCoverUri())
-                        .placeholder(R.drawable.placeholder_disk_play_song)
                         .error(R.drawable.placeholder_disk_play_song)
                         .centerCrop()
-                        .crossFade(android.R.anim.fade_in, 500)
+                        .crossFade(500)
                         .into(img_disk);
 
                 bar.setMax((int) info.getDuration());
@@ -238,7 +233,6 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        timer.cancel();
         bar.removeCallbacks(runnable);
     }
 
@@ -296,23 +290,9 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onResume() {
         super.onResume();
-        if (timer == null)
-            timer = new Timer();
         play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
-        TimerTask timerTask = new TimerTask() {
 
-            @Override
-            public void run() {
-                if (MusicPlayer.getPlayer().isNowPlaying()) {
                     bar.postDelayed(runnable, 50);
-                } else {
-                    bar.postDelayed(runnable, 50);
-                }
-
-            }
-        };
-
-        timer.schedule(timerTask, 0, 50);
     }
 
 

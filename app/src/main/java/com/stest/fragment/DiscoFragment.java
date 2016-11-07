@@ -38,15 +38,7 @@ public class DiscoFragment extends Fragment {
     private AnchorFragment anchorFragment;
     private RankingFragment rankingFragment;
     private View v;
-    private static DiscoFragment discoFragment;
 
-
-    public static DiscoFragment getInstance() {
-        if (discoFragment == null) {
-            discoFragment = new DiscoFragment();
-        }
-        return discoFragment;
-    }
 
 
     private void addView() {

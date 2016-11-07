@@ -40,15 +40,8 @@ public class FriendFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private NearbyFragment nearbyFragment;
     private PartnerFragment partnerFragment;
     private View v;
-    private static FriendFragment friendFragment;
 
 
-    public static FriendFragment getInstance() {
-        if (friendFragment == null) {
-            friendFragment = new FriendFragment();
-        }
-        return friendFragment;
-    }
 
     private void addView() {
         mTitleList.add("动态");

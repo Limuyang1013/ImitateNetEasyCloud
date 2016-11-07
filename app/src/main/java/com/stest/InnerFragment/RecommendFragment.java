@@ -68,16 +68,10 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
 //    private LinearLayout dynamic_layout;
     //
 
-    private View v;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        if (v != null) {
-            ViewUtils.inject(this, v);
-            return v;
-        }
         View v = inflater.inflate(R.layout.recomment_fragment, container, false);
         ViewUtils.inject(this, v);
         initView();

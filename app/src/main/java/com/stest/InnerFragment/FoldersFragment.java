@@ -14,13 +14,9 @@ import com.stest.neteasycloud.R;
  * 文件夹
  */
 public class FoldersFragment extends Fragment {
-    private View v;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (v != null) {
-            return v;
-        }
         View v = inflater.inflate(R.layout.fragment_folders, container, false);
         ViewUtils.inject(this, v);
         return v;
