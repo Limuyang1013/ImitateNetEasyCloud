@@ -29,6 +29,7 @@ import com.stest.json.OkHttp3Stack;
 import com.stest.json.PicUrlInfo;
 import com.stest.neteasycloud.R;
 import com.stest.neteasycloud.RecommendPageItemChangeActivity;
+import com.stest.utils.GlideImageLoader;
 import com.stest.utils.HttpUtils;
 import com.stest.utils.NetWorkUtils;
 import com.stest.utils.SPStrListUtils;
@@ -63,7 +64,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     //更改布局
     @ViewInject(R.id.item_change)
     private LinearLayout item_change;
-    private Integer[] localImages;
     //动态添加布局
 //    private LinearLayout dynamic_layout;
     //
@@ -97,12 +97,12 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     protected void initView() {
         netImages = new ArrayList<>();
         cacheImages = new ArrayList<>();
-        localImages = new Integer[5];
-        localImages[0] = R.mipmap.first;
-        localImages[1] = R.mipmap.second;
-        localImages[2] = R.mipmap.third;
-        localImages[3] = R.mipmap.fourth;
-        localImages[4] = R.mipmap.five;
+//        localImages = new Integer[5];
+//        localImages[0] = R.mipmap.first;
+//        localImages[1] = R.mipmap.second;
+//        localImages[2] = R.mipmap.third;
+//        localImages[3] = R.mipmap.fourth;
+//        localImages[4] = R.mipmap.five;
         mInflater = LayoutInflater.from(getContext());
         daily_text.setText(getDate());
 //        dynamic_layout = findViewById(R.id.dynamic_layout);
@@ -122,25 +122,17 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
                 return false;
             }
         });
-        if (SPStrListUtils.getStrListValue(getContext(), "PIC_URL").size() > 0) {
+        if (NetWorkUtils.isNetworkConnected(getActivity())) {
             Log.d("LoadView", "Net OK");
-            cacheImages.clear();
-            cacheImages = SPStrListUtils.getStrListValue(getContext(), "PIC_URL");
-            mBanner.setImages(cacheImages, new Banner.OnLoadImageListener() {
-                @Override
-                public void OnLoadImage(ImageView view, Object url) {
-                    /**
-                     * 这里你可以根据框架灵活设置
-                     */
-                    Glide.with(getContext())
-                            .load(url)
-                            .centerCrop()
-                            .crossFade()
-                            .into(view);
-                }
-            });
-        } else {
-            mBanner.setImages(localImages);
+            SPStrListUtils.remove(getContext(), "PIC_URL");
+            getUrlInfo();
+        }else {
+            if (SPStrListUtils.getStrListValue(getContext(), "PIC_URL").size() > 0) {
+                Log.d("LoadView", "Net OK");
+                cacheImages.clear();
+                cacheImages = SPStrListUtils.getStrListValue(getContext(), "PIC_URL");
+                mBanner.setImages(cacheImages).setImageLoader(new GlideImageLoader()).start();
+            }
         }
 
     }
@@ -154,16 +146,15 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
             public void onResponse(JSONObject response) {
                 JsonArray array = HttpUtils.getResposeJsonObject(response).get("data").getAsJsonArray();
                 PicUrlInfo info = NetEasyApplication.gsonInstance().fromJson(array.get(0), PicUrlInfo.class);
-//                PicUrlInfo info1 = NetEasyApplication.gsonInstance().fromJson(array.get(3), PicUrlInfo.class);
                 List<PicUrlInfo.DataBean> data = info.getData();
                 for (int i = 0; i < data.size(); i++) {
                     //获取所有图片
                     PicUrlInfo.DataBean bean = data.get(i);
                     netImages.add(bean.getPicUrl());
                 }
+                mBanner.setImages(netImages).setImageLoader(new GlideImageLoader()).start();
                 SPStrListUtils.remove(getContext(), "PIC_URL");
                 SPStrListUtils.putStrListValue(getContext(), "PIC_URL", netImages);
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -221,11 +212,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (NetWorkUtils.isNetworkConnected(getActivity())) {
-            Log.d("LoadView", "Net OK");
-            SPStrListUtils.remove(getContext(), "PIC_URL");
-            getUrlInfo();
-        }
     }
 
 
