@@ -17,7 +17,7 @@
  
 ###临时Bug
 
-- 高斯模糊效果使用过度导致内存泄漏
+- 严重的内存泄漏问题
 
 ###Reference
 - [**PonyMusic**](https://github.com/ChanWong21/PonyMusic)
