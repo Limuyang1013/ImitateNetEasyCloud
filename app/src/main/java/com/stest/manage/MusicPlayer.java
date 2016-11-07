@@ -118,6 +118,9 @@ public class MusicPlayer implements OnCompletionListener {
         });
     }
 
+    public void seekTo(int msec){
+        mMediaPlayer.seekTo(msec);
+    }
     @Override
     public void onCompletion(MediaPlayer mp) {
         next();

@@ -2,9 +2,7 @@ package com.stest.service;
 
 import android.app.Service;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.IBinder;
-import android.support.annotation.MainThread;
 
 import com.stest.manage.MusicPlayer;
 import com.stest.manage.PlayEvent;
@@ -12,8 +10,6 @@ import com.stest.manage.PlayEvent;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.io.IOException;
 
 public class MusicPlayService extends Service {
 

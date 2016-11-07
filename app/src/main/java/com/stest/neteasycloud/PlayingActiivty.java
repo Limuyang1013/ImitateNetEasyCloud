@@ -89,7 +89,14 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
         bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                currentTime.setText(MusicUtils.makeShortTimeString(PlayingActiivty.this, MusicPlayer.getPlayer().getCurrentPosition() / 1000));
+                //是用户触发的
+                if (fromUser) {
+                    MusicPlayer.getPlayer().seekTo(progress);
+                    currentTime.setText(MusicUtils.makeShortTimeString(PlayingActiivty.this, MusicPlayer.getPlayer().getCurrentPosition() / 1000));
+                    MusicPlayer.getPlayer().setNowPlaying(false);
+                    MusicPlayer.getPlayer().pause();
+                    play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
+                }
             }
 
             @Override
@@ -99,7 +106,10 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                MusicPlayer.getPlayer().resume();
+                MusicPlayer.getPlayer().setNowPlaying(true);
+                play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
+                bar.postDelayed(runnable, 50);
             }
         });
     }
@@ -166,7 +176,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                 song_txt.setText(info.getTitle());
                 singer_txt.setText(info.getArtist());
                 play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
-                endTime.setText(MusicUtils.makeShortTimeString(PlayingActiivty.this, info.getDuration()/1000));
+                endTime.setText(MusicUtils.makeShortTimeString(PlayingActiivty.this, info.getDuration() / 1000));
                 //高斯模糊的处理
                 Glide.with(PlayingActiivty.this)
                         .load(info.getCoverUri())
@@ -186,17 +196,22 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                         .into(img_disk);
 
                 bar.setMax((int) info.getDuration());
-                bar.postDelayed(runnable,10);
+                bar.postDelayed(runnable, 50);
             }
         });
 
     }
+
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            if (MusicPlayer.getPlayer().isNowPlaying()){
+            if (MusicPlayer.getPlayer().isNowPlaying()) {
                 bar.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
+                currentTime.setText(MusicUtils.makeShortTimeString(PlayingActiivty.this, MusicPlayer.getPlayer().getCurrentPosition() / 1000));
                 bar.postDelayed(runnable, 50);
+            }else{
+                bar.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
+                currentTime.setText(MusicUtils.makeShortTimeString(PlayingActiivty.this, MusicPlayer.getPlayer().getCurrentPosition() / 1000));
             }
         }
     };
@@ -281,17 +296,17 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onResume() {
         super.onResume();
-        if (timer==null)
-            timer=new Timer();
+        if (timer == null)
+            timer = new Timer();
         play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
         TimerTask timerTask = new TimerTask() {
 
             @Override
             public void run() {
                 if (MusicPlayer.getPlayer().isNowPlaying()) {
-                    bar.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
+                    bar.postDelayed(runnable, 50);
                 } else {
-                    bar.removeCallbacks(this);
+                    bar.postDelayed(runnable, 50);
                 }
 
             }
