@@ -79,5 +79,10 @@
         <item name="android:colorBackground">@color/white</item>
         <item name="android:textColor">@color/listItemPressedNightColorWhite</item>
     </style>
+    <style name="normalNotificationIconStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">46.69998dip</item>
+        <item name="android:scaleType">center</item>
+    </style>
 
 </resources>

@@ -141,7 +141,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                         play.setImageResource(R.drawable.pause_btn);
                         MusicPlayer.getPlayer().next();
                     }
-                }, 50);
+                }, 20);
                 break;
         }
 

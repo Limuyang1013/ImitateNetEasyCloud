@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="#000000"
+    >
+    <ImageView
+        android:id="@+id/cover_img"
+        android:layout_width="120dp"
+        android:layout_height="120dp" />
+    <LinearLayout
+        android:layout_toEndOf="@+id/cover_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/whaite_text"
+                android:maxLines="1"
+                />
+            <ImageView
+                android:id="@+id/playNotificationStop"
+                android:paddingLeft="4.0dip"
+                android:paddingRight="10.0dip"
+                android:src="@drawable/note_btn_close"
+                android:layout_alignParentEnd="true"
+                style="@style/normalNotificationIconStyle" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:id="@+id/love"
+                android:paddingLeft="8.0dip"
+                android:paddingRight="10.0dip"
+                android:src="@drawable/note_btn_loved"
+                android:layout_weight="0.8"
+                style="@style/normalNotificationIconStyle" />
+            <ImageView
+                android:id="@+id/prev"
+                android:src="@drawable/note_btn_pre"
+                android:layout_weight="1"
+                style="@style/normalNotificationIconStyle" />
+            <ImageView
+                android:id="@+id/play"
+                android:paddingLeft="8.0dip"
+                android:paddingRight="8.0dip"
+                android:layout_weight="1.2"
+                android:src="@drawable/note_btn_play"
+                style="@style/normalNotificationIconStyle" />
+
+            <ImageView
+                android:id="@+id/next"
+                android:layout_weight="0.8"
+                android:src="@drawable/note_btn_next"
+                style="@style/normalNotificationIconStyle" />
+
+            <ImageView
+                android:id="@+id/playNotificationLyric"
+                android:paddingLeft="10.0dip"
+                android:paddingRight="8.0dip"
+                android:layout_weight="1"
+                android:src="@drawable/note_btn_lyc"
+                style="@style/normalNotificationIconStyle" />
+        </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
