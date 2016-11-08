@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -22,6 +23,7 @@ import com.stest.manage.MusicPlayer;
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.PlayingActiivty;
 import com.stest.neteasycloud.R;
+import com.stest.utils.SPUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -57,7 +59,6 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
     private ImageView next;
     @ViewInject(R.id.bottom_layout)
     private RelativeLayout bottom_layout;
-    private Timer timer;
 
     public static ControlBarFragment newInstance() {
         return new ControlBarFragment();
@@ -111,7 +112,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                 Intent intent = new Intent(NetEasyApplication.context, PlayingActiivty.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 NetEasyApplication.context.startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.left_slide_in,R.anim.left_slide_out);
+                getActivity().overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
                 break;
             //播放列表
             case R.id.playlist_btn:
@@ -139,7 +140,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                         play.setImageResource(R.drawable.pause_btn);
                         MusicPlayer.getPlayer().next();
                     }
-                },20);
+                }, 20);
                 break;
         }
 
@@ -150,6 +151,9 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                SPUtils.putValue(getContext(), "COVER_PATH", "PATH", info.getCoverUri());
+                SPUtils.putValue(getContext(), "COVER_TITLE", "TITLE", info.getTitle());
+                SPUtils.putValue(getContext(), "COVER_ARTIST", "ARTIST", info.getArtist());
                 song_txt.setText(info.getTitle());
                 singer_txt.setText(info.getArtist());
                 play.setImageResource(R.drawable.pause_btn);
@@ -163,32 +167,17 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                 .into(albumn);
         mProgress.setMax((int) info.getDuration());
         mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
-        if (timer==null)
-            timer=new Timer();
-//        TimerTask timerTask = new TimerTask() {
-//
-//            @Override
-//            public void run() {
-//                if (MusicPlayer.getPlayer().isNowPlaying()) {
-//                    mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
-//                } else {
-//                    mProgress.removeCallbacks(this);
-//                }
-//
-//            }
-//        };
-//
-//        timer.schedule(timerTask, 0, 50);
         bottom_layout.setVisibility(View.VISIBLE);
+        mProgress.postDelayed(runnable, 50);
     }
 
-    Runnable runnable=new Runnable() {
+    Runnable runnable = new Runnable() {
         @Override
         public void run() {
-      if (MusicPlayer.getPlayer().isNowPlaying()){
-          mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
-          mProgress.postDelayed(runnable,50);
-      }
+            if (MusicPlayer.getPlayer().isNowPlaying()) {
+                mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
+                mProgress.postDelayed(runnable, 50);
+            }
         }
     };
 
@@ -196,7 +185,6 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        timer.cancel();
     }
 
     @Override
@@ -213,25 +201,25 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
     @Override
     public void onResume() {
         super.onResume();
-        if (timer==null)
-            timer=new Timer();
         play.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.pause_btn : R.drawable.play_btn);
         mProgress.setMax(MusicPlayer.getPlayer().getDuration());
         mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
-        TimerTask timerTask = new TimerTask() {
+        mProgress.postDelayed(runnable, 50);
+        String coverImgPath = SPUtils.getValue(getContext(), "COVER_PATH", "PATH", null);
+        String coverTitle = SPUtils.getValue(getContext(), "COVER_TITLE", "TITLE", null);
+        String coverArtist = SPUtils.getValue(getContext(), "COVER_ARTIST", "ARTIST", null);
+        if (coverImgPath == null) {
+            albumn.setImageResource(R.drawable.placeholder_disk_210);
+        } else {
+            Glide.with(getContext())
+                    .load(coverImgPath)
+                    .placeholder(R.drawable.placeholder_disk_210)
+                    .error(R.drawable.placeholder_disk_210)
+                    .into(albumn);
+        }
 
-            @Override
-            public void run() {
-                if (MusicPlayer.getPlayer().isNowPlaying()) {
-                    mProgress.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
-                } else {
-                    mProgress.removeCallbacks(this);
-                }
-
-            }
-        };
-
-        timer.schedule(timerTask, 0, 50);
+        song_txt.setText(coverTitle);
+        singer_txt.setText(coverArtist);
 
     }
 }

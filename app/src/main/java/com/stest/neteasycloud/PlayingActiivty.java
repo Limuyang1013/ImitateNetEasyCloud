@@ -2,22 +2,16 @@ package com.stest.neteasycloud;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -30,7 +24,6 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.manage.MusicPlayer;
 import com.stest.model.MusicInfoDetail;
-import com.stest.utils.CoverLoader;
 import com.stest.utils.MusicUtils;
 import com.stest.utils.NetWorkUtils;
 import com.stest.utils.ToastUtils;
@@ -38,9 +31,6 @@ import com.stest.utils.ToastUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
@@ -56,8 +46,6 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     ImageView needle;
     @ViewInject(R.id.default_disk_img)
     ImageView img_disk;
-    @ViewInject(R.id.img_disc)
-    ImageView img_disc;
     @ViewInject(R.id.currentTime)
     TextView currentTime;
     @ViewInject(R.id.totalTime)
