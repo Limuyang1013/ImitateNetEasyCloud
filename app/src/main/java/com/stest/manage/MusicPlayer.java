@@ -1,10 +1,14 @@
 package com.stest.manage;
 
 import android.content.Context;
+import android.content.IntentFilter;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 
+import com.stest.NetEasyApplication;
 import com.stest.model.MusicInfoDetail;
+import com.stest.receiver.NoisyAudioStreamReceiver;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -28,6 +32,8 @@ public class MusicPlayer implements OnCompletionListener {
     private boolean isNowPlaying;
     private MusicInfoDetail mNextSong;
     private MusicInfoDetail mPrevSone;
+    private IntentFilter mNoisyFilter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
+    private NoisyAudioStreamReceiver receiver=new NoisyAudioStreamReceiver();
 
 
     private enum PlayMode {
@@ -64,6 +70,7 @@ public class MusicPlayer implements OnCompletionListener {
 
     public void play(MusicInfoDetail detail) {
         try {
+            NetEasyApplication.getContext().registerReceiver(receiver,mNoisyFilter);
             mMediaPlayer.reset();
             mMediaPlayer.setDataSource(detail.getUri());
             mMediaPlayer.prepareAsync();
@@ -86,6 +93,7 @@ public class MusicPlayer implements OnCompletionListener {
 
     public void pause() {
         mMediaPlayer.pause();
+        NetEasyApplication.getContext().unregisterReceiver(receiver);
     }
 
     public void resume() {
