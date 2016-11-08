@@ -18,7 +18,6 @@ import com.stest.model.ListHeaderView;
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.R;
 import com.stest.service.MusicPlayService;
-import com.stest.utils.SPUtils;
 import com.stest.view.DividerListView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -26,7 +25,6 @@ import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
 
 // 单曲
 public class SinglesFragment extends Fragment implements View.OnClickListener {
@@ -84,9 +82,6 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
         lv.setAdapter(mAdapter);
     }
 
-    public void refreshUI() {
-
-    }
 
     @Override
     public void onAttach(Context context) {

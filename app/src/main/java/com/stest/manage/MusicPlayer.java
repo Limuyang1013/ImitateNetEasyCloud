@@ -6,9 +6,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 
-import com.stest.NetEasyApplication;
 import com.stest.model.MusicInfoDetail;
-import com.stest.receiver.NoisyAudioStreamReceiver;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -33,7 +31,6 @@ public class MusicPlayer implements OnCompletionListener {
     private MusicInfoDetail mNextSong;
     private MusicInfoDetail mPrevSone;
     private IntentFilter mNoisyFilter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
-    private NoisyAudioStreamReceiver receiver=new NoisyAudioStreamReceiver();
 
 
     private enum PlayMode {
@@ -59,7 +56,7 @@ public class MusicPlayer implements OnCompletionListener {
         mPlayMode = PlayMode.RANDOM;
 
         mNextSong = new MusicInfoDetail();
-        mPrevSone=new MusicInfoDetail();
+        mPrevSone = new MusicInfoDetail();
     }
 
     public void setQueue(List<MusicInfoDetail> queue, int index) {
@@ -70,7 +67,6 @@ public class MusicPlayer implements OnCompletionListener {
 
     public void play(MusicInfoDetail detail) {
         try {
-            NetEasyApplication.getContext().registerReceiver(receiver,mNoisyFilter);
             mMediaPlayer.reset();
             mMediaPlayer.setDataSource(detail.getUri());
             mMediaPlayer.prepareAsync();
@@ -93,7 +89,6 @@ public class MusicPlayer implements OnCompletionListener {
 
     public void pause() {
         mMediaPlayer.pause();
-        NetEasyApplication.getContext().unregisterReceiver(receiver);
     }
 
     public void resume() {
@@ -114,7 +109,7 @@ public class MusicPlayer implements OnCompletionListener {
     }
 
     public void previous() {
-        mPrevSone=getPreviousSong();
+        mPrevSone = getPreviousSong();
         play(mPrevSone);
         EventBus.getDefault().post(mPrevSone);
         EventBus.getDefault().postSticky(mPrevSone);
@@ -126,9 +121,10 @@ public class MusicPlayer implements OnCompletionListener {
         });
     }
 
-    public void seekTo(int msec){
+    public void seekTo(int msec) {
         mMediaPlayer.seekTo(msec);
     }
+
     @Override
     public void onCompletion(MediaPlayer mp) {
         next();

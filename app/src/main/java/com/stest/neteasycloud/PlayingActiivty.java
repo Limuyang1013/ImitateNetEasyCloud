@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.animation.AnimatorSet;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -71,7 +72,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
     @ViewInject(R.id.rotate_layout)
     FrameLayout rotate_layout;
     private ActionBar actionBar;
-    ObjectAnimator mRotateAnimation;
+    ObjectAnimator mRotateAnimation, mNeedleAnimation;
 
 
     @Override
@@ -94,6 +95,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                     MusicPlayer.getPlayer().setNowPlaying(false);
                     MusicPlayer.getPlayer().pause();
                     play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
+                    mRotateAnimation.pause();
                 }
             }
 
@@ -108,17 +110,14 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                 MusicPlayer.getPlayer().setNowPlaying(true);
                 play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
                 bar.postDelayed(runnable, 50);
+                mRotateAnimation.resume();
             }
         });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
     private void initWidgets() {
         rotateAnim();
+        needleAnim();
         bar.setIndeterminate(false);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
@@ -184,10 +183,10 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                         .centerCrop()
                         .crossFade(500)
                         .into(img_disk);
-
                 bar.setMax((int) info.getDuration());
                 bar.postDelayed(runnable, 50);
                 mRotateAnimation.start();
+                mNeedleAnimation.start();
             }
         });
 
@@ -200,7 +199,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                 bar.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
                 currentTime.setText(MusicUtils.makeShortTimeString(PlayingActiivty.this, MusicPlayer.getPlayer().getCurrentPosition() / 1000));
                 bar.postDelayed(runnable, 50);
-            }else{
+            } else {
                 bar.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
                 currentTime.setText(MusicUtils.makeShortTimeString(PlayingActiivty.this, MusicPlayer.getPlayer().getCurrentPosition() / 1000));
             }
@@ -230,7 +229,6 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
         super.onDestroy();
         EventBus.getDefault().unregister(this);
         bar.removeCallbacks(runnable);
-        mRotateAnimation.cancel();
     }
 
     @Override
@@ -251,9 +249,8 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                         MusicPlayer.getPlayer().setNowPlaying(true);
                         play_btn.setImageResource(R.drawable.playing_btn_pause);
                         MusicPlayer.getPlayer().previous();
-                        mRotateAnimation.start();
                     }
-                }, 20);
+                }, 50);
                 break;
             case R.id.playing_next:
                 new Handler().postDelayed(new Runnable() {
@@ -263,9 +260,8 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                         MusicPlayer.getPlayer().setNowPlaying(true);
                         play_btn.setImageResource(R.drawable.playing_btn_pause);
                         MusicPlayer.getPlayer().next();
-                        mRotateAnimation.start();
                     }
-                }, 20);
+                }, 50);
                 break;
             case R.id.playing_play:
                 //如果正在播放
@@ -273,11 +269,13 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                     play_btn.setImageResource(R.drawable.playing_btn_play);
                     MusicPlayer.getPlayer().setNowPlaying(false);
                     MusicPlayer.getPlayer().pause();
+                    mNeedleAnimation.reverse();
                     mRotateAnimation.pause();
                 } else if (!MusicPlayer.getPlayer().isNowPlaying()) {
                     play_btn.setImageResource(R.drawable.playing_btn_pause);
                     MusicPlayer.getPlayer().setNowPlaying(true);
                     MusicPlayer.getPlayer().resume();
+                    mNeedleAnimation.start();
                     mRotateAnimation.resume();
                 }
                 break;
@@ -294,15 +292,22 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
         super.onResume();
         play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
         bar.postDelayed(runnable, 50);
-        mRotateAnimation.resume();
     }
 
     //黑胶旋转动画效果
-    public void rotateAnim(){
-        mRotateAnimation=ObjectAnimator.ofFloat(rotate_layout,"rotation",0.0f,360f);
+    public void rotateAnim() {
+        mRotateAnimation = ObjectAnimator.ofFloat(rotate_layout, "rotation", 0, 359);
         mRotateAnimation.setInterpolator(new LinearInterpolator());
-        mRotateAnimation.setDuration(25*1000);
-        mRotateAnimation.setRepeatMode(ValueAnimator.RESTART);
+        mRotateAnimation.setDuration(25 * 1000);
+        mRotateAnimation.setRepeatCount(ValueAnimator.INFINITE);
+    }
+
+    //指针旋转动画效果
+    public void needleAnim() {
+        mNeedleAnimation = ObjectAnimator.ofFloat(needle, "rotation", -25, 0);
+        mNeedleAnimation.setDuration(500);
+        mNeedleAnimation.setRepeatCount(0);
+        mNeedleAnimation.setInterpolator(new LinearInterpolator());
     }
 
 

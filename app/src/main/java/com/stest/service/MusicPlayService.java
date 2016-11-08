@@ -2,7 +2,6 @@ package com.stest.service;
 
 import android.app.Service;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.os.IBinder;
 
 import com.stest.manage.MusicPlayer;
@@ -12,7 +11,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class MusicPlayService extends Service implements AudioManager.OnAudioFocusChangeListener {
+public class MusicPlayService extends Service {
 
     @Override
     public void onCreate() {
@@ -61,23 +60,7 @@ public class MusicPlayService extends Service implements AudioManager.OnAudioFoc
         EventBus.getDefault().unregister(this);
     }
 
-    //捕获/丢弃音乐焦点
-    @Override
-    public void onAudioFocusChange(int focusChange) {
-        switch (focusChange) {
-            case AudioManager.AUDIOFOCUS_LOSS:
-                break;
-            case AudioManager.AUDIOFOCUS_GAIN:
-                break;
-            case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
-                break;
-            case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
-                break;
-            default:
-                break;
-        }
-    }
-
 }
+
 
 

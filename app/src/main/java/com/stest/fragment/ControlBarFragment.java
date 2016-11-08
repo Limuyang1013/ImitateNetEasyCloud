@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationSet;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -140,7 +141,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                         play.setImageResource(R.drawable.pause_btn);
                         MusicPlayer.getPlayer().next();
                     }
-                }, 20);
+                }, 50);
                 break;
         }
 
@@ -223,4 +224,3 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
 
     }
 }
-

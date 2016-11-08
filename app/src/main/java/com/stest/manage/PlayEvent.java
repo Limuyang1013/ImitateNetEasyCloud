@@ -20,6 +20,7 @@ public class PlayEvent {
     private int seekTo;
     private int position;
 
+
     public MusicInfoDetail getSong() {
         return mDetail;
     }
@@ -43,6 +44,7 @@ public class PlayEvent {
     public void setQueue(List<MusicInfoDetail> queue) {
         mQueue = queue;
     }
+
 
     public void setCurrentIndex(int currentPosition) {
         position = currentPosition;
