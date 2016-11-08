@@ -1,5 +1,6 @@
 package com.stest.service;
 
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
@@ -13,10 +14,12 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class MusicPlayService extends Service {
 
+    private NotificationManager notificationManager;
     @Override
     public void onCreate() {
         super.onCreate();
         EventBus.getDefault().register(this);
+        notificationManager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
     }
 
     @Override
