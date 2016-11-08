@@ -111,6 +111,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                 play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
                 bar.postDelayed(runnable, 50);
                 mRotateAnimation.resume();
+                mNeedleAnimation.start();
             }
         });
     }
@@ -185,8 +186,13 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                         .into(img_disk);
                 bar.setMax((int) info.getDuration());
                 bar.postDelayed(runnable, 50);
-                mRotateAnimation.start();
-                mNeedleAnimation.start();
+                if(MusicPlayer.getPlayer().isNowPlaying()) {
+                    mRotateAnimation.start();
+                    mNeedleAnimation.start();
+                }else{
+                    mRotateAnimation.pause();
+                    mNeedleAnimation.pause();
+                }
             }
         });
 
@@ -229,6 +235,8 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
         super.onDestroy();
         EventBus.getDefault().unregister(this);
         bar.removeCallbacks(runnable);
+        mRotateAnimation.setAutoCancel(true);
+        mNeedleAnimation.setAutoCancel(true);
     }
 
     @Override
