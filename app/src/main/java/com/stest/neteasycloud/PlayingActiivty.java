@@ -101,7 +101,12 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                MusicPlayer.getPlayer().resume();
+                MusicPlayer.getPlayer().setNowPlaying(true);
+                play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
+                bar.postDelayed(runnable, 50);
+                mRotateAnimation.resume();
+                mNeedleAnimation.start();
             }
 
             @Override
