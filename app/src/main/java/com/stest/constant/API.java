@@ -21,9 +21,7 @@ public class API {
      * {1}=查询的页码数
      * {2}=当前页的返回数量
      * http://so.ard.iyyin.com/s/song_with_out?q={0}&page={1}&size={2}
-     * http://so.ard.iyyin.com/s/song_with_out?q=五月天&page=1&size=3
      */
-    public static final String SEARCH_MUSIC = "http://so.ard.iyyin.com/s/song_with_out?q=";
     /**
      * 根地址为 http://api.lostg.com
      * 网易歌词 /music/163/lyrics/{id}

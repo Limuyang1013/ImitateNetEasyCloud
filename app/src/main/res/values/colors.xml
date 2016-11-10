@@ -292,4 +292,5 @@
     <color name="status_bar">#70000000</color>
     <color name="accent_material_light">@color/themeColor</color>
 
+
 </resources>

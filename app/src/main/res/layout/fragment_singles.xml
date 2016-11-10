@@ -6,7 +6,6 @@
               android:orientation="vertical"
     >
 
-
     <com.stest.view.DividerListView
         android:id="@+id/lv"
         android:layout_width="match_parent"

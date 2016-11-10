@@ -42,7 +42,6 @@ public class SplashActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             //清空表
-                            Log.d("ThreadName 3",Thread.currentThread().getName());
                             DataSupport.deleteAll(MusicInfoDetail.class);
                             MusicUtils.scanMusic(SplashActivity.this, musicInfo);
                             DataSupport.saveAll(musicInfo);
@@ -53,7 +52,6 @@ public class SplashActivity extends AppCompatActivity {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            Log.d("ThreadName 4",Thread.currentThread().getName());
                             DataSupport.deleteAll(MusicInfoDetail.class);
                             MusicUtils.scanMusic(SplashActivity.this, musicInfo);
                             DataSupport.saveAll(musicInfo);

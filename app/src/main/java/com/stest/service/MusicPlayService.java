@@ -5,6 +5,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
+import com.stest.manage.MusicNotification;
 import com.stest.manage.MusicPlayer;
 import com.stest.manage.PlayEvent;
 
@@ -13,13 +14,18 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 public class MusicPlayService extends Service {
+    //管理通知
+    private NotificationManager manager=null;
+    //通知ID
+    private final int NOTIFICATION_ID=10001;
 
-    private NotificationManager notificationManager;
     @Override
     public void onCreate() {
         super.onCreate();
         EventBus.getDefault().register(this);
-        notificationManager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        //创建通知栏控制
+        manager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+//        manager.notify(NOTIFICATION_ID,MusicNotification.getMusicNotification().onCreatMusicNotification());
     }
 
     @Override
