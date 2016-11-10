@@ -15,7 +15,8 @@
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_centerVertical="true"
-        android:background="@drawable/placeholder_disk_210"
+        android:background="@drawable/default_artist_ban"
+        android:scaleType="fitCenter"
         />
 
     <ImageView

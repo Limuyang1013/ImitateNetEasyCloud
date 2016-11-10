@@ -8,6 +8,10 @@ package com.stest.constant;
 public class API {
 
 
+    //易源API共用尾部
+    public final String YIYUAN_TAIL="&showapi_sign=256397a9586c4276a8f4aa05cd276c7e&showapi_appid=27008";
+
+
     /**
      * Banner API:天天动听(阿里星球)
      */
@@ -43,6 +47,8 @@ public class API {
      * 获取艺术家封面
      */
     public static final String ARTIST_COVER="http://musicmini.baidu.com/app/search/searchList.php?qword=";
+
+
 }
 
 

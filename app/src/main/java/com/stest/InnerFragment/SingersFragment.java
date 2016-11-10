@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.adapter.SingerAdapter;
-import com.stest.fragment.BaseFragment;
 import com.stest.model.ArtistInfo;
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.R;
@@ -20,13 +19,7 @@ import com.stest.view.DividerListView;
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-
-import static com.stest.neteasycloud.R.raw.hs;
 
 /**
  * Created by Limuyang on 2016/8/31.
@@ -72,7 +65,9 @@ public class SingersFragment extends Fragment implements View.OnClickListener {
             artistInfo.setNumber_of_tracks(num.size());
             Info.add(artistInfo);
         }
-        //获取艺术家封面URL
+        /**
+         * 获取艺术家封面URL
+         */
         getArtistCover();
 
         mAdapter=new SingerAdapter(getContext(),Info,R.layout.singles_item_layout);
@@ -88,6 +83,7 @@ public class SingersFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getArtistCover() {
+
     }
 
     //List去重
