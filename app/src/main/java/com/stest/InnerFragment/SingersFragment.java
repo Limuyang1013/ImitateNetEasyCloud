@@ -72,6 +72,8 @@ public class SingersFragment extends Fragment implements View.OnClickListener {
             artistInfo.setNumber_of_tracks(num.size());
             Info.add(artistInfo);
         }
+        //获取艺术家封面URL
+        getArtistCover();
 
         mAdapter=new SingerAdapter(getContext(),Info,R.layout.singles_item_layout);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -83,6 +85,9 @@ public class SingersFragment extends Fragment implements View.OnClickListener {
         lv.setAdapter(mAdapter);
 
 
+    }
+
+    private void getArtistCover() {
     }
 
     //List去重

@@ -35,6 +35,14 @@ public class API {
      * 虾米歌词 /music/xiami/lyrics/{id}
      * 虾米单曲 /music/xiami/songs/{id}
      */
+
+    /**
+     * 搜索歌曲API：http://musicmini.baidu.com/app/search/searchList.php?qword={0}&ie=utf-8&page={1}
+     *{0}=需要搜索的歌曲或歌手
+     *{1}=页码数(第一页就是0，第二页是1)
+     * 获取艺术家封面
+     */
+    public static final String ARTIST_COVER="http://musicmini.baidu.com/app/search/searchList.php?qword=";
 }
 
 
