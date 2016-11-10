@@ -32,7 +32,6 @@ public class AlbumsFragment extends Fragment {
     DividerListView lv;
     private AlbumAdapter mAdapter;
     private List<MusicInfoDetail> musicInfo;
-    private List<String> album;
 
     @Nullable
     @Override
