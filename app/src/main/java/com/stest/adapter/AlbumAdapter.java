@@ -15,6 +15,7 @@ import org.byteam.superadapter.SuperAdapter;
 import org.byteam.superadapter.internal.SuperViewHolder;
 import org.litepal.crud.DataSupport;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +27,7 @@ public class AlbumAdapter extends SuperAdapter<MusicInfoDetail> {
     private ImageView album_Pic;
     public AlbumAdapter(Context context, List<MusicInfoDetail> items, int layoutResId) {
         super(context, items, layoutResId);
+
     }
 
     @Override

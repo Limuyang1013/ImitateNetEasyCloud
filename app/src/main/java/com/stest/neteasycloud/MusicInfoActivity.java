@@ -47,6 +47,7 @@ public class MusicInfoActivity extends BaseActivity {
     private SingersFragment mSingersFragment;
     private AlbumsFragment mAlbumsFragment;
     private FoldersFragment mFoldersFragment;
+    private int page=0;
 
     @Override
 
@@ -55,6 +56,9 @@ public class MusicInfoActivity extends BaseActivity {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_music_info);
         ViewUtils.inject(this);
+        if (getIntent().getExtras()!=null){
+            page=getIntent().getIntExtra("page_number",0);
+        }
         //初始化控件
         initWidgets();
         applyKitKatTranslucency();
@@ -68,6 +72,7 @@ public class MusicInfoActivity extends BaseActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.actionbar_back);
         }
+        mPager.setCurrentItem(page);
         toolbar.inflateMenu(R.menu.music_menu);
         toolbar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.actionbar_more));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -83,6 +88,8 @@ public class MusicInfoActivity extends BaseActivity {
         mPager.setOffscreenPageLimit(1);
         infos_tab.setTabMode(TabLayout.MODE_FIXED);
         infos_tab.setupWithViewPager(mPager);
+        mPager.setCurrentItem(page);
+
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

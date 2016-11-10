@@ -77,7 +77,9 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                 switch (position) {
                     //本地音乐
                     case 0:
-                        MusicInfoActivity.start(getContext());
+                        Intent musicIntent = new Intent(getContext(), MusicInfoActivity.class);
+                        musicIntent.putExtra("page_number",0);
+                        startActivity(musicIntent);
                         break;
                     //最近播放
                     case 1:
@@ -87,6 +89,9 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                         break;
                     //我的歌手
                     case 3:
+                        Intent artistIntent = new Intent(getContext(), MusicInfoActivity.class);
+                        artistIntent.putExtra("page_number",1);
+                        startActivity(artistIntent);
                         break;
                     //我的电台
                     case 4:
