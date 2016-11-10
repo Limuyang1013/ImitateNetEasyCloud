@@ -29,7 +29,6 @@ public class SingersFragment extends Fragment implements View.OnClickListener {
 
     @ViewInject(R.id.lv)
     DividerListView lv;
-    @ViewInject(R.id.popup_menu)
 
     private SingerAdapter mAdapter;
     private List<ArtistInfo> Info;
@@ -70,7 +69,7 @@ public class SingersFragment extends Fragment implements View.OnClickListener {
          */
         getArtistCover();
 
-        mAdapter=new SingerAdapter(getContext(),Info,R.layout.singles_item_layout);
+        mAdapter=new SingerAdapter(getContext(),Info,R.layout.singers_item_layout);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

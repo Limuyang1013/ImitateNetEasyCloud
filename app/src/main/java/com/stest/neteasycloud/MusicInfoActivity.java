@@ -80,7 +80,7 @@ public class MusicInfoActivity extends BaseActivity {
         MyAdapter myAdapter = new MyAdapter(getSupportFragmentManager());
         myAdapter.notifyDataSetChanged();
         mPager.setAdapter(myAdapter);
-        mPager.setOffscreenPageLimit(2);
+        mPager.setOffscreenPageLimit(1);
         infos_tab.setTabMode(TabLayout.MODE_FIXED);
         infos_tab.setupWithViewPager(mPager);
 
