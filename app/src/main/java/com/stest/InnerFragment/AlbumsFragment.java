@@ -30,16 +30,9 @@ import java.util.List;
 public class AlbumsFragment extends Fragment {
     @ViewInject(R.id.lv)
     DividerListView lv;
-    @ViewInject(R.id.albumn_pic)
-    ImageView albumn_pic;
-    @ViewInject(R.id.albumn_name)
-    TextView albumn_name;
-    @ViewInject(R.id.song_num)
-    TextView song_num;
-    @ViewInject(R.id.singer_name)
-    TextView singer_name;
     private AlbumAdapter mAdapter;
     private List<MusicInfoDetail> musicInfo;
+    private List<String> album;
 
     @Nullable
     @Override

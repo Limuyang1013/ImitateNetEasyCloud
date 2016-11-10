@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +28,7 @@ import java.util.List;
 /**
  * Created by Limuyang on 2016/7/7.
  */
-public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
+public class MusicFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
     private View v;
     private MusicDetailAdapter mMusicDetailAdapter;
     //数据
@@ -157,4 +156,9 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         return anim_collect;
     }
 
+    @Override
+    protected void onFragmentVisibleChange(boolean isVisible) {
+        super.onFragmentVisibleChange(isVisible);
+
+    }
 }
