@@ -1,13 +1,11 @@
 package com.stest.adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.stest.NetEasyApplication;
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.R;
 
@@ -15,7 +13,6 @@ import org.byteam.superadapter.SuperAdapter;
 import org.byteam.superadapter.internal.SuperViewHolder;
 import org.litepal.crud.DataSupport;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -6,21 +6,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.adapter.AlbumAdapter;
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.R;
-import com.stest.utils.SPStrListUtils;
 import com.stest.view.DividerListView;
 
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -45,8 +42,8 @@ public class AlbumsFragment extends Fragment {
     private void initWidget() {
         musicInfo = new ArrayList<>();
         musicInfo= DataSupport.findAll(MusicInfoDetail.class);
-
-        mAdapter = new AlbumAdapter(getContext(), musicInfo, R.layout.album_item_layout);
+        List<MusicInfoDetail> data=new ArrayList<>(new HashSet<>(musicInfo));
+        mAdapter = new AlbumAdapter(getContext(), data, R.layout.album_item_layout);
         lv.setAdapter(mAdapter);
     }
 

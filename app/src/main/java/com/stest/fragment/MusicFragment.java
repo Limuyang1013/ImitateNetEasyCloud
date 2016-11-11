@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.RelativeLayout;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.adapter.MusicDetailAdapter;
+import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.MusicInfoActivity;
 import com.stest.neteasycloud.R;
 import com.stest.view.DividerListView;
@@ -28,7 +30,7 @@ import java.util.List;
 /**
  * Created by Limuyang on 2016/7/7.
  */
-public class MusicFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
+public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
     private View v;
     private MusicDetailAdapter mMusicDetailAdapter;
     //数据
@@ -47,7 +49,7 @@ public class MusicFragment extends BaseFragment implements SwipeRefreshLayout.On
     private ImageView collect_expand_img;
     private boolean isCreatRotate = true;
     private boolean isCollectRotate = true;
-    private static final String TAG = "MusicFragment";
+    private List<MusicInfoDetail> musicInfo;
 
     @Nullable
     @Override
@@ -64,6 +66,7 @@ public class MusicFragment extends BaseFragment implements SwipeRefreshLayout.On
 
     //初始化
     private void initWidgets() {
+        musicInfo=new ArrayList<>();
         refreshLayout.setOnRefreshListener(this);
         creat_layout.setOnClickListener(this);
         collect_layout.setOnClickListener(this);
@@ -156,9 +159,4 @@ public class MusicFragment extends BaseFragment implements SwipeRefreshLayout.On
         return anim_collect;
     }
 
-    @Override
-    protected void onFragmentVisibleChange(boolean isVisible) {
-        super.onFragmentVisibleChange(isVisible);
-
-    }
 }

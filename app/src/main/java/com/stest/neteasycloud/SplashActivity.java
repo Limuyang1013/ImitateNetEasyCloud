@@ -42,19 +42,9 @@ public class SplashActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             //清空表
-                            DataSupport.deleteAll(MusicInfoDetail.class);
                             MusicUtils.scanMusic(SplashActivity.this, musicInfo);
                             DataSupport.saveAll(musicInfo);
                             SPUtils.putValue(SplashActivity.this, "isFirst", "First", false);
-                        }
-                    }).start();
-                }else if(!SPUtils.getValue(SplashActivity.this, "isFirst", "First", true)){
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            DataSupport.deleteAll(MusicInfoDetail.class);
-                            MusicUtils.scanMusic(SplashActivity.this, musicInfo);
-                            DataSupport.saveAll(musicInfo);
                         }
                     }).start();
                 }
