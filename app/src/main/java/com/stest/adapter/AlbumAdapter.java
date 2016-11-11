@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.stest.model.AlbumModel;
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.R;
 
@@ -20,15 +21,15 @@ import java.util.List;
  * 专辑Adapter
  */
 
-public class AlbumAdapter extends SuperAdapter<MusicInfoDetail> {
+public class AlbumAdapter extends SuperAdapter<AlbumModel> {
     private ImageView album_Pic;
-    public AlbumAdapter(Context context, List<MusicInfoDetail> items, int layoutResId) {
+    public AlbumAdapter(Context context, List<AlbumModel> items, int layoutResId) {
         super(context, items, layoutResId);
 
     }
 
     @Override
-    public void onBind(SuperViewHolder holder, int viewType, int layoutPosition, MusicInfoDetail item) {
+    public void onBind(SuperViewHolder holder, int viewType, int layoutPosition, AlbumModel item) {
         album_Pic=new ImageView(getContext());
         album_Pic=holder.getView(R.id.albumn_pic);
         Glide.with(getContext())

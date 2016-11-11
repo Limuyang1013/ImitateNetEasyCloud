@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.adapter.AlbumAdapter;
+import com.stest.model.AlbumModel;
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.R;
 import com.stest.view.DividerListView;
@@ -29,6 +30,7 @@ public class AlbumsFragment extends Fragment {
     DividerListView lv;
     private AlbumAdapter mAdapter;
     private List<MusicInfoDetail> musicInfo;
+    private List<AlbumModel> albumModels;
 
     @Nullable
     @Override
@@ -40,9 +42,17 @@ public class AlbumsFragment extends Fragment {
     }
 
     private void initWidget() {
+        albumModels=new ArrayList<>();
         musicInfo = new ArrayList<>();
         musicInfo= DataSupport.findAll(MusicInfoDetail.class);
-        List<MusicInfoDetail> data=new ArrayList<>(new HashSet<>(musicInfo));
+        for (int i=0;i<musicInfo.size();i++){
+            AlbumModel model=new AlbumModel();
+            model.setAlbum(musicInfo.get(i).getAlbum());
+            model.setArtist(musicInfo.get(i).getArtist());
+            model.setCoverUri(musicInfo.get(i).getCoverUri());
+            albumModels.add(model);
+        }
+        List<AlbumModel> data=new ArrayList<>(new HashSet<>(albumModels));
         mAdapter = new AlbumAdapter(getContext(), data, R.layout.album_item_layout);
         lv.setAdapter(mAdapter);
     }
