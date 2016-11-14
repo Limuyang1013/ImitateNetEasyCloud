@@ -3,6 +3,8 @@
 ![](https://img.shields.io/badge/license-Apache%202-blue.svg)
 [![](https://img.shields.io/badge/API-19-orange.svg)](https://android-arsenal.com/api?level=19)
 
+### Language
+[**中文**](https://github.com/GiitSmile/ImitateNetEasyCloud/edit/master/README.md) | [**English**](https://github.com/GiitSmile/ImitateNetEasyCloud/blob/master/README_EN.md)
 ### Precautions
 - Has achieved local playback, to achieve the effect to be optimized
 - From time to time to update
