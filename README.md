@@ -8,7 +8,7 @@
 - 不定期进行更新
 - 所用素材资源均从官方网易云获取，仅供学习使用，喜欢的朋友请多多支持官方网易云音乐APP
 
-###部分截图
+###Screenshots
 
 ![](http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100006.png)
 ![](http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100134.png)
