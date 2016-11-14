@@ -34,7 +34,7 @@
             android:theme="@style/ImageTranslucentTheme"
             android:windowSoftInputMode="stateVisible" />
         <activity
-            android:name=".PlayingActiivty"
+            android:name=".PlayingActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"

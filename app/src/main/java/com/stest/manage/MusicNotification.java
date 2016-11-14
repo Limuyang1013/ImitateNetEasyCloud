@@ -9,10 +9,8 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.stest.NetEasyApplication;
-import com.stest.neteasycloud.PlayingActiivty;
+import com.stest.neteasycloud.PlayingActivity;
 import com.stest.neteasycloud.R;
-
-import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * Created by Limuyang on 2016/11/9.
@@ -79,7 +77,7 @@ public class MusicNotification extends Notification {
     @SuppressLint("NewApi")
     public Notification onCreatMusicNotification(){
         //点击跳转主界面
-        Intent jumpIntent=new Intent(context, PlayingActiivty.class);
+        Intent jumpIntent=new Intent(context, PlayingActivity.class);
         PendingIntent jump=PendingIntent.getActivity(context,0,jumpIntent,PendingIntent.FLAG_UPDATE_CURRENT);
         remoteViews.setOnClickPendingIntent(R.id.notice,jump);
         //注册控制点击事件

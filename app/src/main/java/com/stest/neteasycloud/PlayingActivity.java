@@ -39,7 +39,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
  * 播放音乐界面
  */
 
-public class PlayingActiivty extends AppCompatActivity implements View.OnClickListener {
+public class PlayingActivity extends AppCompatActivity implements View.OnClickListener {
     @ViewInject(R.id.toolbar)
     Toolbar toolbar;
     @ViewInject(R.id.needle)
@@ -90,7 +90,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                 //是用户触发的
                 if (fromUser) {
                     MusicPlayer.getPlayer().seekTo(progress);
-                    currentTime.setText(MusicUtils.makeShortTimeString(PlayingActiivty.this, MusicPlayer.getPlayer().getCurrentPosition() / 1000));
+                    currentTime.setText(MusicUtils.makeShortTimeString(PlayingActivity.this, MusicPlayer.getPlayer().getCurrentPosition() / 1000));
                     MusicPlayer.getPlayer().setNowPlaying(false);
                     MusicPlayer.getPlayer().pause();
                     play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
@@ -145,9 +145,9 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                 switch (item.getItemId()) {
                     //点击分享按钮
                     case R.id.action_share:
-                        if (!NetWorkUtils.isNetworkConnected(PlayingActiivty.this)) {
+                        if (!NetWorkUtils.isNetworkConnected(PlayingActivity.this)) {
                             //没有网
-                            ToastUtils.show(PlayingActiivty.this, getResources().getString(R.string.net_wrong), Toast.LENGTH_SHORT);
+                            ToastUtils.show(PlayingActivity.this, getResources().getString(R.string.net_wrong), Toast.LENGTH_SHORT);
                         } else {
                             //分享到...
                         }
@@ -172,17 +172,17 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                 song_txt.setText(info.getTitle());
                 singer_txt.setText(info.getArtist());
                 play_btn.setImageResource(MusicPlayer.getPlayer().isNowPlaying() ? R.drawable.playing_btn_pause : R.drawable.playing_btn_play);
-                endTime.setText(MusicUtils.makeShortTimeString(PlayingActiivty.this, info.getDuration() / 1000));
+                endTime.setText(MusicUtils.makeShortTimeString(PlayingActivity.this, info.getDuration() / 1000));
                 //高斯模糊的处理
-                Glide.with(PlayingActiivty.this)
+                Glide.with(PlayingActivity.this)
                         .load(info.getCoverUri())
                         .error(R.drawable.fm_run_result_bg)
                         .placeholder(play_back.getDrawable())
                         .crossFade(1000)
-                        .bitmapTransform(new BlurTransformation(PlayingActiivty.this))
+                        .bitmapTransform(new BlurTransformation(PlayingActivity.this))
                         .into(play_back);
                 //加载专辑图片
-                Glide.with(PlayingActiivty.this)
+                Glide.with(PlayingActivity.this)
                         .load(info.getCoverUri())
                         .error(R.drawable.placeholder_disk_play_song)
                         .centerCrop()
@@ -207,11 +207,11 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
         public void run() {
             if (MusicPlayer.getPlayer().isNowPlaying()) {
                 bar.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
-                currentTime.setText(MusicUtils.makeShortTimeString(PlayingActiivty.this, MusicPlayer.getPlayer().getCurrentPosition() / 1000));
+                currentTime.setText(MusicUtils.makeShortTimeString(PlayingActivity.this, MusicPlayer.getPlayer().getCurrentPosition() / 1000));
                 bar.postDelayed(runnable, 50);
             } else {
                 bar.setProgress(MusicPlayer.getPlayer().getCurrentPosition());
-                currentTime.setText(MusicUtils.makeShortTimeString(PlayingActiivty.this, MusicPlayer.getPlayer().getCurrentPosition() / 1000));
+                currentTime.setText(MusicUtils.makeShortTimeString(PlayingActivity.this, MusicPlayer.getPlayer().getCurrentPosition() / 1000));
             }
         }
     };

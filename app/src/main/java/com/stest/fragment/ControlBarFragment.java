@@ -1,7 +1,6 @@
 package com.stest.fragment;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -10,11 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationSet;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -23,16 +20,13 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.stest.NetEasyApplication;
 import com.stest.manage.MusicPlayer;
 import com.stest.model.MusicInfoDetail;
-import com.stest.neteasycloud.PlayingActiivty;
+import com.stest.neteasycloud.PlayingActivity;
 import com.stest.neteasycloud.R;
 import com.stest.utils.SPUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by Limuyang on 2016/9/8.
@@ -111,7 +105,7 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
         switch (v.getId()) {
             //整个底部播放栏布局
             case R.id.bottom_layout:
-                Intent intent = new Intent(NetEasyApplication.context, PlayingActiivty.class);
+                Intent intent = new Intent(NetEasyApplication.context, PlayingActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 NetEasyApplication.context.startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
