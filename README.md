@@ -15,10 +15,10 @@
 <img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100224.png" width = "45%" height="45%" />
 <img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100255.png" width = "45%" height="45%" />
 
-###Temporary Bug
+###Defect
 
 - 严重的内存泄漏问题
-- 退出APP后，再一次进入时无法接着上一次播放的位置进行播放，点击控制栏会出现Crash
+- 没有做网络音乐播放，没有做通知栏控制
 
 ###Reference
 - [**PonyMusic**](https://github.com/ChanWong21/PonyMusic)
