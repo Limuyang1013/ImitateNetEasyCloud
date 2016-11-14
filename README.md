@@ -10,9 +10,12 @@
 
 ###部分截图
 
-![](http://oasusatoz.bkt.clouddn.com/16-10-25/85352746.jpg)
-![](http://oasusatoz.bkt.clouddn.com/16-10-25/27227405.jpg)
-
+![](http://oasusatoz.bkt.clouddn.com/device-2016-11-14-095906.png)
+![](http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100006.png)
+![](http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100053.png)
+![](http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100134.png)
+![](http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100224.png)
+![](http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100255.png)
 
  
 ###临时Bug
