@@ -3,21 +3,22 @@
 ![](https://img.shields.io/badge/license-Apache%202-blue.svg)
 [![](https://img.shields.io/badge/API-19-orange.svg)](https://android-arsenal.com/api?level=19)
 
-###注意事项
+###Precautions
 - 已实现本地播放，实现效果待优化
 - 不定期进行更新
-- 所用图片均从官方网易云获取，仅供学习使用，喜欢的朋友请多多支持官方网易云音乐APP
+- 所用素材资源均从官方网易云获取，仅供学习使用，喜欢的朋友请多多支持官方网易云音乐APP
 
-###部分截图
+###Screenshots
 
-![](http://oasusatoz.bkt.clouddn.com/16-10-25/85352746.jpg)
-![](http://oasusatoz.bkt.clouddn.com/16-10-25/27227405.jpg)
+<img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100006.png" width = "45%" height="45%" />
+<img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100134.png" width = "45%" height="45%" />
+<img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100224.png" width = "45%" height="45%" />
+<img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100255.png" width = "45%" height="45%" />
 
-
- 
-###临时Bug
+###Temporary Bug
 
 - 严重的内存泄漏问题
+- 退出APP后，再一次进入时无法接着上一次播放的位置进行播放，点击控制栏会出现Crash
 
 ###Reference
 - [**PonyMusic**](https://github.com/ChanWong21/PonyMusic)
