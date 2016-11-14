@@ -94,6 +94,10 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
     }
 
     private void addView() {
+        if (!MusicPlayer.getPlayer().isNowPlaying())
+        {
+            bottom_layout.setVisibility(View.GONE);
+        }
         control_layout.setOnClickListener(this);
         playlist.setOnClickListener(this);
         play.setOnClickListener(this);
