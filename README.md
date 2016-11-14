@@ -10,12 +10,11 @@
 
 ###Screenshots
 
-![](http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100006.png)
-![](http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100134.png)
-![](http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100224.png)
-![](http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100255.png)
+<img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100006.png" width = "45%" height="45%" />
+<img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100134.png" width = "45%" height="45%" />
+<img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100224.png" width = "45%" height="45%" />
+<img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100255.png" width = "45%" height="45%" />
 
- 
 ###临时Bug
 
 - 严重的内存泄漏问题
