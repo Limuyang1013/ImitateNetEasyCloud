@@ -3,7 +3,7 @@
 ![](https://img.shields.io/badge/license-Apache%202-blue.svg)
 [![](https://img.shields.io/badge/API-19-orange.svg)](https://android-arsenal.com/api?level=19)
 
-###注意事项
+###Precautions
 - 已实现本地播放，实现效果待优化
 - 不定期进行更新
 - 所用素材资源均从官方网易云获取，仅供学习使用，喜欢的朋友请多多支持官方网易云音乐APP
