@@ -1,5 +1,6 @@
 package com.stest.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -213,9 +214,13 @@ public class ControlBarFragment extends Fragment implements View.OnClickListener
                     .error(R.drawable.placeholder_disk_210)
                     .into(albumn);
         }
-
         song_txt.setText(coverTitle);
         singer_txt.setText(coverArtist);
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
     }
 }

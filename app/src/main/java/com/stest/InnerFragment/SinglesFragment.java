@@ -39,7 +39,7 @@ public class SinglesFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View  v = inflater.inflate(R.layout.fragment_singles, container, false);
+        View v = inflater.inflate(R.layout.fragment_singles, container, false);
         ViewUtils.inject(this, v);
         initWidgets();
         return v;

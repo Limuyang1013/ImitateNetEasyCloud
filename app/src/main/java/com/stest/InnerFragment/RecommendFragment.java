@@ -91,15 +91,8 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     protected void initView() {
         netImages = new ArrayList<>();
         cacheImages = new ArrayList<>();
-//        localImages = new Integer[5];
-//        localImages[0] = R.mipmap.first;
-//        localImages[1] = R.mipmap.second;
-//        localImages[2] = R.mipmap.third;
-//        localImages[3] = R.mipmap.fourth;
-//        localImages[4] = R.mipmap.five;
         mInflater = LayoutInflater.from(getContext());
         daily_text.setText(getDate());
-//        dynamic_layout = findViewById(R.id.dynamic_layout);
         mBanner.setIndicatorGravity(BannerConfig.CENTER);
         mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         mBanner.setDelayTime(3000);

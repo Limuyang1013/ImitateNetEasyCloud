@@ -6,6 +6,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 
+import com.stest.NetEasyApplication;
 import com.stest.model.MusicInfoDetail;
 
 import org.greenrobot.eventbus.EventBus;
@@ -30,7 +31,6 @@ public class MusicPlayer implements OnCompletionListener {
     private boolean isNowPlaying;
     private MusicInfoDetail mNextSong;
     private MusicInfoDetail mPrevSone;
-    private IntentFilter mNoisyFilter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
 
 
     private enum PlayMode {

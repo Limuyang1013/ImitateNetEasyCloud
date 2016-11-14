@@ -4,7 +4,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:background="#000000"
     >
     <ImageView
         android:id="@+id/cover_img"
@@ -27,12 +26,23 @@
                 android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
+                android:text="32"
                 android:textColor="@color/whaite_text"
                 android:maxLines="1"
                 />
+                <TextView
+                    android:id="@+id/singer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title"
+                    android:textSize="10sp"
+                    android:textColor="#7D7D7D"
+                    android:maxLines="1"
+                    />
             <ImageView
                 android:id="@+id/playNotificationStop"
                 android:paddingLeft="4.0dip"
