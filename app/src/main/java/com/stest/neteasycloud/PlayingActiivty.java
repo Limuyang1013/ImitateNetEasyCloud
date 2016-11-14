@@ -289,6 +289,7 @@ public class PlayingActiivty extends AppCompatActivity implements View.OnClickLi
                     MusicPlayer.getPlayer().resume();
                     mNeedleAnimation.start();
                     mRotateAnimation.resume();
+                    bar.postDelayed(runnable, 50);
                 }
                 break;
             case R.id.playing_playlist:
