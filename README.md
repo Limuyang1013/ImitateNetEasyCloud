@@ -10,7 +10,6 @@
 
 ###部分截图
 
-![](http://oasusatoz.bkt.clouddn.com/device-2016-11-14-095906.png)
 ![](http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100006.png)
 ![](http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100134.png)
 ![](http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100224.png)
