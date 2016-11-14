@@ -34,7 +34,7 @@ public class FolderAdapter extends SuperAdapter<FolderModel> {
         holder.setText(R.id.folder_name, item.getFolder_name());
         holder.setImageResource(R.id.folder_pic, R.drawable.list_icn_folder);
         for (int i = 0; i < music_info.size(); i++) {
-            if (music_info.get(i).getUri().contains(item.getFolder_name()))
+            if (music_info.get(i).getUri().contains(item.getFolder_name())&&music_info.get(i).getUri().contains(item.getFolder_path()))
                 num++;
         }
         holder.setText(R.id.folder_num, num + "首");
