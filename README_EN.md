@@ -1,33 +1,33 @@
-## 仿网易云音乐APP
+## Imitation Netease cloud music interface
 
 ![](https://img.shields.io/badge/license-Apache%202-blue.svg)
 [![](https://img.shields.io/badge/API-19-orange.svg)](https://android-arsenal.com/api?level=19)
 
-### 语言
+### Language
 [**中文**](https://github.com/GiitSmile/ImitateNetEasyCloud/edit/master/README.md) | [**English**](https://github.com/GiitSmile/ImitateNetEasyCloud/blob/master/README_EN.md)
-###注意事项
-- 已实现本地播放，实现效果待优化
-- 不定期进行更新
-- 所用素材资源均从官方网易云获取，仅供学习使用，喜欢的朋友请多多支持官方网易云音乐APP
+### Precautions
+- Has achieved local playback, to achieve the effect to be optimized
+- From time to time to update
+- The use of material resources from the official Netease cloud access, only for learning to use, like a lot of friends, please support the official Netease cloud music APP
 
-###截图
+### Screenshots
 
 <img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100006.png" width = "45%" height="45%" />
 <img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100134.png" width = "45%" height="45%" />
 <img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100224.png" width = "45%" height="45%" />
 <img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100255.png" width = "45%" height="45%" />
 
-###缺陷
+### Defect
 
-- 严重的内存泄漏问题
-- 没有做网络音乐播放，没有做通知栏控制
+- Serious memory leak problem
+- Did not do network music player, did not do notice column control
 
-###参考项目
+### Reference
 - [**PonyMusic**](https://github.com/ChanWong21/PonyMusic)
 
 - [**remusic**](https://github.com/aa112901/remusic)
 
-###鸣谢
+### Gratitude
 - [**Leakcanary**](https://github.com/square/leakcanary)
 - [**Fresco**](https://github.com/facebook/fresco)
 - [**Superadapter**](https://github.com/byteam/SuperAdapter)
