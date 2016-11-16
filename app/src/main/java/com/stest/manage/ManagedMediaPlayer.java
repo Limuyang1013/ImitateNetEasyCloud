@@ -2,6 +2,8 @@ package com.stest.manage;
 
 import android.media.MediaPlayer;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.support.annotation.LayoutRes;
 
 import java.io.IOException;
 

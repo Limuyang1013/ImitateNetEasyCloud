@@ -80,11 +80,6 @@ public class NetEasyApplication extends LitePalApplication {
         ImagePipeline imagePipeline = Fresco.getImagePipeline();
         //清空内存缓存（包括Bitmap缓存和未解码图片的缓存）
         imagePipeline.clearMemoryCaches();
-        //清空硬盘缓存，一般在设置界面供用户手动清理
-        //imagePipeline.clearDiskCaches();
-
-        //同时清理内存缓存和硬盘缓存
-        //imagePipeline.clearCaches();
     }
     private void frescoInit() {
         Fresco.initialize(this, getConfigureCaches(this));
