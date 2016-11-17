@@ -20,6 +20,8 @@ import com.stest.adapter.MusicDetailAdapter;
 import com.stest.model.MusicInfoDetail;
 import com.stest.neteasycloud.MusicInfoActivity;
 import com.stest.neteasycloud.R;
+import com.stest.neteasycloud.SplashActivity;
+import com.stest.utils.SPUtils;
 import com.stest.view.DividerListView;
 import com.stest.view.NetEasyRefreshLayout;
 
@@ -49,7 +51,6 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     private ImageView collect_expand_img;
     private boolean isCreatRotate = true;
     private boolean isCollectRotate = true;
-    private List<MusicInfoDetail> musicInfo;
 
     @Nullable
     @Override
@@ -66,7 +67,6 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
     //初始化
     private void initWidgets() {
-        musicInfo=new ArrayList<>();
         refreshLayout.setOnRefreshListener(this);
         creat_layout.setOnClickListener(this);
         collect_layout.setOnClickListener(this);
@@ -106,7 +106,18 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             }
 
         });
-        lv.setAdapter(mMusicDetailAdapter);
+        if (SPUtils.getValue(getActivity(), "isFirst", "First", true)){
+            lv.setAdapter(mMusicDetailAdapter);
+            refreshLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    refreshLayout.setRefreshing(true);
+                }
+            });
+            onRefresh();
+        }else {
+            lv.setAdapter(mMusicDetailAdapter);
+        }
     }
 
     @Override
@@ -115,7 +126,9 @@ public class MusicFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             @Override
             public void run() {
                 if (refreshLayout.isRefreshing()) {
+                    mMusicDetailAdapter = new MusicDetailAdapter(getActivity(), data, R.layout.music_detail_item);
                     refreshLayout.setRefreshing(false);
+                    lv.setAdapter(mMusicDetailAdapter);
                 }
             }
         }, 2500);
