@@ -158,18 +158,18 @@ public class SPStrListUtils {
         putStrListValue(context, key, strList);
     }
 
-    /**
-     * 清空对应key数据
-     *
-     * @param context
-     * @param key
-     */
-    public static void remove(Context context, String key) {
-        SharedPreferences.Editor sp = context.getSharedPreferences(SETTING, Context.MODE_PRIVATE)
-                .edit();
-        sp.remove(key);
-        sp.commit();
-    }
+        /**
+         * 清空对应key数据
+         *
+         * @param context
+         * @param key
+         */
+        public static void remove(Context context, String key) {
+            SharedPreferences.Editor sp = context.getSharedPreferences(SETTING, Context.MODE_PRIVATE)
+                    .edit();
+            sp.remove(key);
+            sp.commit();
+        }
 
     /**
      * 清空所有数据

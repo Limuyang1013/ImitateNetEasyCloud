@@ -128,7 +128,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     public void getUrlInfo() {
         OkHttpClient okClient = new OkHttpClient.Builder().build();
         RequestQueue mQueue = Volley.newRequestQueue(NetEasyApplication.getInstance(), new OkHttp3Stack(okClient));
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(API.BANNER, null, new Response.Listener<JSONObject>() {
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(API.BANNER, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 JsonArray array = HttpUtils.getResposeJsonObject(response).get("data").getAsJsonArray();
