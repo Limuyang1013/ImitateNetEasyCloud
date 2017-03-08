@@ -45,4 +45,5 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="return_destop">再按一次返回桌面</string>
 </resources>

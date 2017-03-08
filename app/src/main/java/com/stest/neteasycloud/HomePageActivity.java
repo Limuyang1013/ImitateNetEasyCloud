@@ -215,7 +215,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 return true;
             } else {
                 if ((System.currentTimeMillis() - time > 1000)) {
-                    Toast.makeText(this, "再按一次返回桌面", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.return_destop, Toast.LENGTH_SHORT).show();
                     time = System.currentTimeMillis();
                 } else {
                     Intent intent = new Intent(Intent.ACTION_MAIN);
