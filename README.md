@@ -10,24 +10,24 @@
 - 不定期进行更新
 - 所用素材资源均从官方网易云获取，仅供学习使用，喜欢的朋友请多多支持官方网易云音乐APP
 
-###截图
+### 截图
 
 <img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100006.png" width = "45%" height="45%" />
 <img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100134.png" width = "45%" height="45%" />
 <img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100224.png" width = "45%" height="45%" />
 <img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100255.png" width = "45%" height="45%" />
 
-###缺陷
+### 缺陷
 
 - 严重的内存泄漏问题
 - 没有做网络音乐播放，没有做通知栏控制
 
-###参考项目
+### 参考项目
 - [**PonyMusic**](https://github.com/ChanWong21/PonyMusic)
 
 - [**remusic**](https://github.com/aa112901/remusic)
 
-###鸣谢
+### 鸣谢
 - [**Leakcanary**](https://github.com/square/leakcanary)
 - [**Fresco**](https://github.com/facebook/fresco)
 - [**Superadapter**](https://github.com/byteam/SuperAdapter)
