@@ -5,17 +5,18 @@
 
 ### 语言
 [**中文**](https://github.com/GiitSmile/ImitateNetEasyCloud/edit/master/README.md) | [**English**](https://github.com/GiitSmile/ImitateNetEasyCloud/blob/master/README_EN.md)
-###注意事项
+
+### 注意事项
 - 已实现本地播放，实现效果待优化
 - 不定期进行更新
 - 所用素材资源均从官方网易云获取，仅供学习使用，喜欢的朋友请多多支持官方网易云音乐APP
 
 ### 截图
 
-<img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100006.png" width = "45%" height="45%" />
-<img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100134.png" width = "45%" height="45%" />
-<img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100224.png" width = "45%" height="45%" />
-<img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100255.png" width = "45%" height="45%" />
+<img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100006.png" width = "45%" height="45%"/>
+<img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100134.png" width = "45%" height="45%"/>
+<img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100224.png" width = "45%" height="45%"/>
+<img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100255.png" width = "45%" height="45%"/>
 
 ### 缺陷
 
