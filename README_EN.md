@@ -11,11 +11,12 @@
 - The use of material resources from the official Netease cloud access, only for learning to use, like a lot of friends, please support the official Netease cloud music APP
 
 ### Screenshots
-
+<p align="center">
 <img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100006.png" width = "45%" height="45%" />
 <img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100134.png" width = "45%" height="45%" />
 <img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100224.png" width = "45%" height="45%" />
 <img src="http://oasusatoz.bkt.clouddn.com/device-2016-11-14-100255.png" width = "45%" height="45%" />
+</p>
 
 ### Defect
 
