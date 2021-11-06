@@ -3,6 +3,8 @@
 ![](https://img.shields.io/badge/license-Apache%202-blue.svg)
 [![](https://img.shields.io/badge/API-19-orange.svg)](https://android-arsenal.com/api?level=19)
 
+ <img src="https://github.com/Limuyang1013/ImitateNetEasyCloud/blob/master/1.jpg" width = "375" height = "667" alt="图片名称" align=center />
+
 ### 语言
 [**中文**](https://github.com/GiitSmile/ImitateNetEasyCloud/edit/master/README.md) | [**English**](https://github.com/GiitSmile/ImitateNetEasyCloud/blob/master/README_EN.md)
 
